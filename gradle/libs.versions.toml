@@ -2,6 +2,7 @@
 agp = "9.3.1"
 coreKtx = "1.19.0"
 hiltAndroid = "2.60.1"
+hiltPlugin = "2.60.1"
 hiltNavigationCompose = "1.4.0"
 junit = "4.13.2"
 junitVersion = "1.3.0"
@@ -65,4 +66,4 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "kspPlugin" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "serializationPlugin" }
 google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
 google-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "googleFirebaseCrashlytics" }
-
+hilt-plugin = { id = "com.google.dagger.hilt.android", version.ref = "hiltPlugin" }
