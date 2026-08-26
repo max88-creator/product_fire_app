@@ -20,7 +20,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.productfireapp.R
 import com.example.productfireapp.ui.theme.BorderColor
-import com.example.productfireapp.ui.theme.LightGray
 
 @Composable
 @Preview(showBackground = true)
@@ -57,7 +56,7 @@ fun PaymentScreen() {
                 ApplePaymentBox()
             }
 
-            CreditCartImage()
+            CreditCartFieldsInput()
         }
     }
 }
