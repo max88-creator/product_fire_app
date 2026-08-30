@@ -42,7 +42,7 @@ android {
 
 dependencies {
 
-    implementation(libs.androidx.compose.runtime)
+
     implementation(libs.androidx.credentials)
     implementation(libs.androidx.credentials.play.services.auth)
     implementation(libs.androidx.room.ktx)
