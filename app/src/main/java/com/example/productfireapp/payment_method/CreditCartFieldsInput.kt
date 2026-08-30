@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.style.styleable
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -43,7 +44,10 @@ fun CreditCartFieldsInput() {
     var nameOnCard by remember { mutableStateOf("OWNERS NAME") }
     var monthOnCard by remember { mutableStateOf("00 / ") }
     var yearOnCard by remember { mutableStateOf("00") }
-    Box(
+
+    var isChecked by remember { mutableStateOf(false) }
+
+    Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
@@ -124,10 +128,10 @@ fun CreditCartFieldsInput() {
                 }
             } else if (isCvvTyping) {
                 Spacer(modifier = Modifier.height(31.dp))
-           CvvTF(
-               cvvValue = cvvValue,
-               onMonthValueChange = { cvvValue = it }
-           )
+                CvvTF(
+                    cvvValue = cvvValue,
+                    onMonthValueChange = { cvvValue = it }
+                )
                 Spacer(modifier = Modifier.height(51.dp))
                 Button(
                     onClick = {
@@ -143,15 +147,15 @@ fun CreditCartFieldsInput() {
                         )
                     )
                 }
-            }else {
-                Spacer(modifier = Modifier.height(18.dp))
+            } else {
+                Spacer(modifier = Modifier.height(14.dp))
                 CreditCardImage(
                     numberOnCard = numberOnCard,
                     nameOnCard = nameOnCard,
                     monthValueOnCard = monthOnCard,
                     yearValueOnCard = yearOnCard
                 )
-                Spacer(modifier = Modifier.height(18.dp))
+                Spacer(modifier = Modifier.height(14.dp))
                 Box(
                     modifier = Modifier
                         .clickable {
@@ -161,7 +165,7 @@ fun CreditCartFieldsInput() {
                     NameOnTheCartBox()
                 }
 
-                Spacer(modifier = Modifier.height(5.dp))
+                Spacer(modifier = Modifier.height(4.dp))
                 Box(
                     modifier = Modifier
                         .clickable {
@@ -170,7 +174,7 @@ fun CreditCartFieldsInput() {
                 ) {
                     CardNumberBox()
                 }
-                Spacer(modifier = Modifier.height(5.dp))
+                Spacer(modifier = Modifier.height(3.dp))
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -194,6 +198,38 @@ fun CreditCartFieldsInput() {
                     }
                 }
             }
+
+        }
+        Spacer(modifier = Modifier.height(16.dp))
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 34.dp)
+        ) {
+            PaymentSwitch(
+                isChecked = isChecked,
+                onCheckedChange = {
+                    isChecked = !isChecked
+                }
+            )
+            val space = 17.sp * 0.03f
+            Spacer(modifier = Modifier.width(25.dp))
+            Text(
+                text = "Save this card",
+                style = TextStyle(
+                    fontSize = 17.sp,
+                    fontWeight = FontWeight(500),
+                    letterSpacing = space
+                )
+            )
+        }
+        Spacer(modifier = Modifier.height(19.dp))
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 17.dp)
+        ) {
+            MakePaymentButton()
         }
     }
 }

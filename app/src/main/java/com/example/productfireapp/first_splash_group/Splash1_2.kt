@@ -17,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
@@ -39,14 +40,15 @@ fun Splash1_2() {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(color = BorderColor)
+                .background(color = Color.White)
         ) {
             Image(
                 painter = painterResource(R.drawable.splash_1_2),
                 contentDescription = null,
                 modifier = Modifier
                     .fillMaxSize()
-                    .offset(x = (0).dp, y = (-25).dp),
+                //    .offset(x = (0).dp, y = (-45).dp)
+                ,
                 contentScale = ContentScale.FillHeight
             )
             Column(

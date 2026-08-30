@@ -27,12 +27,12 @@ fun PayTopBar() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(118.dp)
+            .height(110.dp)
             .background(color = Color.White)
     ) {
         Box(
             modifier = Modifier
-                .padding(top = 68.dp, start = 17.dp)
+                .padding(top = 60.dp, start = 17.dp)
         ) {
             Image(
                 painter = painterResource(R.drawable.back_arrow),

@@ -31,7 +31,7 @@ fun CardNumberBox() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(60.dp)
+            .height(58.dp)
             .background(
                 color = Color.White,
                 shape = RoundedCornerShape(5.dp)

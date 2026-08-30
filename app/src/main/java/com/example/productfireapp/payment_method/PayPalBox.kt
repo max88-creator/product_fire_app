@@ -30,7 +30,7 @@ fun PayPalBox() {
     Box(
         modifier = Modifier
             .width(106.dp)
-            .height(102.dp)
+            .height(98.dp)
             .background(
                 color = Color.White,
                 shape = RoundedCornerShape(5.dp)

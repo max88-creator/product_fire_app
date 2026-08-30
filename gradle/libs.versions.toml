@@ -11,10 +11,12 @@ lifecycleRuntimeKtx = "2.11.0"
 activityCompose = "1.13.0"
 kotlin = "2.2.10"
 composeBom = "2026.08.00"
+
 roomKtx = "2.8.4"
 kspPlugin = "2.3.6"
 serializationPlugin = "2.4.10"
 serializationVersion = "1.11.0"
+
 googleGmsGoogleServices = "4.5.0"
 firebaseAuth = "24.2.0"
 credentials = "1.6.0"
@@ -26,6 +28,7 @@ firebaseStorage = "22.0.1"
 firebaseFunctions = "22.1.1"
 firebaseCrashlytics = "20.1.0"
 googleFirebaseCrashlytics = "3.0.8"
+runtime = "1.12.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -35,6 +38,7 @@ androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref =
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomKtx" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroid" }
+
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -48,6 +52,7 @@ androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "u
 androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+
 serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serializationVersion"}
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
 androidx-credentials = { group = "androidx.credentials", name = "credentials", version.ref = "credentials" }
@@ -58,6 +63,7 @@ firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore
 firebase-storage = { group = "com.google.firebase", name = "firebase-storage", version.ref = "firebaseStorage" }
 firebase-functions = { group = "com.google.firebase", name = "firebase-functions", version.ref = "firebaseFunctions" }
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics", version.ref = "firebaseCrashlytics" }
+androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime", version.ref = "runtime" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

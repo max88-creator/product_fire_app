@@ -35,7 +35,7 @@ fun CreditCardImage(
     Box(
         modifier = Modifier
             .width(380.dp)
-            .height(189.dp)
+            .height(180.dp)
             .background(
                 color = DarkPrimary,
                 shape = RoundedCornerShape(10.dp)
@@ -98,11 +98,7 @@ fun CreditCardImage(
                 )
             )
             Text(
-                text = if (nameOnCard.isEmpty()) {
-                    "OWNERS NAME"
-                } else {
-                    nameOnCard.uppercase()
-                },
+                text = nameOnCard.uppercase(),
                 style = TextStyle(
                     color = Color.White,
                     fontFamily = AppFontFamily,
@@ -128,11 +124,7 @@ fun CreditCardImage(
                 )
             )
             Text(
-                text = if (monthValueOnCard.isEmpty() && yearValueOnCard.isEmpty()) {
-                    "00 / 00"
-                } else {
-                    "$monthValueOnCard / $yearValueOnCard"
-                },
+                text = "$monthValueOnCard / $yearValueOnCard",
                 style = TextStyle(
                     color = Color.White,
                     fontFamily = AppFontFamily,
