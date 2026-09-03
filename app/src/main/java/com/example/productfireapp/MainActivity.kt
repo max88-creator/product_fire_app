@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.example.productfireapp.payment_method.PaymentScreen
+import com.example.productfireapp.home_screen.HomeScreen
 import com.example.productfireapp.ui.theme.ProductFireAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,7 +17,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ProductFireAppTheme {
-                PaymentScreen()
+                HomeScreen()
             }
         }
     }

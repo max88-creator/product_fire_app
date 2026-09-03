@@ -83,7 +83,8 @@ fun CreditCartFieldsInput() {
                 Spacer(modifier = Modifier.height(31.dp))
                 CardNumberTF(
                     value = cardNumberValue,
-                    onValueChange = { cardNumberValue = it }
+                    onValueChange = { cardNumberValue = it },
+                    onSaveClick = {}
                 )
                 Spacer(modifier = Modifier.height(51.dp))
                 Button(
