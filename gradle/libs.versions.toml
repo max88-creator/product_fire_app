@@ -14,7 +14,7 @@ composeBom = "2026.08.00"
 
 roomKtx = "2.8.4"
 kspPlugin = "2.3.6"
-serializationPlugin = "2.4.10"
+serializationPlugin = "2.3.21"
 serializationVersion = "1.11.0"
 
 googleGmsGoogleServices = "4.5.0"
@@ -69,7 +69,8 @@ androidx-compose-runtime = { group = "androidx.compose.runtime", name = "runtime
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "kspPlugin" }
+hilt-plugin = { id = "com.google.dagger.hilt.android", version.ref = "hiltPlugin" }
 serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "serializationPlugin" }
 google-gms-google-services = { id = "com.google.gms.google-services", version.ref = "googleGmsGoogleServices" }
 google-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "googleFirebaseCrashlytics" }
-hilt-plugin = { id = "com.google.dagger.hilt.android", version.ref = "hiltPlugin" }
+

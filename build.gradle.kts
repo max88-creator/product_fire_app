@@ -6,5 +6,5 @@ plugins {
     alias(libs.plugins.hilt.plugin) apply false
     alias(libs.plugins.google.gms.google.services) apply false
     alias(libs.plugins.google.firebase.crashlytics) apply false
-    //   alias(libs.plugins.serialization) apply false
+ //   alias(libs.plugins.serialization) apply false
 }
