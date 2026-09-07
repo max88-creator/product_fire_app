@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -30,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.productfireapp.R
 import com.example.productfireapp.data.Vegetable
+import com.example.productfireapp.data.VegetableE
 import com.example.productfireapp.ui.theme.AppFontFamily
 import com.example.productfireapp.ui.theme.BGGray
 import com.example.productfireapp.ui.theme.BorderColor
@@ -38,7 +40,7 @@ import com.example.productfireapp.ui.theme.MediumPrimary
 
 @Composable
 fun ProductItem(
-    vegetable: Vegetable,
+    vegetable: VegetableE,
     onFavoriteClick: () -> Unit,
     onAddClick: () -> Unit
 ) {
@@ -114,10 +116,11 @@ fun ProductItem(
                             )
                     )
                     Image(
-                        painter = painterResource(vegetable.image),
+                        painter = painterResource(vegetable.symbol),
                         contentDescription = null,
                         modifier = Modifier
-                            .size(43.dp)
+                            .size(79.dp)
+                            .offset(x = 0.dp, y = 11.dp)
                             .align(Alignment.BottomCenter)
                     )
                 }
