@@ -4,8 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.animateScrollBy
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -13,19 +11,11 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,15 +26,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.compose.rememberNavController
 import com.example.productfireapp.R
-import com.example.productfireapp.bottom_nav_bar.data.BottomMenuItem
-import com.example.productfireapp.bottom_nav_bar.ui.BottomMenu
-import com.example.productfireapp.data.CategoryE
 import com.example.productfireapp.data.VegetableE
-import com.example.productfireapp.navigation.NavigationRoutes
 import com.example.productfireapp.ui.theme.AppFontFamily
-import com.example.productfireapp.ui.theme.CustomGray
 import com.example.productfireapp.ui.theme.TextBoxGray
 import kotlinx.coroutines.launch
 
@@ -54,11 +38,6 @@ import kotlinx.coroutines.launch
 @Composable
 @Preview(showBackground = true)
 fun HomeScreen() {
-
-    val navController = rememberNavController()
-    val selectedItemState = remember {
-        mutableStateOf(BottomMenuItem.Home.title)
-    }
 
     val vegetableItem = listOf(
         VegetableE.FRESH_PEACH,
@@ -72,141 +51,121 @@ fun HomeScreen() {
     val coroutineScope = rememberCoroutineScope()
     val scrollState = rememberScrollState()
 
-    Scaffold(
-        bottomBar = {
-            BottomMenu(
-                selectedItemTitle = selectedItemState.value
-            ) { selectedItemTitle ->
-                selectedItemState.value = selectedItemTitle
-                when (selectedItemTitle) {
-                    BottomMenuItem.Home.title -> navController.navigate(NavigationRoutes.Home)
-                    BottomMenuItem.User.title -> navController.navigate(NavigationRoutes.User)
-                    BottomMenuItem.Favorites.title -> navController.navigate(NavigationRoutes.Favorites)
-                    BottomMenuItem.Basket.title -> navController.navigate(NavigationRoutes.Basket)
-                }
-            }
-        }
-    ) { paddingValues ->
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White)
+    ) {
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .background(Color.White)
-                .padding(paddingValues)
-
+                .fillMaxWidth()
+                .padding(horizontal = 17.dp)
         ) {
-            Column(
+            Spacer(modifier = Modifier.height(15.dp))
+            SearchKeyWordsBox()
+            Spacer(modifier = Modifier.height(10.dp))
+            Image(
+                painter = painterResource(
+                    id = R.drawable.advertisiment
+                ),
+                contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 17.dp)
+                    .height(283.dp)
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            CategoryBox()
+            Spacer(modifier = Modifier.height(32.dp))
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 17.dp),
+                verticalAlignment = Alignment.CenterVertically
             ) {
-                Spacer(modifier = Modifier.height(11.dp))
-                SearchKeyWordsBox()
-                Spacer(modifier = Modifier.height(10.dp))
-                Image(
-                    painter = painterResource(
-                        id = R.drawable.advertisiment
+                Text(
+                    text = "Featured products",
+                    style = TextStyle(
+                        fontFamily = AppFontFamily,
+                        color = Color.Black,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight(600)
                     ),
+                    modifier = Modifier
+                        .weight(1f)
+                )
+                Image(
+                    painter = painterResource(R.drawable.forward_arrow),
                     contentDescription = null,
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .height(283.dp)
+                        .width(11.dp)
+                        .height(18.dp)
+                        .clickable {
+                            coroutineScope.launch {
+                                scrollState.animateScrollBy(300f)
+                            }
+                        }
                 )
-                Spacer(modifier = Modifier.height(10.dp))
-                CategoryBox()
-                Spacer(modifier = Modifier.height(32.dp))
-
-
+            }
+            Spacer(modifier = Modifier.height(21.dp))
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(TextBoxGray)
+                    .verticalScroll(scrollState),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Row() {
+                    ProductItem(
+                        vegetable = vegetableItem[0],
+                        onFavoriteClick = {},
+                        onAddClick = {}
+                    )
+                    Spacer(modifier = Modifier.width(18.dp))
+                    ProductItem(
+                        vegetable = vegetableItem[1],
+                        onFavoriteClick = {},
+                        onAddClick = {}
+                    )
+                }
+                Spacer(modifier = Modifier.height(20.dp))
+                Row() {
+                    ProductItem(
+                        vegetable = vegetableItem[2],
+                        onFavoriteClick = {},
+                        onAddClick = {}
+                    )
+                    Spacer(modifier = Modifier.width(18.dp))
+                    ProductItem(
+                        vegetable = vegetableItem[3],
+                        onFavoriteClick = {},
+                        onAddClick = {}
+                    )
+                }
+                Spacer(modifier = Modifier.height(20.dp))
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(horizontal = 17.dp),
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    Text(
-                        text = "Featured products",
-                        style = TextStyle(
-                            fontFamily = AppFontFamily,
-                            color = Color.Black,
-                            fontSize = 18.sp,
-                            fontWeight = FontWeight(600)
-                        ),
-                        modifier = Modifier
-                            .weight(1f)
-                    )
-                    Image(
-                        painter = painterResource(R.drawable.forward_arrow),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .width(11.dp)
-                            .height(18.dp)
-                            .clickable {
-                                coroutineScope.launch {
-                                    scrollState.animateScrollBy(300f)
-                                }
-                            }
-                    )
-                }
-                Spacer(modifier = Modifier.height(21.dp))
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
                         .background(TextBoxGray)
-                        .verticalScroll(scrollState),
-                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Row() {
-                        ProductItem(
-                            vegetable = vegetableItem[0],
-                            onFavoriteClick = {},
-                            onAddClick = {}
-                        )
-                        Spacer(modifier = Modifier.width(18.dp))
-                        ProductItem(
-                            vegetable = vegetableItem[1],
-                            onFavoriteClick = {},
-                            onAddClick = {}
-                        )
-                    }
-                    Spacer(modifier = Modifier.height(20.dp))
-                    Row() {
-                        ProductItem(
-                            vegetable = vegetableItem[2],
-                            onFavoriteClick = {},
-                            onAddClick = {}
-                        )
-                        Spacer(modifier = Modifier.width(18.dp))
-                        ProductItem(
-                            vegetable = vegetableItem[3],
-                            onFavoriteClick = {},
-                            onAddClick = {}
-                        )
-                    }
-                    Spacer(modifier = Modifier.height(20.dp))
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .background(TextBoxGray)
-                    ) {
-                        ProductItem(
-                            vegetable = vegetableItem[4],
-                            onFavoriteClick = {},
-                            onAddClick = {}
-                        )
-                        Spacer(modifier = Modifier.width(18.dp))
-                        ProductItem(
-                            vegetable = vegetableItem[5],
-                            onFavoriteClick = {},
-                            onAddClick = {}
-                        )
-                    }
-                    Spacer(modifier = Modifier.height(25.dp))
+                    ProductItem(
+                        vegetable = vegetableItem[4],
+                        onFavoriteClick = {},
+                        onAddClick = {}
+                    )
+                    Spacer(modifier = Modifier.width(18.dp))
+                    ProductItem(
+                        vegetable = vegetableItem[5],
+                        onFavoriteClick = {},
+                        onAddClick = {}
+                    )
                 }
-
-
+                Spacer(modifier = Modifier.height(25.dp))
             }
         }
     }
 }
+
 
 //            vegetablesList.forEach { item ->
 //                Row(

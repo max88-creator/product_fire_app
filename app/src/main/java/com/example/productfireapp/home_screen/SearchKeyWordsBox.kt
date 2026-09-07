@@ -62,7 +62,7 @@ fun SearchKeyWordsBox() {
                     fontWeight = FontWeight(500)
                 )
             )
-            Spacer(modifier = Modifier.width(143.dp))
+            Spacer(modifier = Modifier.width(122.dp))
             Image(
                 painter = painterResource(R.drawable.ic_sort),
                 contentDescription = null,
