@@ -14,8 +14,9 @@ import androidx.navigation.compose.rememberNavController
 import com.example.productfireapp.basket_screen.BasketScreen
 import com.example.productfireapp.bottom_nav_bar.data.BottomMenuItem
 import com.example.productfireapp.bottom_nav_bar.ui.BottomMenu
-import com.example.productfireapp.favorites_screen.FavoritesList
-import com.example.productfireapp.home_screen.HomeScreen
+import com.example.productfireapp.favorites.FavoritesList
+import com.example.productfireapp.presentation.home_screen.HomeScreen
+import com.example.productfireapp.presentation.home_screen.ProductsList
 import com.example.productfireapp.user_screen.UserScreen
 
 @Composable
@@ -31,7 +32,7 @@ fun NavGraph() {
                 selectedItemTitle = selectedItemTitle,
                 onItemClick = { title ->
                     selectedItemTitle = title
-                    val destination = when(title) {
+                    val destination = when (title) {
                         BottomMenuItem.Home.title -> NavigationRoutes.Home
                         BottomMenuItem.User.title -> NavigationRoutes.User
                         BottomMenuItem.Favorites.title -> NavigationRoutes.Favorites
@@ -62,10 +63,23 @@ fun NavGraph() {
             //    popExitTransition = TODO(),
             //     sizeTransform = TODO()
         ) {
-            composable<NavigationRoutes.Home>{ HomeScreen() }
-            composable<NavigationRoutes.User>{ UserScreen() }
-            composable<NavigationRoutes.Favorites>{ FavoritesList() }
-            composable<NavigationRoutes.Basket>{ BasketScreen() }
+            composable<NavigationRoutes.Home> {
+                HomeScreen(
+                    toProductListNavigate = {
+                        navController.navigate(NavigationRoutes.ProductList)
+                    }
+                )
+            }
+            composable<NavigationRoutes.User> { UserScreen() }
+            composable<NavigationRoutes.Favorites> { FavoritesList() }
+            composable<NavigationRoutes.Basket> { BasketScreen() }
+            composable<NavigationRoutes.ProductList> {
+                ProductsList(
+                    backToHomeScreenClick = {
+                        navController.navigate(NavigationRoutes.Home)
+                    }
+                )
+            }
         }
     }
 }

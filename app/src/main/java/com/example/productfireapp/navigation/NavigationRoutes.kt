@@ -11,5 +11,7 @@ sealed interface NavigationRoutes {
     @Serializable
     data object Favorites: NavigationRoutes
     @Serializable
+    data object ProductList: NavigationRoutes
+    @Serializable
     data object Basket: NavigationRoutes
 }

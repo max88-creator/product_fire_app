@@ -1,4 +1,4 @@
-package com.example.productfireapp.home_screen
+package com.example.productfireapp.presentation.home_screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -16,11 +16,14 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,20 +34,24 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.productfireapp.R
 import com.example.productfireapp.data.Vegetable
-import com.example.productfireapp.data.VegetableE
 import com.example.productfireapp.ui.theme.AppFontFamily
-import com.example.productfireapp.ui.theme.BGGray
 import com.example.productfireapp.ui.theme.BorderColor
 import com.example.productfireapp.ui.theme.CustomGray
 import com.example.productfireapp.ui.theme.MediumPrimary
 
 @Composable
 fun ProductItem(
-    vegetable: VegetableE,
+    vegetable: Vegetable,
     onFavoriteClick: () -> Unit,
-    onAddClick: () -> Unit
+   // onAddClick: () -> Unit,
+    onDecrementClick: () -> Unit,
+    onIncrementClick: () -> Unit
 ) {
+
+    var changeProductCountWindow by remember { mutableStateOf(false) }
+
     val space = 10.sp * 0.05f
+    val currentWeight = vegetable.count * vegetable.weightValue
     Box(
         modifier = Modifier
             .width(181.dp)
@@ -78,13 +85,18 @@ fun ProductItem(
                     .align(Alignment.TopEnd)
             ) {
                 if (vegetable.isFavorite) {
-                    Image(
-                        painter = painterResource(R.drawable.heart_fill),
-                        contentDescription = null,
-                        modifier = Modifier.clickable {
+                    IconButton(
+                        onClick = {
                             onFavoriteClick()
                         }
-                    )
+                    ) {
+                        Image(
+                            painter = painterResource(R.drawable.heart_fill),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .size(16.dp)
+                        )
+                    }
                 } else {
                     IconButton(
                         onClick = {
@@ -93,7 +105,9 @@ fun ProductItem(
                     ) {
                         Icon(
                             painter = painterResource(R.drawable.empty_heart),
-                            contentDescription = null
+                            contentDescription = null,
+                            modifier = Modifier
+                                .size(16.dp)
                         )
                     }
                 }
@@ -116,7 +130,7 @@ fun ProductItem(
                             )
                     )
                     Image(
-                        painter = painterResource(vegetable.symbol),
+                        painter = painterResource(vegetable.image),
                         contentDescription = null,
                         modifier = Modifier
                             .size(79.dp)
@@ -126,7 +140,11 @@ fun ProductItem(
                 }
                 Spacer(modifier = Modifier.height(15.dp))
                 Text(
-                    text = "$${vegetable.coast}",
+                    text = if (vegetable.count > 1) {
+                        "$${vegetable.count * vegetable.coast}"
+                    }else {
+                        "$${vegetable.coast}"
+                    },
                     style = TextStyle(
                         color = MediumPrimary,
                         fontFamily = AppFontFamily,
@@ -144,7 +162,11 @@ fun ProductItem(
                     )
                 )
                 Text(
-                    text = vegetable.weight,
+                    text = if (vegetable.count > 1) {
+                        "$currentWeight ${vegetable.weightParameter}"
+                    } else {
+                        "${vegetable.weightValue} ${vegetable.weightParameter}"
+                    },
                     style = TextStyle(
                         color = CustomGray,
                         fontFamily = AppFontFamily,
@@ -159,52 +181,14 @@ fun ProductItem(
                         .height(1.dp)
                         .background(BorderColor)
                 )
-                if (vegetable.isAdded) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceAround
-                    ) {
-                        Text(
-                            text = "-",
-                            style = TextStyle(
-                                color = MediumPrimary,
-                                fontFamily = AppFontFamily,
-                                fontSize = 13.sp,
-                                fontWeight = FontWeight(500)
-                            ),
-                            modifier = Modifier
-                                    .clickable {
-                                        if (vegetable.count == 1) {
-                                            vegetable.isAdded = false
-                                        } else {
-                                            vegetable.count--
-                                        }
-                                    }
-                        )
-                        Text(
-                            text = vegetable.count.toString(),
-                            style = TextStyle(
-                                color = MediumPrimary,
-                                fontFamily = AppFontFamily,
-                                fontSize = 12.sp,
-                                fontWeight = FontWeight(500)
-                            )
-                        )
-                        Text(
-                            text = "+",
-                            style = TextStyle(
-                                color = MediumPrimary,
-                                fontFamily = AppFontFamily,
-                                fontSize = 13.sp,
-                                fontWeight = FontWeight(500)
-                            ),
-                            modifier = Modifier
-                                .clickable{
-                                    vegetable.count++
-                                }
-                        )
-                    }
+                if (changeProductCountWindow) {
+                   ChangeProductCount(
+                       vegetable = vegetable,
+                       onDecrementClick = onDecrementClick,
+                       onIncrementClick = onIncrementClick
+                   )
                 } else {
+                    Spacer(modifier = Modifier.height(11.dp))
                     Box(
                         modifier = Modifier
                             .fillMaxWidth(),
@@ -234,7 +218,7 @@ fun ProductItem(
                                 ),
                                 modifier = Modifier
                                     .clickable {
-                                        onAddClick()
+                                        changeProductCountWindow = !changeProductCountWindow
                                     }
                             )
                         }

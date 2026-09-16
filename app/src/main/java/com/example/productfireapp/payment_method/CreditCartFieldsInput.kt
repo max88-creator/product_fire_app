@@ -207,18 +207,13 @@ fun CreditCartFieldsInput() {
                 .fillMaxWidth()
                 .padding(start = 34.dp)
         ) {
-            PaymentSwitch(
-                isChecked = isChecked,
-                onCheckedChange = {
-                    isChecked = !isChecked
-                }
-            )
-            val space = 17.sp * 0.03f
+           CustomSwitch()
+            val space = 12.sp * 0.03f
             Spacer(modifier = Modifier.width(25.dp))
             Text(
                 text = "Save this card",
                 style = TextStyle(
-                    fontSize = 17.sp,
+                    fontSize = 12.sp,
                     fontWeight = FontWeight(500),
                     letterSpacing = space
                 )

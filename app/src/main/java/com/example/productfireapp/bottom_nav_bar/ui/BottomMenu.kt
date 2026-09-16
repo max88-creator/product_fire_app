@@ -47,7 +47,7 @@ fun BottomMenu(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(bottom = bottomPadding + 5.dp)
+            .padding(bottom = bottomPadding)
     ) {
         Surface(
             modifier = Modifier

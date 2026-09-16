@@ -1,4 +1,4 @@
-package com.example.productfireapp.home_screen
+package com.example.productfireapp.presentation.home_screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -30,7 +30,6 @@ import com.example.productfireapp.ui.theme.TextBoxGray
 @Composable
 @Preview(showBackground = true)
 fun SearchKeyWordsBox() {
-    
     Box(
         modifier = Modifier
             .fillMaxWidth()

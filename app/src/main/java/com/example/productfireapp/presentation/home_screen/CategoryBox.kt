@@ -1,4 +1,4 @@
-package com.example.productfireapp.home_screen
+package com.example.productfireapp.presentation.home_screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -32,30 +32,23 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.productfireapp.R
 import com.example.productfireapp.data.CategoryE
+import com.example.productfireapp.presentation.viewmodels.HomeScreenViewModel
 import com.example.productfireapp.ui.theme.AppFontFamily
 import com.example.productfireapp.ui.theme.CustomGray
 import kotlinx.coroutines.launch
 
 @Composable
 @Preview(showBackground = true)
-fun CategoryBox() {
-    val categoryItem = listOf(
-        CategoryE.VEGETABLES,
-        CategoryE.FRUITS,
-        CategoryE.BEVERAGES,
-        CategoryE.GROCERY,
-        CategoryE.EDITABLE_OIL,
-        CategoryE.HOUSEHOLD,
-        CategoryE.BABYCARE
-    )
-
+fun CategoryBox(
+    viewModel: HomeScreenViewModel = hiltViewModel()
+) {
     val listState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
     Column(
         modifier = Modifier,
-        //    .fillMaxSize(),
         verticalArrangement = Arrangement.Center
     ) {
         Row(
@@ -83,7 +76,7 @@ fun CategoryBox() {
                     .clickable {
                         coroutineScope.launch {
                             val current = listState.firstVisibleItemIndex
-                            if (current < categoryItem.lastIndex) {
+                            if (current < viewModel.elements.categoryItem.lastIndex) {
                                 listState.animateScrollToItem(index = current + 1)
                             }
                         }
@@ -96,7 +89,7 @@ fun CategoryBox() {
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            items(categoryItem) { item ->
+            items(viewModel.elements.categoryItem) { item ->
                 Column(
                     modifier = Modifier
                         .fillMaxWidth(),
@@ -135,45 +128,3 @@ fun CategoryBox() {
         }
     }
 }
-
-//HorizontalPager(
-//            state = pagerState,
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .height(56.dp),
-//            beyondViewportPageCount = 7,
-//            pageSize = PageSize.Fixed(pageSize = 71.dp),
-//            userScrollEnabled = true
-//        ) { category ->
-//            val item = categoryItem[category]
-//            Column(
-//                modifier = Modifier
-//            ) {
-//                Box(
-//                    modifier = Modifier
-//                        .size(52.dp)
-//                        .background(
-//                            color = item.bgColor,
-//                            shape = CircleShape
-//                        ),
-//                    contentAlignment = Alignment.Center
-//                ) {
-//                    Image(
-//                        painter = painterResource(item.symbol),
-//                        contentDescription = null,
-//                        modifier = Modifier
-//                            .size(24.dp)
-//                    )
-//                }
-//                Spacer(modifier = Modifier.height(11.dp))
-//                Text(
-//                    text = "text",
-//                    style = TextStyle(
-//                        fontFamily = AppFontFamily,
-//                        color = CustomGray,
-//                        fontSize = 10.sp,
-//                        fontWeight = FontWeight(500)
-//                    )
-//                )
-//            }
-//        }

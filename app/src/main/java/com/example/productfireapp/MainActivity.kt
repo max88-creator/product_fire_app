@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.example.productfireapp.home_screen.HomeScreen
 import com.example.productfireapp.navigation.NavGraph
 import com.example.productfireapp.ui.theme.ProductFireAppTheme
 import dagger.hilt.android.AndroidEntryPoint

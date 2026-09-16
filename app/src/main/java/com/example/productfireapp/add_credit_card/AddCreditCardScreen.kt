@@ -25,11 +25,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.productfireapp.payment_method.CardNumberBox
+import com.example.productfireapp.payment_method.CustomSwitch
 import com.example.productfireapp.payment_method.CvvRow
 import com.example.productfireapp.payment_method.CvvTF
 import com.example.productfireapp.payment_method.MonthYearRow
 import com.example.productfireapp.payment_method.NameOnTheCartBox
-import com.example.productfireapp.payment_method.PaymentSwitch
 
 @Composable
 @Preview(showBackground = true)
@@ -156,12 +156,7 @@ fun AddCreditCardScreen() {
                     .fillMaxWidth()
                     .padding(start = 34.dp)
             ) {
-                PaymentSwitch(
-                    isChecked = isChecked,
-                    onCheckedChange = {
-                        isChecked = !isChecked
-                    }
-                )
+               CustomSwitch()
                 val space = 17.sp * 0.03f
                 Spacer(modifier = Modifier.width(25.dp))
                 Text(
