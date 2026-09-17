@@ -1,4 +1,4 @@
-package com.example.productfireapp.data
+package com.example.productfireapp.domain.models
 
 
 import androidx.compose.foundation.layout.height

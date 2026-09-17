@@ -33,7 +33,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.productfireapp.R
-import com.example.productfireapp.data.Vegetable
+import com.example.productfireapp.domain.models.Vegetable
 import com.example.productfireapp.ui.theme.AppFontFamily
 import com.example.productfireapp.ui.theme.BorderColor
 import com.example.productfireapp.ui.theme.CustomGray
@@ -42,13 +42,12 @@ import com.example.productfireapp.ui.theme.MediumPrimary
 @Composable
 fun ProductItem(
     vegetable: Vegetable,
-    onFavoriteClick: () -> Unit,
-   // onAddClick: () -> Unit,
+//    onFavoriteClick: () -> Unit,
     onDecrementClick: () -> Unit,
     onIncrementClick: () -> Unit
 ) {
-
     var changeProductCountWindow by remember { mutableStateOf(false) }
+    var isFavorite by remember { mutableStateOf(false) }
 
     val space = 10.sp * 0.05f
     val currentWeight = vegetable.count * vegetable.weightValue
@@ -84,10 +83,10 @@ fun ProductItem(
                     .padding(9.dp)
                     .align(Alignment.TopEnd)
             ) {
-                if (vegetable.isFavorite) {
+                if (isFavorite) {
                     IconButton(
                         onClick = {
-                            onFavoriteClick()
+                            isFavorite = !isFavorite
                         }
                     ) {
                         Image(
@@ -100,7 +99,7 @@ fun ProductItem(
                 } else {
                     IconButton(
                         onClick = {
-                            onFavoriteClick()
+                            isFavorite = !isFavorite
                         }
                     ) {
                         Icon(
@@ -141,7 +140,7 @@ fun ProductItem(
                 Spacer(modifier = Modifier.height(15.dp))
                 Text(
                     text = if (vegetable.count > 1) {
-                        "$${vegetable.count * vegetable.coast}"
+                        "$${vegetable.count} * ${vegetable.coast}"
                     }else {
                         "$${vegetable.coast}"
                     },
@@ -183,9 +182,7 @@ fun ProductItem(
                 )
                 if (changeProductCountWindow) {
                    ChangeProductCount(
-                       vegetable = vegetable,
-                       onDecrementClick = onDecrementClick,
-                       onIncrementClick = onIncrementClick
+                       vegetable = vegetable
                    )
                 } else {
                     Spacer(modifier = Modifier.height(11.dp))

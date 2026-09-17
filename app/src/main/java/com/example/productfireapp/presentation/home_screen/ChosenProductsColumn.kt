@@ -16,11 +16,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -40,9 +37,13 @@ fun ChosenProductsColumn(
     viewModel: HomeScreenViewModel = hiltViewModel(),
     toProductListClick: () -> Unit
 ) {
+    val items = viewModel.vegetableList.collectAsState(emptyList())
+
+    LaunchedEffect(true) {
+        viewModel.getVegCount()
+    }
     val scrollState = rememberScrollState()
-    val pairs = viewModel.elements.vegList.windowed(2, 2, true)
-    var changgeCount by remember { mutableStateOf(false) }
+    val pairs = items.value.windowed(2, 2, true)
 
     Column() {
         Row(
@@ -94,20 +95,12 @@ fun ChosenProductsColumn(
                         ProductItem(
                             vegetable = item,
 
-                            onFavoriteClick = {
-                                viewModel.addToFavoriteList(vegetable = item)
-                            },
-
-//                            onAddClick = {
-//
-//                            },
-
                             onDecrementClick = {
-                               viewModel.decrementItem(vegetable = item)
+                                viewModel.decrementCount(vegetable = item)
                             },
 
                             onIncrementClick = {
-                             viewModel.incrementItem(vegetable = item)
+                                viewModel.incrementItem(vegetable = item)
                             }
                         )
                     }

@@ -7,29 +7,33 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.productfireapp.data.Vegetable
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import com.example.productfireapp.domain.models.Vegetable
+import com.example.productfireapp.presentation.viewmodels.HomeScreenViewModel
 import com.example.productfireapp.ui.theme.AppFontFamily
 import com.example.productfireapp.ui.theme.MediumPrimary
 
 @Composable
 fun ChangeProductCount(
     vegetable: Vegetable,
-    onDecrementClick: () -> Unit,
-    onIncrementClick: () -> Unit
+    viewModel: HomeScreenViewModel = hiltViewModel(),
 ) {
+
     Spacer(modifier = Modifier.height(11.dp))
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceAround
     ) {
         Text(
-            text = "-",
+            text =
+                "-",
             style = TextStyle(
                 color = MediumPrimary,
                 fontFamily = AppFontFamily,
@@ -38,7 +42,7 @@ fun ChangeProductCount(
             ),
             modifier = Modifier
                 .clickable {
-                    onDecrementClick()
+                        viewModel.decrementCount(vegetable)
                 }
         )
         Text(
@@ -60,7 +64,7 @@ fun ChangeProductCount(
             ),
             modifier = Modifier
                 .clickable {
-                    onIncrementClick()
+                    viewModel.incrementItem(vegetable)
                 }
         )
     }

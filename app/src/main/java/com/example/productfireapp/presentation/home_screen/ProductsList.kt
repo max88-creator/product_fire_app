@@ -69,14 +69,9 @@ fun ProductsList(
                             pair.forEach { item ->
                                 ProductItem(
                                     vegetable = item,
-                                    onFavoriteClick = {
-                                        viewModel.addToFavoriteList(vegetable = item)
-                                    },
-
                                     onDecrementClick = {
-                                        viewModel.decrementItem(vegetable = item)
+                                //        viewModel.decrementItem(vegetable = item)
                                     },
-
                                     onIncrementClick = {
                                         viewModel.incrementItem(vegetable = item)
                                     }

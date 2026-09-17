@@ -1,9 +1,10 @@
 package com.example.productfireapp.presentation.home_screen
 
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.ui.graphics.Color
 import com.example.productfireapp.R
-import com.example.productfireapp.data.CategoryE
-import com.example.productfireapp.data.Vegetable
+import com.example.productfireapp.domain.models.CategoryE
+import com.example.productfireapp.domain.models.Vegetable
 import com.example.productfireapp.ui.theme.AvocadoColor
 import com.example.productfireapp.ui.theme.GrapesColor
 import com.example.productfireapp.ui.theme.LightPrimary
@@ -15,6 +16,7 @@ import javax.inject.Inject
 class Elements @Inject constructor() {
     val vegList = mutableStateListOf(
         Vegetable(
+            id = 1,
             bgColor = PeachColor,
             image = R.drawable.peach,
             coast = 8.00,
@@ -22,10 +24,12 @@ class Elements @Inject constructor() {
             name = "Fresh Peach",
             weightValue = 1.0,
             weightParameter = "dozen",
-            isFavorite = false,
             isEventExist = false,
+            eventText = "",
+            eventTextColor = Color.Black,
         ),
         Vegetable(
+            id = 2,
             bgColor = AvocadoColor,
             image = R.drawable.avocado,
             coast = 7.00,
@@ -33,11 +37,12 @@ class Elements @Inject constructor() {
             name = "Avocado",
             weightValue = 2.0,
             weightParameter = "lbs",
-            isFavorite = false,
             isEventExist = true,
-            eventText = "new"
+            eventText = "new",
+            eventTextColor = Color.Black,
         ),
         Vegetable(
+            id = 3,
             bgColor = PineapleColor,
             image = R.drawable.pineapple,
             coast = 9.90,
@@ -45,10 +50,12 @@ class Elements @Inject constructor() {
             name = "Pineapple",
             weightValue = 1.50,
             weightParameter = "lbs",
-            isFavorite = false,
-            isEventExist = false
+            isEventExist = false,
+            eventText = "",
+            eventTextColor = Color.Black
         ),
         Vegetable(
+            id = 4,
             bgColor = GrapesColor,
             image = R.drawable.grapes,
             coast = 7.05,
@@ -56,11 +63,12 @@ class Elements @Inject constructor() {
             name = "Black Grapes",
             weightValue = 5.0,
             weightParameter = "lbs",
-            isFavorite = false,
             isEventExist = true,
-            eventText = "-18%"
+            eventText = "-18%",
+            eventTextColor = Color.Black
         ),
         Vegetable(
+            id = 5,
             bgColor = PomegranateColor,
             image = R.drawable.pomegranate,
             coast = 2.09,
@@ -68,11 +76,12 @@ class Elements @Inject constructor() {
             name = "Pomegranate",
             weightValue = 1.50,
             weightParameter = "lbs",
-            isFavorite = false,
             isEventExist = true,
-            eventText = "new"
+            eventText = "new",
+            eventTextColor = Color.Black
         ),
         Vegetable(
+            id = 6,
             bgColor = LightPrimary,
             image = R.drawable.fresh_broccoli,
             coast = 3.00,
@@ -80,8 +89,8 @@ class Elements @Inject constructor() {
             name = "Fresh broccoli",
             weightValue = 1.0,
             weightParameter = "lbs",
-            isFavorite = false,
-            isEventExist = false
+            isEventExist = false,
+            eventTextColor = Color.Black
         )
     )
 
