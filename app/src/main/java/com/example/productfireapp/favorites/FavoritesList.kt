@@ -18,7 +18,6 @@ import com.example.productfireapp.ui.theme.BGGray
 fun FavoritesList(
     viewModel: HomeScreenViewModel = hiltViewModel()
 ) {
-//val favoriteItems = viewModel.favoriteFlow.collectAsStateWithLifecycle()
     Column(
         modifier = Modifier
             .fillMaxSize()

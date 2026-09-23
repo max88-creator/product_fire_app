@@ -1,6 +1,8 @@
 package com.example.productfireapp.data.di
 
+import com.example.productfireapp.data.repositories.FavoritesRepositoryImpl
 import com.example.productfireapp.data.repositories.VegetableRepositoryImpl
+import com.example.productfireapp.domain.repositories.FavoritesRepository
 import com.example.productfireapp.domain.repositories.VegetableRepository
 import dagger.Binds
 import dagger.Module
@@ -15,4 +17,8 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindVegetableRepository(vegetableRepositoryImpl: VegetableRepositoryImpl): VegetableRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindFavoriteRepository(favoritesRepositoryImpl: FavoritesRepositoryImpl): FavoritesRepository
 }

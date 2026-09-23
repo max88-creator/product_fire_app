@@ -94,14 +94,6 @@ fun ChosenProductsColumn(
 
                         ProductItem(
                             vegetable = item,
-
-                            onDecrementClick = {
-                                viewModel.decrementCount(vegetable = item)
-                            },
-
-                            onIncrementClick = {
-                                viewModel.incrementItem(vegetable = item)
-                            }
                         )
                     }
                 }

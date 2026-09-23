@@ -20,6 +20,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -32,25 +33,32 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.productfireapp.R
+import com.example.productfireapp.domain.models.Favorite
 import com.example.productfireapp.domain.models.Vegetable
+import com.example.productfireapp.presentation.viewmodels.FavoritesScreenViewModel
 import com.example.productfireapp.ui.theme.AppFontFamily
 import com.example.productfireapp.ui.theme.BorderColor
 import com.example.productfireapp.ui.theme.CustomGray
 import com.example.productfireapp.ui.theme.MediumPrimary
+import kotlinx.coroutines.flow.map
 
 @Composable
 fun ProductItem(
     vegetable: Vegetable,
-//    onFavoriteClick: () -> Unit,
-    onDecrementClick: () -> Unit,
-    onIncrementClick: () -> Unit
+    favsViewModel: FavoritesScreenViewModel = hiltViewModel(),
 ) {
+
+    val favsList = favsViewModel.favorites.collectAsState()
+
     var changeProductCountWindow by remember { mutableStateOf(false) }
-    var isFavorite by remember { mutableStateOf(false) }
+
 
     val space = 10.sp * 0.05f
     val currentWeight = vegetable.count * vegetable.weightValue
+
+
     Box(
         modifier = Modifier
             .width(181.dp)
@@ -83,10 +91,10 @@ fun ProductItem(
                     .padding(9.dp)
                     .align(Alignment.TopEnd)
             ) {
-                if (isFavorite) {
+                if (favsViewModel.checkList(vegetable)) {
                     IconButton(
                         onClick = {
-                            isFavorite = !isFavorite
+                            favsViewModel.deleteFavorite(vegetable.id)
                         }
                     ) {
                         Image(
@@ -99,7 +107,7 @@ fun ProductItem(
                 } else {
                     IconButton(
                         onClick = {
-                            isFavorite = !isFavorite
+                            favsViewModel.insertToFavorites(vegetable)
                         }
                     ) {
                         Icon(
@@ -141,7 +149,7 @@ fun ProductItem(
                 Text(
                     text = if (vegetable.count > 1) {
                         "$${vegetable.count} * ${vegetable.coast}"
-                    }else {
+                    } else {
                         "$${vegetable.coast}"
                     },
                     style = TextStyle(
@@ -181,9 +189,9 @@ fun ProductItem(
                         .background(BorderColor)
                 )
                 if (changeProductCountWindow) {
-                   ChangeProductCount(
-                       vegetable = vegetable
-                   )
+                    ChangeProductCount(
+                        vegetable = vegetable
+                    )
                 } else {
                     Spacer(modifier = Modifier.height(11.dp))
                     Box(
@@ -220,6 +228,7 @@ fun ProductItem(
                             )
                         }
                     }
+
                 }
             }
         }

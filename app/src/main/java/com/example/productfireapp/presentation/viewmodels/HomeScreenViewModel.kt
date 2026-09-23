@@ -34,9 +34,12 @@ class HomeScreenViewModel @Inject constructor(
     }
 
     fun decrementCount(vegetable: Vegetable) {
-        viewModelScope.launch {
-            repository.decrementCount(vegetable.id)
+        if (vegetable.count > 0) {
+            viewModelScope.launch {
+                repository.decrementCount(vegetable.id)
+            }
+        } else {
+            return
         }
     }
 }
-

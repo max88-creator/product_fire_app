@@ -5,10 +5,11 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.productfireapp.domain.models.Favorite
+import com.example.productfireapp.domain.models.Vegetable
 import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface FavoritesDao {
+interface FavoritesDao{
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFavorite(item: Favorite)
 

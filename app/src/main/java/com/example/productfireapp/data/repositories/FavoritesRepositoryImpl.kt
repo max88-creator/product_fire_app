@@ -9,9 +9,11 @@ import javax.inject.Inject
 class FavoritesRepositoryImpl @Inject constructor(
     private val dao: FavoritesDao
 ) : FavoritesRepository {
+
     override suspend fun insertFavorite(item: Favorite) {
         dao.insertFavorite(item)
     }
+
 
     override suspend fun delete(id: Int): Int {
         return dao.delete(id)
@@ -24,5 +26,4 @@ class FavoritesRepositoryImpl @Inject constructor(
     override suspend fun isFavorite(id: Int): Boolean {
         return dao.isFavorite(id)
     }
-
 }

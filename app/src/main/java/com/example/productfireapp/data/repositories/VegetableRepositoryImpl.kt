@@ -1,6 +1,7 @@
 package com.example.productfireapp.data.repositories
 
 import com.example.productfireapp.domain.dao.VegetableDao
+import com.example.productfireapp.domain.models.Favorite
 import com.example.productfireapp.domain.models.Vegetable
 import com.example.productfireapp.domain.repositories.VegetableRepository
 import kotlinx.coroutines.flow.Flow
@@ -28,4 +29,9 @@ class VegetableRepositoryImpl @Inject constructor(
     override fun getAllVegetable(): Flow<List<Vegetable>> {
         return dao.getAllVegetable()
     }
+
+//    override fun mapToFavorite(id: Int): Favorite {
+//        return toFavorite()
+//    }
+
 }

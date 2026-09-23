@@ -26,7 +26,6 @@ fun ProductsList(
     viewModel: HomeScreenViewModel = hiltViewModel(),
     backToHomeScreenClick: () -> Unit
 ) {
-
     val scrollState = rememberScrollState()
     val pairs = viewModel.elements.vegList.windowed(2, 2, true)
     Surface(
@@ -51,7 +50,6 @@ fun ProductsList(
                     .background(color = TextBoxGray)
             ) {
                 Spacer(modifier = Modifier.height(25.dp))
-
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
@@ -60,7 +58,6 @@ fun ProductsList(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     pairs.forEach { pair ->
-
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             horizontalArrangement = Arrangement.spacedBy(18.dp)
@@ -68,19 +65,11 @@ fun ProductsList(
 
                             pair.forEach { item ->
                                 ProductItem(
-                                    vegetable = item,
-                                    onDecrementClick = {
-                                //        viewModel.decrementItem(vegetable = item)
-                                    },
-                                    onIncrementClick = {
-                                        viewModel.incrementItem(vegetable = item)
-                                    }
+                                    vegetable = item
                                 )
                             }
                         }
-                        Spacer(
-                            modifier = Modifier.height(20.dp)
-                        )
+                        Spacer(modifier = Modifier.height(20.dp))
                     }
                 }
             }
