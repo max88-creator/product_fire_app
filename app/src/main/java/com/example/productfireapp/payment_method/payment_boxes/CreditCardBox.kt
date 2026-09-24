@@ -1,4 +1,4 @@
-package com.example.productfireapp.payment_method
+package com.example.productfireapp.payment_method.payment_boxes
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -24,7 +24,7 @@ import com.example.productfireapp.ui.theme.CustomGray
 
 @Composable
 @Preview(showBackground = true)
-fun PayPalBox() {
+fun CreditCardBox() {
     val letterSpace = 10.sp * 0.03f
 
     Box(
@@ -34,23 +34,23 @@ fun PayPalBox() {
             .background(
                 color = Color.White,
                 shape = RoundedCornerShape(5.dp)
-                ),
+            ),
         contentAlignment = Alignment.Center
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Icon(
-                painter = painterResource(R.drawable.p_icon),
+                painter = painterResource(R.drawable.credit_card_icon),
                 contentDescription = null,
                 modifier = Modifier
-                    .width(21.dp)
-                    .height(22.dp),
+                    .width(31.dp)
+                    .height(21.dp),
                 tint = CustomGray
             )
-            Spacer(modifier = Modifier.height(17.dp))
+            Spacer(modifier = Modifier.height(19.dp))
             Text(
-                text = "Paypal",
+                text = "Credit Card",
                 style = TextStyle(
                     color = CustomGray,
                     fontSize = 10.sp,
@@ -61,4 +61,3 @@ fun PayPalBox() {
         }
     }
 }
-

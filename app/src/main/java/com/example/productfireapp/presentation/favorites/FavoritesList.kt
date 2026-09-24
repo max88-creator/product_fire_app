@@ -1,4 +1,4 @@
-package com.example.productfireapp.favorites
+package com.example.productfireapp.presentation.favorites
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column

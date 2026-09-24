@@ -1,4 +1,4 @@
-package com.example.productfireapp.payment_method
+package com.example.productfireapp.payment_method.payment_boxes
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -16,15 +16,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.productfireapp.R
 import com.example.productfireapp.ui.theme.CustomGray
 
 @Composable
-@Preview(showBackground = true)
-fun CreditCardBox() {
+fun ApplePaymentBox() {
     val letterSpace = 10.sp * 0.03f
 
     Box(
@@ -41,16 +39,16 @@ fun CreditCardBox() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Icon(
-                painter = painterResource(R.drawable.credit_card_icon),
+                painter = painterResource(R.drawable.apple_icon),
                 contentDescription = null,
                 modifier = Modifier
-                    .width(31.dp)
-                    .height(21.dp),
+                    .width(22.dp)
+                    .height(27.dp),
                 tint = CustomGray
             )
-            Spacer(modifier = Modifier.height(19.dp))
+            Spacer(modifier = Modifier.height(16.dp))
             Text(
-                text = "Credit Card",
+                text = "Apple pay",
                 style = TextStyle(
                     color = CustomGray,
                     fontSize = 10.sp,

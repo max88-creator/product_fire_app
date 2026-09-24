@@ -2,7 +2,9 @@ package com.example.productfireapp.data.di
 
 import android.app.Application
 import androidx.room.Room
+import com.example.productfireapp.data.database_migrations.Migration1_2
 import com.example.productfireapp.data.db.MainDb
+import com.example.productfireapp.domain.dao.BasketItemDao
 import com.example.productfireapp.domain.dao.FavoritesDao
 import com.example.productfireapp.domain.dao.VegetableDao
 import com.example.productfireapp.utils.ConvertColors
@@ -22,7 +24,8 @@ object MainModule {
             context = app,
             klass = MainDb::class.java,
             name = "main_db"
-        ).build()
+        )
+            .addMigrations(Migration1_2).build()
     }
 
     @Provides
@@ -35,4 +38,8 @@ object MainModule {
         return mainDb.favoritesDao()
     }
 
+    @Provides
+    fun provideBasketItemDao(mainDb: MainDb): BasketItemDao {
+        return mainDb.basketItemDao()
+    }
 }

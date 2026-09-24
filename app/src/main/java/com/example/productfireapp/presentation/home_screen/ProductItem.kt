@@ -20,8 +20,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -37,6 +39,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.productfireapp.R
 import com.example.productfireapp.domain.models.Favorite
 import com.example.productfireapp.domain.models.Vegetable
+import com.example.productfireapp.presentation.viewmodels.BasketScreenViewModel
 import com.example.productfireapp.presentation.viewmodels.FavoritesScreenViewModel
 import com.example.productfireapp.ui.theme.AppFontFamily
 import com.example.productfireapp.ui.theme.BorderColor
@@ -48,8 +51,16 @@ import kotlinx.coroutines.flow.map
 fun ProductItem(
     vegetable: Vegetable,
     favsViewModel: FavoritesScreenViewModel = hiltViewModel(),
+    basketScreenViewModel: BasketScreenViewModel = hiltViewModel()
 ) {
 
+    LaunchedEffect(Unit) {
+        if (vegetable.count > 0) {
+            basketScreenViewModel.insertItem(vegetable)
+        } else {
+            basketScreenViewModel.delete(vegetable.id)
+        }
+    }
     val favsList = favsViewModel.favorites.collectAsState()
 
     val isFavorite = favsList.value.any { favorite ->

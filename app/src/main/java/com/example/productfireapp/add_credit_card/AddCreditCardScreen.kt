@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.sp
 import com.example.productfireapp.payment_method.CardNumberBox
 import com.example.productfireapp.payment_method.CustomSwitch
 import com.example.productfireapp.payment_method.CvvRow
-import com.example.productfireapp.payment_method.CvvTF
+import com.example.productfireapp.payment_method.data_text_fields.CvvTF
 import com.example.productfireapp.payment_method.MonthYearRow
 import com.example.productfireapp.payment_method.NameOnTheCartBox
 

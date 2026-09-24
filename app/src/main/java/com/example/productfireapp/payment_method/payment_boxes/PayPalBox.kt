@@ -1,4 +1,4 @@
-package com.example.productfireapp.payment_method
+package com.example.productfireapp.payment_method.payment_boxes
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -16,13 +16,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.productfireapp.R
 import com.example.productfireapp.ui.theme.CustomGray
 
 @Composable
-fun ApplePaymentBox() {
+@Preview(showBackground = true)
+fun PayPalBox() {
     val letterSpace = 10.sp * 0.03f
 
     Box(
@@ -32,23 +34,23 @@ fun ApplePaymentBox() {
             .background(
                 color = Color.White,
                 shape = RoundedCornerShape(5.dp)
-            ),
+                ),
         contentAlignment = Alignment.Center
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Icon(
-                painter = painterResource(R.drawable.apple_icon),
+                painter = painterResource(R.drawable.p_icon),
                 contentDescription = null,
                 modifier = Modifier
-                    .width(22.dp)
-                    .height(27.dp),
+                    .width(21.dp)
+                    .height(22.dp),
                 tint = CustomGray
             )
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(17.dp))
             Text(
-                text = "Apple pay",
+                text = "Paypal",
                 style = TextStyle(
                     color = CustomGray,
                     fontSize = 10.sp,
@@ -59,3 +61,4 @@ fun ApplePaymentBox() {
         }
     }
 }
+

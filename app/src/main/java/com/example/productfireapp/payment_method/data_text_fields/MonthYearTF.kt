@@ -1,4 +1,4 @@
-package com.example.productfireapp.payment_method
+package com.example.productfireapp.payment_method.data_text_fields
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
