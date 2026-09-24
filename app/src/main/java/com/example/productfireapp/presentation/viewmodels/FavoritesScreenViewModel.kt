@@ -15,8 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FavoritesScreenViewModel @Inject constructor(
-    private val repository: FavoritesRepository,
-    private val favorite: Favorite
+    private val repository: FavoritesRepository
 ) : ViewModel() {
     val favorites: StateFlow<List<Favorite>> = repository.getAllFavorites()
         .stateIn(
@@ -41,7 +40,7 @@ class FavoritesScreenViewModel @Inject constructor(
 
     fun deleteFavorite(id: Int) {
         viewModelScope.launch {
-            repository.delete(favorite.id)
+            repository.delete(id)
         }
     }
 

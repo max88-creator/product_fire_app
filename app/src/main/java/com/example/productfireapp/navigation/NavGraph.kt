@@ -71,7 +71,13 @@ fun NavGraph() {
                 )
             }
             composable<NavigationRoutes.User> { UserScreen() }
-            composable<NavigationRoutes.Favorites> { FavoritesList() }
+            composable<NavigationRoutes.Favorites> {
+                FavoritesList(
+            backToHome = {
+                navController.navigate(NavigationRoutes.Home)
+            }
+                )
+            }
             composable<NavigationRoutes.Basket> { BasketScreen() }
             composable<NavigationRoutes.ProductList> {
                 ProductsList(
@@ -80,6 +86,7 @@ fun NavGraph() {
                     }
                 )
             }
+
         }
     }
 }
