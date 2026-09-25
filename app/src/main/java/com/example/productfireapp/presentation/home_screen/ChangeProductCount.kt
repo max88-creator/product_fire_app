@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.productfireapp.domain.models.Vegetable
+import com.example.productfireapp.presentation.viewmodels.BasketScreenViewModel
 import com.example.productfireapp.presentation.viewmodels.HomeScreenViewModel
 import com.example.productfireapp.ui.theme.AppFontFamily
 import com.example.productfireapp.ui.theme.MediumPrimary
@@ -24,48 +25,8 @@ import com.example.productfireapp.ui.theme.MediumPrimary
 fun ChangeProductCount(
     vegetable: Vegetable,
     viewModel: HomeScreenViewModel = hiltViewModel(),
+    basketItemViewModel: BasketScreenViewModel = hiltViewModel()
 ) {
 
-    Spacer(modifier = Modifier.height(11.dp))
-    Row(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceAround
-    ) {
-        Text(
-            text =
-                "-",
-            style = TextStyle(
-                color = MediumPrimary,
-                fontFamily = AppFontFamily,
-                fontSize = 13.sp,
-                fontWeight = FontWeight(500)
-            ),
-            modifier = Modifier
-                .clickable {
-                        viewModel.decrementCount(vegetable)
-                }
-        )
-        Text(
-            text = vegetable.count.toString(),
-            style = TextStyle(
-                color = MediumPrimary,
-                fontFamily = AppFontFamily,
-                fontSize = 12.sp,
-                fontWeight = FontWeight(500)
-            )
-        )
-        Text(
-            text = "+",
-            style = TextStyle(
-                color = MediumPrimary,
-                fontFamily = AppFontFamily,
-                fontSize = 13.sp,
-                fontWeight = FontWeight(500)
-            ),
-            modifier = Modifier
-                .clickable {
-                    viewModel.incrementItem(vegetable)
-                }
-        )
-    }
+
 }

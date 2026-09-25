@@ -12,12 +12,12 @@ interface BasketItemDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertBasketItem(item: BasketItem)
 
-    @Query("DELETE FROM favorite WHERE id = :id")
+    @Query("DELETE FROM basket_item WHERE id = :id")
     suspend fun delete(id: Int): Int
 
-    @Query("SELECT * FROM favorite")
+    @Query("SELECT * FROM basket_item")
     fun getAllItems(): Flow<List<BasketItem>>
 
-    @Query("SELECT EXISTS(SELECT 1 FROM favorite WHERE id = :id)")
+    @Query("SELECT EXISTS(SELECT 1 FROM basket_item WHERE id = :id)")
     suspend fun isBasketItem(id: Int): Boolean
 }

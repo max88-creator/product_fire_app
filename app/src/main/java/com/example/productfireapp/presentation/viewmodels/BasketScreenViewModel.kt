@@ -27,7 +27,9 @@ class BasketScreenViewModel @Inject constructor(
     fun insertItem(vegetable: Vegetable) {
         viewModelScope.launch {
             val basketItem = vegetable.toBasketItem()
-            repository.insertBasketItem(item = basketItem)
+            if (vegetable.count > 0) {
+                repository.insertBasketItem(item = basketItem)
+            }
         }
     }
 

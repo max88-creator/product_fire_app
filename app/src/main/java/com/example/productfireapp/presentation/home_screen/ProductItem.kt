@@ -20,10 +20,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -37,36 +35,45 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.productfireapp.R
-import com.example.productfireapp.domain.models.Favorite
 import com.example.productfireapp.domain.models.Vegetable
 import com.example.productfireapp.presentation.viewmodels.BasketScreenViewModel
 import com.example.productfireapp.presentation.viewmodels.FavoritesScreenViewModel
+import com.example.productfireapp.presentation.viewmodels.HomeScreenViewModel
 import com.example.productfireapp.ui.theme.AppFontFamily
 import com.example.productfireapp.ui.theme.BorderColor
 import com.example.productfireapp.ui.theme.CustomGray
 import com.example.productfireapp.ui.theme.MediumPrimary
-import kotlinx.coroutines.flow.map
 
 @Composable
 fun ProductItem(
     vegetable: Vegetable,
+    homeScreenViewModel: HomeScreenViewModel = hiltViewModel(),
     favsViewModel: FavoritesScreenViewModel = hiltViewModel(),
-    basketScreenViewModel: BasketScreenViewModel = hiltViewModel()
+    basketScreenViewModel: BasketScreenViewModel = hiltViewModel(),
+    // basketItem: BasketItem
 ) {
+    val vegetableList = homeScreenViewModel.vegetableList.collectAsState()
 
-    LaunchedEffect(Unit) {
-        if (vegetable.count > 0) {
-            basketScreenViewModel.insertItem(vegetable)
-        } else {
-            basketScreenViewModel.delete(vegetable.id)
-        }
+    val isVegBasket = vegetableList.value.any { vegetable ->
+        vegetable.count > 0
     }
+    //   val itemCount = basketItem.count
+
+//    val addedInnBasket = vegetableList.value.any { item ->
+//   //     vegCount == itemCount
+//    }
+
     val favsList = favsViewModel.favorites.collectAsState()
 
     val isFavorite = favsList.value.any { favorite ->
         vegetable.id == favorite.id
     }
 
+    val basketItemsList = basketScreenViewModel.basketItems.collectAsState()
+
+    val isExistInBasket = basketItemsList.value.any { item ->
+        vegetable.id == item.id
+    }
     var changeProductCountWindow by remember { mutableStateOf(false) }
 
 
@@ -132,7 +139,6 @@ fun ProductItem(
                     )
                 )
             }
-
         }
         Column(
             modifier = Modifier
@@ -203,10 +209,57 @@ fun ProductItem(
                     .height(1.dp)
                     .background(BorderColor)
             )
-            if (changeProductCountWindow) {
-                ChangeProductCount(
-                    vegetable = vegetable
-                )
+            if (vegetable.count > 0) {
+                Spacer(modifier = Modifier.height(11.dp))
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceAround
+                ) {
+                    Text(
+                        text =
+                            "-",
+                        style = TextStyle(
+                            color = MediumPrimary,
+                            fontFamily = AppFontFamily,
+                            fontSize = 13.sp,
+                            fontWeight = FontWeight(500)
+                        ),
+                        modifier = Modifier
+                            .clickable {
+                                if (vegetable.count == 0) {
+                                    changeProductCountWindow = true
+                                    basketScreenViewModel.delete(vegetable.id)
+                                } else {
+                                    homeScreenViewModel.decrementCount(vegetable)
+                                }
+                            }
+                    )
+                    Text(
+                        text = vegetable.count.toString(),
+                        style = TextStyle(
+                            color = MediumPrimary,
+                            fontFamily = AppFontFamily,
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight(500)
+                        )
+                    )
+                    Text(
+                        text = "+",
+                        style = TextStyle(
+                            color = MediumPrimary,
+                            fontFamily = AppFontFamily,
+                            fontSize = 13.sp,
+                            fontWeight = FontWeight(500)
+                        ),
+                        modifier = Modifier
+                            .clickable {
+                                homeScreenViewModel.incrementItem(vegetable)
+                                if (!isExistInBasket) {
+                                    basketScreenViewModel.insertItem(vegetable)
+                                }
+                            }
+                    )
+                }
             } else {
                 Spacer(modifier = Modifier.height(11.dp))
                 Box(
@@ -238,12 +291,11 @@ fun ProductItem(
                             ),
                             modifier = Modifier
                                 .clickable {
-                                    changeProductCountWindow = !changeProductCountWindow
+                                    homeScreenViewModel.incrementItem(vegetable)
                                 }
                         )
                     }
                 }
-
             }
         }
     }

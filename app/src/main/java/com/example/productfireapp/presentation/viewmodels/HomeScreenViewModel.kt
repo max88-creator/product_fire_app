@@ -7,6 +7,8 @@ import com.example.productfireapp.domain.models.Vegetable
 import com.example.productfireapp.domain.repositories.VegetableRepository
 import com.example.productfireapp.presentation.home_screen.Elements
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,7 +19,11 @@ class HomeScreenViewModel @Inject constructor(
 ) : ViewModel() {
 
     val vegetableList = repository.getAllVegetable()
-
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(3000),
+            initialValue = emptyList()
+        )
 
     fun getVegCount() {
         viewModelScope.launch {
