@@ -24,6 +24,7 @@ fun FavoritesList(
     backToHome: () -> Unit
 ) {
     val favoritesList = viewModel.favorites.collectAsState()
+
     Scaffold(
         topBar = {
             TopFavoriteBar(
@@ -43,6 +44,7 @@ fun FavoritesList(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 17.dp)
+                    .background(color = CustomGray.copy(alpha = 0.2f))
             ) {
                 items(favoritesList.value) { favorite ->
                    SwipeFavorite(

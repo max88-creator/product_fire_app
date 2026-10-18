@@ -16,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class BasketScreenViewModel @Inject constructor(
     private val repository: BasketItemRepository
-): ViewModel() {
+) : ViewModel() {
     val basketItems: StateFlow<List<BasketItem>> = repository.getAllItems()
         .stateIn(
             scope = viewModelScope,
@@ -27,9 +27,7 @@ class BasketScreenViewModel @Inject constructor(
     fun insertItem(vegetable: Vegetable) {
         viewModelScope.launch {
             val basketItem = vegetable.toBasketItem()
-            if (vegetable.count > 0) {
-                repository.insertBasketItem(item = basketItem)
-            }
+            repository.insertBasketItem(item = basketItem)
         }
     }
 

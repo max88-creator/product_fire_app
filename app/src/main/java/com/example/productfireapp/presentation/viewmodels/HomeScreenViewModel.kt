@@ -18,6 +18,7 @@ class HomeScreenViewModel @Inject constructor(
     private val repository: VegetableRepository
 ) : ViewModel() {
 
+
     val vegetableList = repository.getAllVegetable()
         .stateIn(
             scope = viewModelScope,
@@ -47,6 +48,11 @@ class HomeScreenViewModel @Inject constructor(
             }
         } else {
             return
+        }
+    }
+    fun resetCount(vegetable: Vegetable) {
+        viewModelScope.launch {
+            repository.resetCount(vegetable.id)
         }
     }
 }

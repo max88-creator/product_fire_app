@@ -16,14 +16,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.productfireapp.R
 import com.example.productfireapp.domain.models.BasketItem
+import com.example.productfireapp.domain.models.Vegetable
+import com.example.productfireapp.presentation.viewmodels.HomeScreenViewModel
 import com.example.productfireapp.ui.theme.SwipeBoxColor
 
 @Composable
 fun SwipeItem(
     basketItem: BasketItem,
-    onDeleteClick: () -> Unit
+    onDeleteClick: () -> Unit,
 ) {
     val dismissState = rememberSwipeToDismissBoxState(
         confirmValueChange = { value ->

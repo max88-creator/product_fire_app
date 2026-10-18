@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -23,15 +24,22 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.productfireapp.domain.models.Favorite
+import com.example.productfireapp.presentation.viewmodels.FavoritesScreenViewModel
 import com.example.productfireapp.ui.theme.AppFontFamily
 import com.example.productfireapp.ui.theme.CustomGray
 import com.example.productfireapp.ui.theme.DarkPrimary
 
 @Composable
 fun FavoriteItem(
-    favorite: Favorite
+    favorite: Favorite,
+    favsViewModel: FavoritesScreenViewModel = hiltViewModel(),
+
 ) {
+    val items = favsViewModel.favorites.collectAsState()
+
+    //   items.value.forEach { item ->
     Box(
         modifier = Modifier
             .width(380.dp)
@@ -41,13 +49,20 @@ fun FavoriteItem(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 15.dp, end = 20.dp, top = 18.dp),
-           horizontalArrangement = Arrangement.Center
+                .padding(
+                    start = 15.dp,
+                    end = 20.dp,
+                    top = 18.dp
+                ),
+            horizontalArrangement = Arrangement.Center
         ) {
             Box(
                 modifier = Modifier
                     .size(64.dp)
-                    .background(color = favorite.bgColor, shape = CircleShape),
+                    .background(
+                        color = favorite.bgColor,
+                        shape = CircleShape
+                    ),
                 contentAlignment = Alignment.Center
             ) {
                 Image(
@@ -61,10 +76,15 @@ fun FavoriteItem(
             Spacer(modifier = Modifier.width(22.dp))
             Column(
                 horizontalAlignment = Alignment.Start,
-                verticalArrangement = Arrangement.SpaceAround
+                verticalArrangement = Arrangement.Center
             ) {
+                val coast = if (favorite.count < 1) {
+                    favorite.coast
+                } else {
+                    favorite.count * favorite.coast
+                }
                 Text(
-                    text = "$ ${favorite.coast} x ${favorite.count}",
+                    text = coast.toString(),
                     style = TextStyle(
                         fontFamily = AppFontFamily,
                         color = DarkPrimary,
@@ -81,8 +101,13 @@ fun FavoriteItem(
                         fontWeight = FontWeight(600)
                     )
                 )
+                val weight = if (favorite.weightValue < 0.0) {
+                    favorite.weightParameter
+                } else {
+                    favorite.weightValue * favorite.count
+                }
                 Text(
-                    text = "$ ${favorite.weightValue} ${favorite.weightParameter}",
+                    text = "$weight ${favorite.weightParameter}",
                     style = TextStyle(
                         fontFamily = AppFontFamily,
                         color = CustomGray,
@@ -91,7 +116,7 @@ fun FavoriteItem(
                     )
                 )
             }
-            Spacer(modifier = Modifier.width(240.dp))
+            Spacer(modifier = Modifier.width(125.dp))
             Column(
                 modifier = Modifier.background(Color.White),
                 verticalArrangement = Arrangement.Center

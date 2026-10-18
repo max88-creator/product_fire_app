@@ -14,6 +14,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -27,7 +28,8 @@ fun ProductsList(
     backToHomeScreenClick: () -> Unit
 ) {
     val scrollState = rememberScrollState()
-    val pairs = viewModel.elements.vegList.windowed(2, 2, true)
+    val items = viewModel.vegetableList.collectAsState()
+    val pairs = items.value.windowed(2, 2, true)
     Surface(
         modifier = Modifier
             .fillMaxSize()

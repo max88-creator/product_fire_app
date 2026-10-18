@@ -26,12 +26,11 @@ class VegetableRepositoryImpl @Inject constructor(
         dao.decrementCount(id)
     }
 
+    override suspend fun resetCount(id: Int) {
+        dao.resetCount(id)
+    }
+
     override fun getAllVegetable(): Flow<List<Vegetable>> {
         return dao.getAllVegetable()
     }
-
-//    override fun mapToFavorite(id: Int): Favorite {
-//        return toFavorite()
-//    }
-
 }

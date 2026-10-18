@@ -45,7 +45,7 @@ fun ChosenProductsColumn(
     val scrollState = rememberScrollState()
     val pairs = items.value.windowed(2, 2, true)
 
-    Column() {
+    Column{
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -93,7 +93,7 @@ fun ChosenProductsColumn(
                     pair.forEach { item ->
 
                         ProductItem(
-                            vegetable = item,
+                            vegetable = item
                         )
                     }
                 }

@@ -35,3 +35,18 @@ fun Vegetable.toBasketItem(): BasketItem {
         eventTextColor = eventTextColor
     )
 }
+
+fun BasketItem.toVegetable(): Vegetable =
+    Vegetable(
+        id = id,
+        bgColor = bgColor,
+        image = image,
+        coast = coast,
+        count = count,
+        name = name,
+        weightValue = weightValue,
+        weightParameter = weightParameter,
+        isEventExist = isEventExist,
+        eventText = eventText,
+        eventTextColor = eventTextColor
+    )

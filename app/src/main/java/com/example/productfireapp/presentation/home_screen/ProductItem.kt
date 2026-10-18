@@ -50,19 +50,7 @@ fun ProductItem(
     homeScreenViewModel: HomeScreenViewModel = hiltViewModel(),
     favsViewModel: FavoritesScreenViewModel = hiltViewModel(),
     basketScreenViewModel: BasketScreenViewModel = hiltViewModel(),
-    // basketItem: BasketItem
 ) {
-    val vegetableList = homeScreenViewModel.vegetableList.collectAsState()
-
-    val isVegBasket = vegetableList.value.any { vegetable ->
-        vegetable.count > 0
-    }
-    //   val itemCount = basketItem.count
-
-//    val addedInnBasket = vegetableList.value.any { item ->
-//   //     vegCount == itemCount
-//    }
-
     val favsList = favsViewModel.favorites.collectAsState()
 
     val isFavorite = favsList.value.any { favorite ->
@@ -76,6 +64,11 @@ fun ProductItem(
     }
     var changeProductCountWindow by remember { mutableStateOf(false) }
 
+    val coast = if (vegetable.count < 1) {
+        vegetable.coast
+    } else {
+        vegetable.count * vegetable.coast
+    }
 
     val space = 10.sp * 0.05f
     val currentWeight = vegetable.count * vegetable.weightValue
@@ -168,11 +161,7 @@ fun ProductItem(
             }
             Spacer(modifier = Modifier.height(15.dp))
             Text(
-                text = if (vegetable.count > 1) {
-                    "$${vegetable.count} * ${vegetable.coast}"
-                } else {
-                    "$${vegetable.coast}"
-                },
+                text = coast.toString(),
                 style = TextStyle(
                     color = MediumPrimary,
                     fontFamily = AppFontFamily,
@@ -253,10 +242,7 @@ fun ProductItem(
                         ),
                         modifier = Modifier
                             .clickable {
-                                homeScreenViewModel.incrementItem(vegetable)
-                                if (!isExistInBasket) {
-                                    basketScreenViewModel.insertItem(vegetable)
-                                }
+                             homeScreenViewModel.incrementItem(vegetable)
                             }
                     )
                 }
@@ -264,7 +250,13 @@ fun ProductItem(
                 Spacer(modifier = Modifier.height(11.dp))
                 Box(
                     modifier = Modifier
-                        .fillMaxWidth(),
+                        .fillMaxWidth()
+                        .clickable {
+                            homeScreenViewModel.incrementItem(vegetable)
+                            if (!isExistInBasket) {
+                                basketScreenViewModel.insertItem(vegetable)
+                            }
+                        },
                     contentAlignment = Alignment.Center
                 ) {
                     Row(
@@ -288,11 +280,7 @@ fun ProductItem(
                                 fontFamily = AppFontFamily,
                                 fontSize = 12.sp,
                                 fontWeight = FontWeight(500)
-                            ),
-                            modifier = Modifier
-                                .clickable {
-                                    homeScreenViewModel.incrementItem(vegetable)
-                                }
+                            )
                         )
                     }
                 }

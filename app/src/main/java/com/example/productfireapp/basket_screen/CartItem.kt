@@ -24,6 +24,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.productfireapp.domain.models.BasketItem
+import com.example.productfireapp.domain.models.Vegetable
 import com.example.productfireapp.ui.theme.AppFontFamily
 import com.example.productfireapp.ui.theme.CustomGray
 import com.example.productfireapp.ui.theme.DarkPrimary
@@ -32,6 +33,9 @@ import com.example.productfireapp.ui.theme.DarkPrimary
 fun CartItem(
     basketItem: BasketItem
 ) {
+
+    val coast = basketItem.coast * basketItem.count
+    val weight = basketItem.weightValue * basketItem.count
     Box(
         modifier = Modifier
             .width(380.dp)
@@ -64,7 +68,11 @@ fun CartItem(
                 verticalArrangement = Arrangement.SpaceAround
             ) {
                 Text(
-                    text = "$ ${basketItem.coast} x ${basketItem.count}",
+                    text = if (basketItem.count < 1) {
+                        "$ ${basketItem.coast}"
+                    } else {
+                        "$ $coast"
+                    },
                     style = TextStyle(
                         fontFamily = AppFontFamily,
                         color = DarkPrimary,
@@ -82,7 +90,7 @@ fun CartItem(
                     )
                 )
                 Text(
-                    text = "$ ${basketItem.weightValue} ${basketItem.weightParameter}",
+                    text = weight.toString(),
                     style = TextStyle(
                         fontFamily = AppFontFamily,
                         color = CustomGray,

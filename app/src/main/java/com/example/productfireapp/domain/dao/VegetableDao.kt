@@ -23,4 +23,7 @@ interface VegetableDao {
 
     @Query("SELECT * FROM vegetable")
     fun getAllVegetable(): Flow<List<Vegetable>>
+
+    @Query("UPDATE vegetable SET count = 0 WHERE id = :id")
+    suspend fun resetCount(id: Int)
 }

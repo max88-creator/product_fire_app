@@ -9,6 +9,6 @@ interface VegetableRepository {
     suspend fun insertVegetableList(items: List<Vegetable>)
     suspend fun incrementCount(id: Int)
     suspend fun decrementCount(id: Int)
+    suspend fun resetCount(id: Int)
     fun getAllVegetable(): Flow<List<Vegetable>>
-   // fun mapToFavorite(id: Int): Favorite
 }
