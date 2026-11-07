@@ -13,18 +13,27 @@ class VegetableRepositoryImpl @Inject constructor(
     override suspend fun getVegetableCount(): Int {
         return dao.getVegetableCount()
     }
+
     override suspend fun insertVegetableList(items: List<Vegetable>) {
         dao.insertVegetableList(items = items)
     }
-    override suspend fun incrementCount(id: Int) {
-        dao.incrementCount(id)
+
+    override suspend fun addToBasket(id: Int) {
+        dao.addToBasket(id)
     }
-    override suspend fun decrementCount(id: Int) {
-        dao.decrementCount(id)
+
+    override suspend fun incrementBasketItem(id: Int) {
+        dao.incrementBasketItem(id)
     }
-    override suspend fun resetCount(id: Int) {
-        dao.resetCount(id)
+
+    override suspend fun decrementBasketItem(id: Int) {
+        dao.decrementBasketItem(id)
     }
+
+    override suspend fun removeFromBasket(id: Int) {
+        dao.removeFromBasket(id)
+    }
+
     override fun getAllVegetable(): Flow<List<Vegetable>> {
         return dao.getAllVegetable()
     }

@@ -7,9 +7,10 @@ import kotlinx.coroutines.flow.Flow
 interface VegetableRepository {
     suspend fun getVegetableCount(): Int
     suspend fun insertVegetableList(items: List<Vegetable>)
-    suspend fun incrementCount(id: Int)
-    suspend fun decrementCount(id: Int)
-    suspend fun resetCount(id: Int)
+    suspend fun addToBasket(id: Int)
+    suspend fun incrementBasketItem(id: Int)
+    suspend fun decrementBasketItem(id: Int)
+    suspend fun removeFromBasket(id: Int)
     fun getAllVegetable(): Flow<List<Vegetable>>
 }
 
