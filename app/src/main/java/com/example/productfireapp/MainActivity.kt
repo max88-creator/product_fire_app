@@ -5,8 +5,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.example.productfireapp.domain.models.Vegetable
-import com.example.productfireapp.navigation.NavGraph
+import com.example.productfireapp.navigation.NavigationGraph
 import com.example.productfireapp.ui.theme.ProductFireAppTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,7 +17,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ProductFireAppTheme {
-                NavGraph()
+                NavigationGraph()
             }
         }
     }

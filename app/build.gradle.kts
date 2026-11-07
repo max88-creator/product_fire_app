@@ -53,6 +53,7 @@ dependencies {
     implementation(libs.firebase.functions)
     implementation(libs.firebase.storage)
     implementation(libs.googleid)
+    implementation(libs.navigation.compose)
     ksp(libs.androidx.room.compiler)
 
     implementation(libs.hilt.android)

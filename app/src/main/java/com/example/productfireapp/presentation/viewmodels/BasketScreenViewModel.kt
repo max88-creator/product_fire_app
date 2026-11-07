@@ -15,9 +15,17 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BasketScreenViewModel @Inject constructor(
-    private val repository: BasketItemRepository
+    private val repository: BasketItemRepository,
 ) : ViewModel() {
-    val basketItems: StateFlow<List<BasketItem>> = repository.getAllItems()
+
+//    val _uiBasketState = MutableStateFlow(
+//        BasketItem()
+//    )
+//
+//    val uiBasketState = _uiBasketState.combine(
+//        homeScreenViewModel.
+//    )
+    val basketItemsState: StateFlow<List<BasketItem>> = repository.getAllItems()
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(3000),
@@ -34,6 +42,9 @@ class BasketScreenViewModel @Inject constructor(
     fun delete(id: Int) {
         viewModelScope.launch {
             repository.delete(id)
+            basketItemsState.value
         }
     }
 }
+
+

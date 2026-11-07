@@ -50,3 +50,4 @@ fun BasketItem.toVegetable(): Vegetable =
         eventText = eventText,
         eventTextColor = eventTextColor
     )
+

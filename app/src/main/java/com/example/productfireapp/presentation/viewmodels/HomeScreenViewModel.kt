@@ -7,15 +7,17 @@ import com.example.productfireapp.domain.models.Vegetable
 import com.example.productfireapp.domain.repositories.VegetableRepository
 import com.example.productfireapp.presentation.home_screen.Elements
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.collections.emptyList
 
 @HiltViewModel
 class HomeScreenViewModel @Inject constructor(
     val elements: Elements,
-    private val repository: VegetableRepository
+    private val repository: VegetableRepository,
 ) : ViewModel() {
 
 
@@ -56,3 +58,5 @@ class HomeScreenViewModel @Inject constructor(
         }
     }
 }
+
+

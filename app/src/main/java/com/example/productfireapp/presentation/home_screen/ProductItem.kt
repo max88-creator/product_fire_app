@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.productfireapp.R
+import com.example.productfireapp.domain.models.BasketItem
 import com.example.productfireapp.domain.models.Vegetable
 import com.example.productfireapp.presentation.viewmodels.BasketScreenViewModel
 import com.example.productfireapp.presentation.viewmodels.FavoritesScreenViewModel
@@ -57,7 +58,11 @@ fun ProductItem(
         vegetable.id == favorite.id
     }
 
-    val basketItemsList = basketScreenViewModel.basketItems.collectAsState()
+    val basketItemsList = basketScreenViewModel.basketItemsState.collectAsState()
+    val basketItems = basketItemsList.value
+    val item = basketItems.find { basketItem ->
+        basketItem.id == vegetable.id
+    }
 
     val isExistInBasket = basketItemsList.value.any { item ->
         vegetable.id == item.id
@@ -288,3 +293,5 @@ fun ProductItem(
         }
     }
 }
+
+

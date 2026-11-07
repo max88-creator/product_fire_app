@@ -1,22 +1,22 @@
 package com.example.productfireapp.domain.models
 
-import androidx.compose.ui.graphics.Color
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "favorite")
+@Entity(
+    tableName = "favorite",
+    foreignKeys = [
+        ForeignKey(
+            entity = Vegetable::class,
+            parentColumns = ["id"],
+            childColumns = ["id"],
+            onDelete = ForeignKey.CASCADE
+        )
+    ]
+)
 data class Favorite(
     @PrimaryKey
-    val id: Int,
-    val bgColor: Color = Color.White,
-    val image: Int = 0,
-    val coast: Double = 0.0,
-    val count: Int = 0,
-    val name: String = "",
-    val weightValue: Double = 0.0,
-    val weightParameter: String = "",
-    val isEventExist: Boolean = false,
-    val eventText: String = "",
-    val eventTextColor: Color = Color.White
+    val id: Int
 )
 

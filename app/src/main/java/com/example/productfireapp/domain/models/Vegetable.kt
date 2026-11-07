@@ -19,3 +19,4 @@ data class Vegetable(
     val eventText: String = "",
     val eventTextColor: Color = Color.White
 )
+

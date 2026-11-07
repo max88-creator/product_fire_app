@@ -21,3 +21,5 @@ interface BasketItemDao {
     @Query("SELECT EXISTS(SELECT 1 FROM basket_item WHERE id = :id)")
     suspend fun isBasketItem(id: Int): Boolean
 }
+
+

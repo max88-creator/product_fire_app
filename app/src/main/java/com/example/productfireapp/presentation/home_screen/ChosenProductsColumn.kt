@@ -91,7 +91,6 @@ fun ChosenProductsColumn(
                 ) {
 
                     pair.forEach { item ->
-
                         ProductItem(
                             vegetable = item
                         )

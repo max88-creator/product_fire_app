@@ -33,7 +33,6 @@ import com.example.productfireapp.ui.theme.DarkPrimary
 fun CartItem(
     basketItem: BasketItem
 ) {
-
     val coast = basketItem.coast * basketItem.count
     val weight = basketItem.weightValue * basketItem.count
     Box(

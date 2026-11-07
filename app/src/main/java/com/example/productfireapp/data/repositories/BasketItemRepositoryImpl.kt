@@ -24,5 +24,4 @@ class BasketItemRepositoryImpl @Inject constructor(
     override suspend fun isBasketItem(id: Int): Boolean {
         return dao.isBasketItem(id)
     }
-
 }

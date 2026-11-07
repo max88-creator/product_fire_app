@@ -12,16 +12,9 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.example.productfireapp.data.mappers.toVegetable
-import com.example.productfireapp.domain.models.Vegetable
 import com.example.productfireapp.presentation.viewmodels.BasketScreenViewModel
 import com.example.productfireapp.presentation.viewmodels.HomeScreenViewModel
 import com.example.productfireapp.ui.theme.CustomGray
@@ -32,7 +25,7 @@ fun BasketScreen(
     homeScreenViewModel: HomeScreenViewModel = hiltViewModel(),
     backClick: () -> Unit
 ) {
-    val items = basketItemViewModel.basketItems.collectAsState()
+    val items = basketItemViewModel.basketItemsState.collectAsState()
 
     Scaffold(
         topBar = {

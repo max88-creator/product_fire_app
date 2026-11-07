@@ -22,3 +22,5 @@ abstract class MainDb: RoomDatabase() {
     abstract fun favoritesDao(): FavoritesDao
     abstract fun basketItemDao(): BasketItemDao
 }
+
+

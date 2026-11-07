@@ -14,14 +14,13 @@ import androidx.navigation.compose.rememberNavController
 import com.example.productfireapp.basket_screen.BasketScreen
 import com.example.productfireapp.bottom_nav_bar.data.BottomMenuItem
 import com.example.productfireapp.bottom_nav_bar.ui.BottomMenu
-import com.example.productfireapp.domain.models.Vegetable
 import com.example.productfireapp.presentation.favorites.FavoritesList
 import com.example.productfireapp.presentation.home_screen.HomeScreen
 import com.example.productfireapp.presentation.home_screen.ProductsList
 import com.example.productfireapp.user_screen.UserScreen
 
 @Composable
-fun NavGraph() {
+fun NavigationGraph() {
     val navController = rememberNavController()
 
     var selectedItemTitle by rememberSaveable {
