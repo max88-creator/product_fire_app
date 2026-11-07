@@ -1,18 +1,14 @@
 package com.example.productfireapp.presentation.viewmodels
 
-import androidx.compose.runtime.collectAsState
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.productfireapp.domain.models.Vegetable
 import com.example.productfireapp.domain.repositories.VegetableRepository
 import com.example.productfireapp.presentation.home_screen.Elements
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-import kotlin.collections.emptyList
 
 @HiltViewModel
 class HomeScreenViewModel @Inject constructor(
@@ -37,24 +33,27 @@ class HomeScreenViewModel @Inject constructor(
         }
     }
 
-    fun incrementItem(vegetable: Vegetable) {
+    fun addToBasket(id: Int) {
         viewModelScope.launch {
-            repository.incrementCount(vegetable.id)
+            repository.addToBasket(id)
         }
     }
 
-    fun decrementCount(vegetable: Vegetable) {
-        if (vegetable.count > 0) {
-            viewModelScope.launch {
-                repository.decrementCount(vegetable.id)
-            }
-        } else {
-            return
+    fun incrementItem(id: Int) {
+        viewModelScope.launch {
+            repository.incrementBasketItem(id)
         }
     }
-    fun resetCount(vegetable: Vegetable) {
+
+    fun decrementCount(id: Int) {
         viewModelScope.launch {
-            repository.resetCount(vegetable.id)
+            repository.decrementBasketItem(id)
+        }
+    }
+
+    fun resetCount(id: Int) {
+        viewModelScope.launch {
+            repository.removeFromBasket(id)
         }
     }
 }

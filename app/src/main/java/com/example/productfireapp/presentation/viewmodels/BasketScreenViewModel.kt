@@ -2,48 +2,32 @@ package com.example.productfireapp.presentation.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.productfireapp.domain.models.BasketItem
-import com.example.productfireapp.domain.models.Vegetable
 import com.example.productfireapp.domain.repositories.BasketItemRepository
+import com.example.productfireapp.domain.repositories.VegetableRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class BasketScreenViewModel @Inject constructor(
-    private val repository: BasketItemRepository,
+    private val vegetableRepository: VegetableRepository,
+    private val basketItemRepository: BasketItemRepository,
 ) : ViewModel() {
 
-//    val _uiBasketState = MutableStateFlow(
-//        BasketItem()
-//    )
-//
-//    val uiBasketState = _uiBasketState.combine(
-//        homeScreenViewModel.
-//    )
-//    val basketItemsState: StateFlow<List<BasketItem>> = repository.getAllItems()
-//        .stateIn(
-//            scope = viewModelScope,
-//            started = SharingStarted.WhileSubscribed(3000),
-//            initialValue = emptyList()
-//        )
+    val basketItemState = basketItemRepository.getAllItems()
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(3000),
+            initialValue = emptyList()
+        )
 
-    fun insertItem(vegetable: Vegetable) {
+    fun delete(id: Int) {
         viewModelScope.launch {
-     //       val basketItem = vegetable.toBasketItem()
-    //        repository.insertBasketItem(item = basketItem)
+            vegetableRepository.removeFromBasket(id)
         }
     }
-
-//    fun delete(id: Int) {
-//        viewModelScope.launch {
-//            repository.delete(id)
-//            basketItemsState.value
-//        }
-//    }
 }
 
 
