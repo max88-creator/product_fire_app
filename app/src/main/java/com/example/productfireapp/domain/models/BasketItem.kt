@@ -17,7 +17,7 @@ import androidx.room.PrimaryKey
 )
 data class BasketItem(
     @PrimaryKey
-    val id: Int = 0
+    val id: Int
 )
 
 

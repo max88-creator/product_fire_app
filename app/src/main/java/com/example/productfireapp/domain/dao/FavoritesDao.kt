@@ -16,8 +16,8 @@ interface FavoritesDao{
     @Query("DELETE FROM favorite WHERE id = :id")
     suspend fun delete(id: Int): Int
 
-    @Query("SELECT * FROM favorite")
-    fun getAllFavorites(): Flow<List<Favorite>>
+    @Query("SELECT vegetable. * FROM vegetable INNER JOIN favorite ON vegetable.id = favorite.id")
+    fun getAllFavorites(): Flow<List<Vegetable>>
 
     @Query("SELECT EXISTS(SELECT 1 FROM favorite WHERE id = :id)")
     suspend fun isFavorite(id: Int): Boolean
