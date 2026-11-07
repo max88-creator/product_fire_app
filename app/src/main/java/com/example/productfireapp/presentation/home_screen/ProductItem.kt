@@ -210,8 +210,7 @@ fun ProductItem(
                         horizontalArrangement = Arrangement.SpaceAround
                     ) {
                         Text(
-                            text =
-                                "-",
+                            text = "-",
                             style = TextStyle(
                                 color = MediumPrimary,
                                 fontFamily = AppFontFamily,
@@ -220,12 +219,12 @@ fun ProductItem(
                             ),
                             modifier = Modifier
                                 .clickable {
-//                                if (vegetable.count == 0) {
-//                                    changeProductCountWindow = true
-//                                    basketScreenViewModel.delete(vegetable.id)
-//                                } else {
-//                                    homeScreenViewModel.decrementCount(vegetable)
-//                                }
+                                    if (vegetable.count == 0) {
+                                        changeProductCountWindow = true
+                                        basketScreenViewModel.delete(vegetable.id)
+                                    } else {
+                                        homeScreenViewModel.decrementCount(vegetable.id)
+                                    }
                                 }
                         )
                         Text(
@@ -247,7 +246,7 @@ fun ProductItem(
                             ),
                             modifier = Modifier
                                 .clickable {
-                                    homeScreenViewModel.incrementItem(vegetable)
+                                    homeScreenViewModel.incrementItem(vegetable.id)
                                 }
                         )
                     }
@@ -257,10 +256,7 @@ fun ProductItem(
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable {
-                                homeScreenViewModel.incrementItem(vegetable)
-//                            if (!isExistInBasket) {
-//                                basketScreenViewModel.insertItem(vegetable)
-//                            }
+                                homeScreenViewModel.addToBasket(vegetable.id)
                             },
                         contentAlignment = Alignment.Center
                     ) {
@@ -294,5 +290,8 @@ fun ProductItem(
         }
     }
 }
+
+
+
 
 
