@@ -37,7 +37,7 @@ fun FavoriteItem(
     favsViewModel: FavoritesScreenViewModel = hiltViewModel(),
 
 ) {
-    val items = favsViewModel.favorites.collectAsState()
+ //   val items = favsViewModel.favorites.collectAsState()
 
     //   items.value.forEach { item ->
     Box(
@@ -56,66 +56,66 @@ fun FavoriteItem(
                 ),
             horizontalArrangement = Arrangement.Center
         ) {
-            Box(
-                modifier = Modifier
-                    .size(64.dp)
-                    .background(
-                        color = favorite.bgColor,
-                        shape = CircleShape
-                    ),
-                contentAlignment = Alignment.Center
-            ) {
-                Image(
-                    painter = painterResource(id = favorite.image),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .width(50.dp)
-                        .height(41.dp)
-                )
-            }
-            Spacer(modifier = Modifier.width(22.dp))
-            Column(
-                horizontalAlignment = Alignment.Start,
-                verticalArrangement = Arrangement.Center
-            ) {
-                val coast = if (favorite.count < 1) {
-                    favorite.coast
-                } else {
-                    favorite.count * favorite.coast
-                }
-                Text(
-                    text = coast.toString(),
-                    style = TextStyle(
-                        fontFamily = AppFontFamily,
-                        color = DarkPrimary,
-                        fontSize = 12.sp,
-                        fontWeight = FontWeight(500)
-                    )
-                )
-                Text(
-                    text = favorite.name,
-                    style = TextStyle(
-                        fontFamily = AppFontFamily,
-                        color = Color.Black,
-                        fontSize = 15.sp,
-                        fontWeight = FontWeight(600)
-                    )
-                )
-                val weight = if (favorite.weightValue < 0.0) {
-                    favorite.weightParameter
-                } else {
-                    favorite.weightValue * favorite.count
-                }
-                Text(
-                    text = "$weight ${favorite.weightParameter}",
-                    style = TextStyle(
-                        fontFamily = AppFontFamily,
-                        color = CustomGray,
-                        fontSize = 12.sp,
-                        fontWeight = FontWeight(500)
-                    )
-                )
-            }
+//            Box(
+//                modifier = Modifier
+//                    .size(64.dp)
+//                    .background(
+//                        color = favorite.bgColor,
+//                        shape = CircleShape
+//                    ),
+//                contentAlignment = Alignment.Center
+//            ) {
+//                Image(
+//                    painter = painterResource(id = favorite.image),
+//                    contentDescription = null,
+//                    modifier = Modifier
+//                        .width(50.dp)
+//                        .height(41.dp)
+//                )
+//            }
+//            Spacer(modifier = Modifier.width(22.dp))
+//            Column(
+//                horizontalAlignment = Alignment.Start,
+//                verticalArrangement = Arrangement.Center
+//            ) {
+//                val coast = if (favorite.count < 1) {
+//                    favorite.coast
+//                } else {
+//                    favorite.count * favorite.coast
+//                }
+//                Text(
+//                    text = coast.toString(),
+//                    style = TextStyle(
+//                        fontFamily = AppFontFamily,
+//                        color = DarkPrimary,
+//                        fontSize = 12.sp,
+//                        fontWeight = FontWeight(500)
+//                    )
+//                )
+//                Text(
+//                    text = favorite.name,
+//                    style = TextStyle(
+//                        fontFamily = AppFontFamily,
+//                        color = Color.Black,
+//                        fontSize = 15.sp,
+//                        fontWeight = FontWeight(600)
+//                    )
+//                )
+//                val weight = if (favorite.weightValue < 0.0) {
+//                    favorite.weightParameter
+//                } else {
+//                    favorite.weightValue * favorite.count
+//                }
+//                Text(
+//                    text = "$weight ${favorite.weightParameter}",
+//                    style = TextStyle(
+//                        fontFamily = AppFontFamily,
+//                        color = CustomGray,
+//                        fontSize = 12.sp,
+//                        fontWeight = FontWeight(500)
+//                    )
+//                )
+//            }
             Spacer(modifier = Modifier.width(125.dp))
             Column(
                 modifier = Modifier.background(Color.White),
@@ -129,9 +129,9 @@ fun FavoriteItem(
                         fontSize = 18.sp
                     )
                 )
-                Text(
-                    text = favorite.count.toString()
-                )
+//                Text(
+//                    text = favorite.count.toString()
+//                )
                 Text(
                     text = "-",
                     style = TextStyle(

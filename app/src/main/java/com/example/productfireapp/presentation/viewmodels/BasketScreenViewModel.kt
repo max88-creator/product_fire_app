@@ -2,7 +2,6 @@ package com.example.productfireapp.presentation.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.productfireapp.data.mappers.toBasketItem
 import com.example.productfireapp.domain.models.BasketItem
 import com.example.productfireapp.domain.models.Vegetable
 import com.example.productfireapp.domain.repositories.BasketItemRepository
@@ -25,26 +24,26 @@ class BasketScreenViewModel @Inject constructor(
 //    val uiBasketState = _uiBasketState.combine(
 //        homeScreenViewModel.
 //    )
-    val basketItemsState: StateFlow<List<BasketItem>> = repository.getAllItems()
-        .stateIn(
-            scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(3000),
-            initialValue = emptyList()
-        )
+//    val basketItemsState: StateFlow<List<BasketItem>> = repository.getAllItems()
+//        .stateIn(
+//            scope = viewModelScope,
+//            started = SharingStarted.WhileSubscribed(3000),
+//            initialValue = emptyList()
+//        )
 
     fun insertItem(vegetable: Vegetable) {
         viewModelScope.launch {
-            val basketItem = vegetable.toBasketItem()
-            repository.insertBasketItem(item = basketItem)
+     //       val basketItem = vegetable.toBasketItem()
+    //        repository.insertBasketItem(item = basketItem)
         }
     }
 
-    fun delete(id: Int) {
-        viewModelScope.launch {
-            repository.delete(id)
-            basketItemsState.value
-        }
-    }
+//    fun delete(id: Int) {
+//        viewModelScope.launch {
+//            repository.delete(id)
+//            basketItemsState.value
+//        }
+//    }
 }
 
 

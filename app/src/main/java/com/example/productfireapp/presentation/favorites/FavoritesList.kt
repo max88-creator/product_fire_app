@@ -23,7 +23,7 @@ fun FavoritesList(
     viewModel: FavoritesScreenViewModel = hiltViewModel(),
     backToHome: () -> Unit
 ) {
-    val favoritesList = viewModel.favorites.collectAsState()
+ //   val favoritesList = viewModel.favorites.collectAsState()
 
     Scaffold(
         topBar = {
@@ -46,13 +46,13 @@ fun FavoritesList(
                     .padding(horizontal = 17.dp)
                     .background(color = CustomGray.copy(alpha = 0.2f))
             ) {
-                items(favoritesList.value) { favorite ->
-                   SwipeFavorite(
-                       favorite,
-                       onDeleteClick = { viewModel.deleteFavorite(favorite.id)}
-                       )
-                    Spacer(modifier = Modifier.height(14.dp))
-                }
+//                items(favoritesList.value) { favorite ->
+//                   SwipeFavorite(
+//                       favorite,
+//                       onDeleteClick = { viewModel.deleteFavorite(favorite.id)}
+//                       )
+//                    Spacer(modifier = Modifier.height(14.dp))
+//                }
             }
         }
     }

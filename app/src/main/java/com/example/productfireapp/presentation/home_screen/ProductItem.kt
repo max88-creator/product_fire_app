@@ -52,21 +52,21 @@ fun ProductItem(
     favsViewModel: FavoritesScreenViewModel = hiltViewModel(),
     basketScreenViewModel: BasketScreenViewModel = hiltViewModel(),
 ) {
-    val favsList = favsViewModel.favorites.collectAsState()
+//    val favsList = favsViewModel.favorites.collectAsState()
+//
+//    val isFavorite = favsList.value.any { favorite ->
+//        vegetable.id == favorite.id
+//    }
 
-    val isFavorite = favsList.value.any { favorite ->
-        vegetable.id == favorite.id
-    }
+//    val basketItemsList = basketScreenViewModel.basketItemsState.collectAsState()
+//    val basketItems = basketItemsList.value
+//    val item = basketItems.find { basketItem ->
+//        basketItem.id == vegetable.id
+//    }
 
-    val basketItemsList = basketScreenViewModel.basketItemsState.collectAsState()
-    val basketItems = basketItemsList.value
-    val item = basketItems.find { basketItem ->
-        basketItem.id == vegetable.id
-    }
-
-    val isExistInBasket = basketItemsList.value.any { item ->
-        vegetable.id == item.id
-    }
+//    val isExistInBasket = basketItemsList.value.any { item ->
+//        vegetable.id == item.id
+//    }
     var changeProductCountWindow by remember { mutableStateOf(false) }
 
     val coast = if (vegetable.count < 1) {
@@ -89,204 +89,205 @@ fun ProductItem(
             modifier = Modifier
                 .align(Alignment.TopEnd)
         ) {
-            if (isFavorite) {
-                IconButton(
-                    onClick = {
-                        favsViewModel.deleteFavorite(vegetable.id)
-                    }
+//            if (isFavorite) {
+//                IconButton(
+//                    onClick = {
+//                        favsViewModel.deleteFavorite(vegetable.id)
+//                    }
+//                ) {
+//                    Image(
+//                        painter = painterResource(R.drawable.heart_fill),
+//                        contentDescription = null,
+//                        modifier = Modifier
+//                            .size(16.dp)
+//                    )
+//                }
+//            } else {
+//                IconButton(
+//                    onClick = {
+//                        favsViewModel.insertToFavorites(vegetable)
+//                    }
+//                ) {
+//                    Icon(
+//                        painter = painterResource(R.drawable.empty_heart),
+//                        contentDescription = null,
+//                        modifier = Modifier
+//                            .size(16.dp)
+//                    )
+//                }
+//            }
+//        }
+            if (vegetable.isEventExist) {
+                Box(
+                    modifier = Modifier
+                        .width(38.dp)
+                        .height(18.dp)
+                        .background(vegetable.bgColor)
+                        .align(Alignment.TopStart),
+                    contentAlignment = Alignment.Center
                 ) {
-                    Image(
-                        painter = painterResource(R.drawable.heart_fill),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .size(16.dp)
-                    )
-                }
-            } else {
-                IconButton(
-                    onClick = {
-                        favsViewModel.insertToFavorites(vegetable)
-                    }
-                ) {
-                    Icon(
-                        painter = painterResource(R.drawable.empty_heart),
-                        contentDescription = null,
-                        modifier = Modifier
-                            .size(16.dp)
+                    Text(
+                        text = vegetable.eventText,
+                        style = TextStyle(
+                            fontFamily = AppFontFamily,
+                            color = vegetable.eventTextColor,
+                            fontSize = 10.sp,
+                            fontWeight = FontWeight(500),
+                            letterSpacing = space
+                        )
                     )
                 }
             }
-        }
-        if (vegetable.isEventExist) {
-            Box(
+            Column(
                 modifier = Modifier
-                    .width(38.dp)
-                    .height(18.dp)
-                    .background(vegetable.bgColor)
-                    .align(Alignment.TopStart),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = vegetable.eventText,
-                    style = TextStyle(
-                        fontFamily = AppFontFamily,
-                        color = vegetable.eventTextColor,
-                        fontSize = 10.sp,
-                        fontWeight = FontWeight(500),
-                        letterSpacing = space
-                    )
-                )
-            }
-        }
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(top = 21.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Box(
-                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(top = 21.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Box(
                     modifier = Modifier
-                        .size(84.dp)
-                        .background(
-                            color = vegetable.bgColor,
-                            shape = CircleShape
-                        )
-                )
-                Image(
-                    painter = painterResource(vegetable.image),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .size(79.dp)
-                        .offset(x = 0.dp, y = 11.dp)
-                        .align(Alignment.BottomCenter)
-                )
-            }
-            Spacer(modifier = Modifier.height(15.dp))
-            Text(
-                text = coast.toString(),
-                style = TextStyle(
-                    color = MediumPrimary,
-                    fontFamily = AppFontFamily,
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight(500)
-                )
-            )
-            Text(
-                text = vegetable.name,
-                style = TextStyle(
-                    color = Color.Black,
-                    fontFamily = AppFontFamily,
-                    fontSize = 15.sp,
-                    fontWeight = FontWeight(600)
-                )
-            )
-            Text(
-                text = if (vegetable.count > 1) {
-                    "$currentWeight ${vegetable.weightParameter}"
-                } else {
-                    "${vegetable.weightValue} ${vegetable.weightParameter}"
-                },
-                style = TextStyle(
-                    color = CustomGray,
-                    fontFamily = AppFontFamily,
-                    fontSize = 12.sp,
-                    fontWeight = FontWeight(500)
-                )
-            )
-            Spacer(modifier = Modifier.height(11.dp))
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(1.dp)
-                    .background(BorderColor)
-            )
-            if (vegetable.count > 0) {
-                Spacer(modifier = Modifier.height(11.dp))
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceAround
                 ) {
-                    Text(
-                        text =
-                            "-",
-                        style = TextStyle(
-                            color = MediumPrimary,
-                            fontFamily = AppFontFamily,
-                            fontSize = 13.sp,
-                            fontWeight = FontWeight(500)
-                        ),
+                    Box(
                         modifier = Modifier
-                            .clickable {
-                                if (vegetable.count == 0) {
-                                    changeProductCountWindow = true
-                                    basketScreenViewModel.delete(vegetable.id)
-                                } else {
-                                    homeScreenViewModel.decrementCount(vegetable)
-                                }
-                            }
+                            .size(84.dp)
+                            .background(
+                                color = vegetable.bgColor,
+                                shape = CircleShape
+                            )
                     )
-                    Text(
-                        text = vegetable.count.toString(),
-                        style = TextStyle(
-                            color = MediumPrimary,
-                            fontFamily = AppFontFamily,
-                            fontSize = 12.sp,
-                            fontWeight = FontWeight(500)
-                        )
-                    )
-                    Text(
-                        text = "+",
-                        style = TextStyle(
-                            color = MediumPrimary,
-                            fontFamily = AppFontFamily,
-                            fontSize = 13.sp,
-                            fontWeight = FontWeight(500)
-                        ),
+                    Image(
+                        painter = painterResource(vegetable.image),
+                        contentDescription = null,
                         modifier = Modifier
-                            .clickable {
-                             homeScreenViewModel.incrementItem(vegetable)
-                            }
+                            .size(79.dp)
+                            .offset(x = 0.dp, y = 11.dp)
+                            .align(Alignment.BottomCenter)
                     )
                 }
-            } else {
+                Spacer(modifier = Modifier.height(15.dp))
+                Text(
+                    text = coast.toString(),
+                    style = TextStyle(
+                        color = MediumPrimary,
+                        fontFamily = AppFontFamily,
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight(500)
+                    )
+                )
+                Text(
+                    text = vegetable.name,
+                    style = TextStyle(
+                        color = Color.Black,
+                        fontFamily = AppFontFamily,
+                        fontSize = 15.sp,
+                        fontWeight = FontWeight(600)
+                    )
+                )
+                Text(
+                    text = if (vegetable.count > 1) {
+                        "$currentWeight ${vegetable.weightParameter}"
+                    } else {
+                        "${vegetable.weightValue} ${vegetable.weightParameter}"
+                    },
+                    style = TextStyle(
+                        color = CustomGray,
+                        fontFamily = AppFontFamily,
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight(500)
+                    )
+                )
                 Spacer(modifier = Modifier.height(11.dp))
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .clickable {
-                            homeScreenViewModel.incrementItem(vegetable)
-                            if (!isExistInBasket) {
-                                basketScreenViewModel.insertItem(vegetable)
-                            }
-                        },
-                    contentAlignment = Alignment.Center
-                ) {
+                        .height(1.dp)
+                        .background(BorderColor)
+                )
+                if (vegetable.count > 0) {
+                    Spacer(modifier = Modifier.height(11.dp))
                     Row(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Center
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceAround
                     ) {
-                        Image(
-                            painter = painterResource(R.drawable.green_basket),
-                            contentDescription = null,
-                            modifier = Modifier
-                                .width(13.dp)
-                                .height(15.dp)
-                        )
-                        Spacer(modifier = Modifier.width(9.dp))
                         Text(
-                            text = "Add to cart",
+                            text =
+                                "-",
                             style = TextStyle(
-                                color = CustomGray,
+                                color = MediumPrimary,
+                                fontFamily = AppFontFamily,
+                                fontSize = 13.sp,
+                                fontWeight = FontWeight(500)
+                            ),
+                            modifier = Modifier
+                                .clickable {
+//                                if (vegetable.count == 0) {
+//                                    changeProductCountWindow = true
+//                                    basketScreenViewModel.delete(vegetable.id)
+//                                } else {
+//                                    homeScreenViewModel.decrementCount(vegetable)
+//                                }
+                                }
+                        )
+                        Text(
+                            text = vegetable.count.toString(),
+                            style = TextStyle(
+                                color = MediumPrimary,
                                 fontFamily = AppFontFamily,
                                 fontSize = 12.sp,
                                 fontWeight = FontWeight(500)
                             )
                         )
+                        Text(
+                            text = "+",
+                            style = TextStyle(
+                                color = MediumPrimary,
+                                fontFamily = AppFontFamily,
+                                fontSize = 13.sp,
+                                fontWeight = FontWeight(500)
+                            ),
+                            modifier = Modifier
+                                .clickable {
+                                    homeScreenViewModel.incrementItem(vegetable)
+                                }
+                        )
+                    }
+                } else {
+                    Spacer(modifier = Modifier.height(11.dp))
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clickable {
+                                homeScreenViewModel.incrementItem(vegetable)
+//                            if (!isExistInBasket) {
+//                                basketScreenViewModel.insertItem(vegetable)
+//                            }
+                            },
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth(),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Center
+                        ) {
+                            Image(
+                                painter = painterResource(R.drawable.green_basket),
+                                contentDescription = null,
+                                modifier = Modifier
+                                    .width(13.dp)
+                                    .height(15.dp)
+                            )
+                            Spacer(modifier = Modifier.width(9.dp))
+                            Text(
+                                text = "Add to cart",
+                                style = TextStyle(
+                                    color = CustomGray,
+                                    fontFamily = AppFontFamily,
+                                    fontSize = 12.sp,
+                                    fontWeight = FontWeight(500)
+                                )
+                            )
+                        }
                     }
                 }
             }

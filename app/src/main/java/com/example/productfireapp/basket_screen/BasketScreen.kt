@@ -25,7 +25,7 @@ fun BasketScreen(
     homeScreenViewModel: HomeScreenViewModel = hiltViewModel(),
     backClick: () -> Unit
 ) {
-    val items = basketItemViewModel.basketItemsState.collectAsState()
+//    val items = basketItemViewModel.basketItemsState.collectAsState()
 
     Scaffold(
         topBar = {
@@ -55,15 +55,15 @@ fun BasketScreen(
                     .fillMaxWidth()
                     .padding(horizontal = 17.dp)
             ) {
-                items(items.value) { item ->
-                    SwipeItem(
-                        basketItem = item,
-                        onDeleteClick = {
-                            basketItemViewModel.delete(item.id)
-                        }
-                    )
-                    Spacer(modifier = Modifier.height(14.dp))
-                }
+//                items(items.value) { item ->
+//                    SwipeItem(
+//                        basketItem = item,
+//                        onDeleteClick = {
+//                            basketItemViewModel.delete(item.id)
+//                        }
+//                    )
+//                    Spacer(modifier = Modifier.height(14.dp))
+//                }
             }
         }
     }

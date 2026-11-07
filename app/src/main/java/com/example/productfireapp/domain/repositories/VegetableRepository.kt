@@ -12,3 +12,4 @@ interface VegetableRepository {
     suspend fun resetCount(id: Int)
     fun getAllVegetable(): Flow<List<Vegetable>>
 }
+

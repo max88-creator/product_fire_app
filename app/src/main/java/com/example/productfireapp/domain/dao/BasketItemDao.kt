@@ -10,13 +10,13 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface BasketItemDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertBasketItem(item: BasketItem)
 
     @Query("DELETE FROM basket_item WHERE id = :id")
     suspend fun delete(id: Int): Int
 
-    @Query("SELECT vegetable. * FROM " +
+    @Query("SELECT vegetable.* FROM " +
             "vegetable INNER JOIN basket_item ON" +
             " vegetable.id = basket_item.id")
     fun getAllItems(): Flow<List<Vegetable>>
