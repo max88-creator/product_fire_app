@@ -16,11 +16,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -35,7 +32,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.productfireapp.R
-import com.example.productfireapp.domain.models.BasketItem
 import com.example.productfireapp.domain.models.Vegetable
 import com.example.productfireapp.presentation.viewmodels.BasketScreenViewModel
 import com.example.productfireapp.presentation.viewmodels.FavoritesScreenViewModel
@@ -219,12 +215,7 @@ fun ProductItem(
                             ),
                             modifier = Modifier
                                 .clickable {
-                                    if (vegetable.count == 0) {
-                                        changeProductCountWindow = true
-                                        basketScreenViewModel.delete(vegetable.id)
-                                    } else {
-                                        homeScreenViewModel.decrementCount(vegetable.id)
-                                    }
+                                 homeScreenViewModel.decrementCount(vegetable.id)
                                 }
                         )
                         Text(
