@@ -23,17 +23,27 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.productfireapp.domain.models.BasketItem
 import com.example.productfireapp.domain.models.Vegetable
+import com.example.productfireapp.presentation.viewmodels.BasketScreenViewModel
 import com.example.productfireapp.ui.theme.AppFontFamily
 import com.example.productfireapp.ui.theme.CustomGray
 import com.example.productfireapp.ui.theme.DarkPrimary
+import kotlin.math.roundToInt
 
 @Composable
 fun CartItem(
     vegetable: Vegetable
 ) {
-    val coast = vegetable.coast * vegetable.count
+
+
+    val price = vegetable.count * vegetable.coast
+
+    val coast = price.formatPrice()
+     val shippingCharge = 0.0
+
+
     Box(
         modifier = Modifier
             .width(380.dp)
@@ -66,11 +76,7 @@ fun CartItem(
                 verticalArrangement = Arrangement.SpaceAround
             ) {
                 Text(
-                    text = if (vegetable.count < 1) {
-                        "$ ${vegetable.coast}"
-                    } else {
-                        "$ $coast"
-                    },
+                    text = coast,
                     style = TextStyle(
                         fontFamily = AppFontFamily,
                         color = DarkPrimary,
@@ -131,3 +137,11 @@ fun CartItem(
     }
 }
 
+fun Double.formatPrice(): String {
+    val rounded = (this * 10).roundToInt() / 10.0
+    return if (rounded % 1 == 0.0) {
+        rounded.toInt().toString()
+    } else {
+        String.format("%.1f", rounded)
+    }
+}

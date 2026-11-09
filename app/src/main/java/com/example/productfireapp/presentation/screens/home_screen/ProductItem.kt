@@ -51,11 +51,6 @@ fun ProductItem(
         vegetable.id == favorite.id
     }
 
-    val coast = if (vegetable.count < 1) {
-        vegetable.coast
-    } else {
-        vegetable.count * vegetable.coast
-    }
 
     val space = 10.sp * 0.05f
     val currentWeight = vegetable.count * vegetable.weightValue
@@ -147,7 +142,7 @@ fun ProductItem(
             }
             Spacer(modifier = Modifier.height(15.dp))
             Text(
-                text = coast.toString(),
+                text = vegetable.coast.toString(),
                 style = TextStyle(
                     color = MediumPrimary,
                     fontFamily = AppFontFamily,

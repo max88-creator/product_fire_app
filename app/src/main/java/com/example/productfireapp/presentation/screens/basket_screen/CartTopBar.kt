@@ -7,10 +7,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,15 +35,15 @@ fun CartTopBar(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(118.dp)
+   //         .height(118.dp)
             .background(color = Color.White)
     ) {
         Column(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
                 .padding(start = 17.dp)
         ) {
-            Spacer(modifier = Modifier.height(63.dp))
+            Spacer(modifier = Modifier.height(43.dp))
             Row(
                 modifier = Modifier
                     .fillMaxWidth(),
@@ -67,6 +70,7 @@ fun CartTopBar(
                     )
                 )
             }
+            Spacer(modifier = Modifier.height(28.dp))
         }
     }
 }

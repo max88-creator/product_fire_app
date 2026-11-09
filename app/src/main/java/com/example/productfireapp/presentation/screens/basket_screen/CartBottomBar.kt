@@ -7,10 +7,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
@@ -29,17 +32,21 @@ import com.example.productfireapp.ui.theme.DarkPrimary
 
 @Composable
 fun CartBottomBar(
+    subtotal: Double,
+    shippingCharge: Double,
+    total: Double,
     onShippingMethodNavigate: () -> Unit
 ) {
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(234.dp)
+  //          .height(234.dp)
             .background(Color.White)
     ) {
         Column(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
                 .padding(horizontal = 17.dp)
         ) {
             Spacer(modifier = Modifier.height(22.dp))
@@ -58,7 +65,7 @@ fun CartBottomBar(
                     )
                 )
                 Text(
-                    text = "\$56.7",
+                    text = subtotal.toString(),
                     style = TextStyle(
                         fontFamily = AppFontFamily,
                         color = CustomGray,
@@ -83,7 +90,7 @@ fun CartBottomBar(
                     )
                 )
                 Text(
-                    text = "\$1.6",
+                    text = shippingCharge.toString(),
                     style = TextStyle(
                         fontFamily = AppFontFamily,
                         color = CustomGray,
@@ -115,7 +122,7 @@ fun CartBottomBar(
                     )
                 )
                 Text(
-                    text = "\$58.2",
+                    text = total.toString(),
                     style = TextStyle(
                         fontFamily = AppFontFamily,
                         color = Color.Black,
@@ -125,6 +132,7 @@ fun CartBottomBar(
                 )
             }
             Spacer(modifier = Modifier.height(16.dp))
+                //      Spacer(modifier = Modifier.weight(1f))
             Box(
                 modifier = Modifier
                     .width(380.dp)
@@ -148,6 +156,8 @@ fun CartBottomBar(
                     )
                 )
             }
+            Spacer(modifier = Modifier.height(11.dp))
         }
     }
 }
+

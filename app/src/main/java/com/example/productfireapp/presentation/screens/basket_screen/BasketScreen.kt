@@ -24,7 +24,17 @@ fun BasketScreen(
 ) {
     val basketItemViewModel: BasketScreenViewModel = hiltViewModel()
 
-    val items = basketItemViewModel.basketItemState.collectAsState()
+    val basketItems = basketItemViewModel.basketItemState.collectAsState()
+
+    val items = basketItems.value
+
+    val sum = items.sumOf { item ->
+        item.coast * item.count
+    }
+
+    val shippingCharge = 0.0
+
+    val totalPrice = sum + shippingCharge
 
     Scaffold(
         topBar = {
@@ -36,6 +46,9 @@ fun BasketScreen(
         },
         bottomBar = {
             CartBottomBar(
+                subtotal = sum,
+                shippingCharge = 0.0,
+                total = totalPrice,
                 onShippingMethodNavigate = {
 
                 }
@@ -54,7 +67,7 @@ fun BasketScreen(
                     .fillMaxWidth()
                     .padding(horizontal = 17.dp)
             ) {
-                items(items.value) { item ->
+                items(items) { item ->
                     SwipeItem(
                         vegetable = item,
                         onDeleteClick = { basketItemViewModel.delete(item.id) }

@@ -32,15 +32,15 @@ fun TopFavoriteBar(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(118.dp)
+   //         .height(118.dp)
             .background(color = Color.White)
     ) {
         Column(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
                 .padding(start = 17.dp)
         ) {
-            Spacer(modifier = Modifier.height(63.dp))
+            Spacer(modifier = Modifier.height(43.dp))
             Row(
                 modifier = Modifier
                     .fillMaxWidth(),
@@ -67,6 +67,7 @@ fun TopFavoriteBar(
                     )
                 )
             }
+            Spacer(modifier = Modifier.height(28.dp))
         }
     }
 }

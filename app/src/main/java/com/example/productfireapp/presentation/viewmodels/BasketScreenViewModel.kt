@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlin.math.roundToInt
 
 @HiltViewModel
 class BasketScreenViewModel @Inject constructor(
@@ -28,6 +29,14 @@ class BasketScreenViewModel @Inject constructor(
             vegetableRepository.removeFromBasket(id)
         }
     }
+//    fun Double.formatPricePrecise(): String {
+//        val rounded = (this * 10).roundToInt() / 10.0
+//        return if (rounded % 1 == 0.0) {
+//            rounded.toInt().toString()
+//        } else {
+//            String.format("%.1f", rounded)
+//        }
+//    }
 }
 
 

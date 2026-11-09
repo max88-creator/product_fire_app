@@ -120,7 +120,7 @@ fun NavigationGraph() {
             ) {
                 BasketScreen(
                     backClick = {
-                        navController.navigate(NavigationRoutes.Home)
+                        navController.popBackStack()
                     }
                 )
             }
@@ -128,23 +128,6 @@ fun NavigationGraph() {
             composable<NavigationRoutes.Favorites>(
                 enterTransition = {
                     slideIntoContainer(
-                        towards = AnimatedContentTransitionScope.SlideDirection.Right,
-                        animationSpec = tween(
-                            durationMillis = 500,
-                            easing = FastOutSlowInEasing
-                        )
-                    )
-                }
-            ) {
-                FavoritesList(
-                    backToHome = {
-                        navController.navigate(NavigationRoutes.Home)
-                    }
-                )
-            }
-            composable<NavigationRoutes.Favorites> (
-                enterTransition = {
-                    slideIntoContainer(
                         towards = AnimatedContentTransitionScope.SlideDirection.Left,
                         animationSpec = tween(
                             durationMillis = 500,
@@ -155,25 +138,11 @@ fun NavigationGraph() {
             ) {
                 FavoritesList(
                     backToHome = {
-                        navController.navigate(NavigationRoutes.Home)
+                        navController.popBackStack()
                     }
                 )
             }
-            composable<NavigationRoutes.Basket>(
-                enterTransition = {
-                    slideIntoContainer(
-                        towards = AnimatedContentTransitionScope.SlideDirection.Left,
-                        animationSpec = tween(
-                            durationMillis = 500,
-                            easing = FastOutSlowInEasing
-                        )
-                    )
-                }
-            ) {
-                BasketScreen(
-                    backClick = { navController.navigate(NavigationRoutes.Home) },
-                )
-            }
+
             composable<NavigationRoutes.ProductList> (
                 enterTransition = {
                     slideIntoContainer(
@@ -187,7 +156,7 @@ fun NavigationGraph() {
             ) {
                 ProductsList(
                     backToHomeScreenClick = {
-                        navController.navigate(NavigationRoutes.Home)
+                        navController.popBackStack()
                     }
                 )
             }
