@@ -8,8 +8,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.productfireapp.basket_screen.BasketScreen
 import com.example.productfireapp.bottom_nav_bar.data.BottomMenuItem
@@ -23,31 +25,41 @@ import com.example.productfireapp.user_screen.UserScreen
 fun NavigationGraph() {
     val navController = rememberNavController()
 
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val destination = navBackStackEntry?.destination
+
+    val showBottomMenu =
+        destination?.hasRoute<NavigationRoutes.Basket>() != true &&
+                destination?.hasRoute<NavigationRoutes.Favorites>() != true &&
+                destination?.hasRoute<NavigationRoutes.ProductList>() != true
+
     var selectedItemTitle by rememberSaveable {
         mutableStateOf(BottomMenuItem.Home.title)
     }
     Scaffold(
         bottomBar = {
-            BottomMenu(
-                selectedItemTitle = selectedItemTitle,
-                onItemClick = { title ->
-                    selectedItemTitle = title
-                    val destination = when (title) {
-                        BottomMenuItem.Home.title -> NavigationRoutes.Home
-                        BottomMenuItem.User.title -> NavigationRoutes.User
-                        BottomMenuItem.Favorites.title -> NavigationRoutes.Favorites
-                        BottomMenuItem.Basket.title -> NavigationRoutes.Basket
-                        else -> return@BottomMenu
-                    }
-                    navController.navigate(destination) {
-                        popUpTo(NavigationRoutes.Home) {
-                            saveState = true
+            if (showBottomMenu) {
+                BottomMenu(
+                    selectedItemTitle = selectedItemTitle,
+                    onItemClick = { title ->
+                        selectedItemTitle = title
+                        val destination = when (title) {
+                            BottomMenuItem.Home.title -> NavigationRoutes.Home
+                            BottomMenuItem.User.title -> NavigationRoutes.User
+                            BottomMenuItem.Favorites.title -> NavigationRoutes.Favorites
+                            BottomMenuItem.Basket.title -> NavigationRoutes.Basket
+                            else -> return@BottomMenu
                         }
-                        launchSingleTop = true
-                        restoreState = true
+                        navController.navigate(destination) {
+                            popUpTo(NavigationRoutes.Home) {
+                                saveState = true
+                            }
+                            launchSingleTop = true
+                            restoreState = true
+                        }
                     }
-                }
-            )
+                )
+            }
         }
     ) { paddingValues ->
         NavHost(
@@ -73,9 +85,9 @@ fun NavigationGraph() {
             composable<NavigationRoutes.User> { UserScreen() }
             composable<NavigationRoutes.Favorites> {
                 FavoritesList(
-            backToHome = {
-                navController.navigate(NavigationRoutes.Home)
-            }
+                    backToHome = {
+                        navController.navigate(NavigationRoutes.Home)
+                    }
                 )
             }
             composable<NavigationRoutes.Basket> {
@@ -94,3 +106,5 @@ fun NavigationGraph() {
         }
     }
 }
+
+

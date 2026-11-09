@@ -25,7 +25,7 @@ import com.example.productfireapp.ui.theme.SwipeBoxColor
 
 @Composable
 fun SwipeItem(
-    basketItem: BasketItem,
+    vegetable: Vegetable,
     onDeleteClick: () -> Unit,
 ) {
     val dismissState = rememberSwipeToDismissBoxState(
@@ -60,8 +60,9 @@ fun SwipeItem(
             }
         },
         content = {
-            CartItem(basketItem)
+            CartItem(vegetable)
         },
         enableDismissFromStartToEnd = false
     )
 }
+

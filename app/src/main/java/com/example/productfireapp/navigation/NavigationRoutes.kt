@@ -15,3 +15,4 @@ sealed interface NavigationRoutes {
     @Serializable
     data object Basket: NavigationRoutes
 }
+

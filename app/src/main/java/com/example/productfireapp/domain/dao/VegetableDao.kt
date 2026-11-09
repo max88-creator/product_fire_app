@@ -26,7 +26,7 @@ WHERE id = :id AND count = 0
     """)
     suspend fun setCountToOne(id: Int)
 
-    @Query("UPDATE vegetable SET count = count + 1 WHERE id = :id AND count > 1")
+    @Query("UPDATE vegetable SET count = count + 1 WHERE id = :id")
     suspend fun increaseProductCount(id: Int)
 
     @Query("UPDATE vegetable SET count = count - 1 WHERE id = :id AND count > 1")

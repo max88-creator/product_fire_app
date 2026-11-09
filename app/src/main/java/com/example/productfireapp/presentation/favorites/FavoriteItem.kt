@@ -15,7 +15,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -24,23 +23,15 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.example.productfireapp.domain.models.Favorite
 import com.example.productfireapp.domain.models.Vegetable
-import com.example.productfireapp.presentation.viewmodels.FavoritesScreenViewModel
 import com.example.productfireapp.ui.theme.AppFontFamily
 import com.example.productfireapp.ui.theme.CustomGray
 import com.example.productfireapp.ui.theme.DarkPrimary
 
 @Composable
 fun FavoriteItem(
-    vegetable: Vegetable,
+    vegetable: Vegetable
 ) {
-    val favsViewModel = hiltViewModel<FavoritesScreenViewModel>()
-
-    val items = favsViewModel.favorites.collectAsState()
-
-
     Box(
         modifier = Modifier
             .width(380.dp)

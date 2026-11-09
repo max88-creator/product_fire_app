@@ -21,10 +21,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,7 +32,6 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.productfireapp.R
 import com.example.productfireapp.domain.models.Vegetable
-import com.example.productfireapp.presentation.viewmodels.BasketScreenViewModel
 import com.example.productfireapp.presentation.viewmodels.FavoritesScreenViewModel
 import com.example.productfireapp.presentation.viewmodels.HomeScreenViewModel
 import com.example.productfireapp.ui.theme.AppFontFamily
@@ -49,24 +44,12 @@ fun ProductItem(
     vegetable: Vegetable,
     homeScreenViewModel: HomeScreenViewModel = hiltViewModel(),
     favsViewModel: FavoritesScreenViewModel = hiltViewModel(),
-    basketScreenViewModel: BasketScreenViewModel = hiltViewModel(),
 ) {
     val favsList = favsViewModel.favorites.collectAsState()
 
     val isFavorite = favsList.value.any { favorite ->
         vegetable.id == favorite.id
     }
-
-//    val basketItemsList = basketScreenViewModel.basketItemsState.collectAsState()
-//    val basketItems = basketItemsList.value
-//    val item = basketItems.find { basketItem ->
-//        basketItem.id == vegetable.id
-//    }
-
-//    val isExistInBasket = basketItemsList.value.any { item ->
-//        vegetable.id == item.id
-//    }
-    var changeProductCountWindow by remember { mutableStateOf(false) }
 
     val coast = if (vegetable.count < 1) {
         vegetable.coast
@@ -76,7 +59,6 @@ fun ProductItem(
 
     val space = 10.sp * 0.05f
     val currentWeight = vegetable.count * vegetable.weightValue
-
 
     Box(
         modifier = Modifier

@@ -31,10 +31,9 @@ import com.example.productfireapp.ui.theme.DarkPrimary
 
 @Composable
 fun CartItem(
-    basketItem: BasketItem
+    vegetable: Vegetable
 ) {
-//    val coast = basketItem.coast * basketItem.count
-//    val weight = basketItem.weightValue * basketItem.count
+    val coast = vegetable.coast * vegetable.count
     Box(
         modifier = Modifier
             .width(380.dp)
@@ -50,53 +49,58 @@ fun CartItem(
             Box(
                 modifier = Modifier
                     .size(64.dp)
-      //              .background(color = basketItem.bgColor, shape = CircleShape),
-      //          contentAlignment = Alignment.Center
+                    .background(color = vegetable.bgColor, shape = CircleShape),
+                contentAlignment = Alignment.Center
             ) {
-//                Image(
-//                    painter = painterResource(id = basketItem.image),
-//                    contentDescription = null,
-//                    modifier = Modifier
-//                        .width(50.dp)
-//                        .height(41.dp)
-//                )
+                Image(
+                    painter = painterResource(id = vegetable.image),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .width(50.dp)
+                        .height(41.dp)
+                )
             }
             Spacer(modifier = Modifier.width(22.dp))
             Column(
                 horizontalAlignment = Alignment.Start,
                 verticalArrangement = Arrangement.SpaceAround
             ) {
-//                Text(
-//                    text = if (basketItem.count < 1) {
-//                        "$ ${basketItem.coast}"
-//                    } else {
-//                        "$ $coast"
-//                    },
-//                    style = TextStyle(
-//                        fontFamily = AppFontFamily,
-//                        color = DarkPrimary,
-//                        fontSize = 12.sp,
-//                        fontWeight = FontWeight(500)
-//                    )
-//                )
-//                Text(
-//                    text = basketItem.name,
-//                    style = TextStyle(
-//                        fontFamily = AppFontFamily,
-//                        color = Color.Black,
-//                        fontSize = 15.sp,
-//                        fontWeight = FontWeight(600)
-//                    )
-//                )
-//                Text(
-//                    text = weight.toString(),
-//                    style = TextStyle(
-//                        fontFamily = AppFontFamily,
-//                        color = CustomGray,
-//                        fontSize = 12.sp,
-//                        fontWeight = FontWeight(500)
-//                    )
-//                )
+                Text(
+                    text = if (vegetable.count < 1) {
+                        "$ ${vegetable.coast}"
+                    } else {
+                        "$ $coast"
+                    },
+                    style = TextStyle(
+                        fontFamily = AppFontFamily,
+                        color = DarkPrimary,
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight(500)
+                    )
+                )
+                Text(
+                    text = vegetable.name,
+                    style = TextStyle(
+                        fontFamily = AppFontFamily,
+                        color = Color.Black,
+                        fontSize = 15.sp,
+                        fontWeight = FontWeight(600)
+                    )
+                )
+                val weight = if (vegetable.weightValue < 0.0) {
+                    vegetable.weightParameter
+                } else {
+                    vegetable.weightValue * vegetable.count
+                }
+                Text(
+                    text = "$weight ${vegetable.weightParameter}",
+                    style = TextStyle(
+                        fontFamily = AppFontFamily,
+                        color = CustomGray,
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight(500)
+                    )
+                )
             }
             Spacer(modifier = Modifier.width(240.dp))
             Column(
@@ -111,9 +115,9 @@ fun CartItem(
                         fontSize = 18.sp
                     )
                 )
-//                Text(
-//                    text = basketItem.count.toString()
-//                )
+                Text(
+                    text = vegetable.count.toString()
+                )
                 Text(
                     text = "-",
                     style = TextStyle(
@@ -126,3 +130,4 @@ fun CartItem(
         }
     }
 }
+
