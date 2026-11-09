@@ -18,11 +18,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.productfireapp.R
 import com.example.productfireapp.domain.models.Favorite
+import com.example.productfireapp.domain.models.Vegetable
 import com.example.productfireapp.ui.theme.SwipeBoxColor
 
 @Composable
 fun SwipeFavorite(
-    favorite: Favorite,
+    vegetable: Vegetable,
     onDeleteClick: () -> Unit
 ) {
     val dismissState = rememberSwipeToDismissBoxState(
@@ -57,7 +58,7 @@ fun SwipeFavorite(
             }
         },
         content = {
-            FavoriteItem(favorite)
+            FavoriteItem(vegetable = vegetable)
         },
         enableDismissFromStartToEnd = false
     )

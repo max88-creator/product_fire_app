@@ -46,10 +46,13 @@ fun FavoritesList(
                     .padding(horizontal = 17.dp)
                     .background(color = CustomGray.copy(alpha = 0.2f))
             ) {
-                items(favoritesList.value) { favorite ->
-                FavoriteItem(
-                    favorite = favorite,
-                    favsViewModel = viewModel
+                items(
+                    favoritesList.value,
+                    key = { favorite -> favorite.id }
+                ) { favorite ->
+                SwipeFavorite(
+                    vegetable = favorite,
+                    onDeleteClick = { viewModel.deleteFavorite(favorite.id) }
                 )
                     Spacer(modifier = Modifier.height(14.dp))
                 }
@@ -57,3 +60,4 @@ fun FavoritesList(
         }
     }
 }
+

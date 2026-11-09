@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.example.productfireapp.domain.models.Favorite
+import com.example.productfireapp.domain.models.Vegetable
 import com.example.productfireapp.presentation.viewmodels.FavoritesScreenViewModel
 import com.example.productfireapp.ui.theme.AppFontFamily
 import com.example.productfireapp.ui.theme.CustomGray
@@ -33,13 +34,13 @@ import com.example.productfireapp.ui.theme.DarkPrimary
 
 @Composable
 fun FavoriteItem(
-    favorite: Favorite,
-    favsViewModel: FavoritesScreenViewModel = hiltViewModel(),
-
+    vegetable: Vegetable,
 ) {
- //   val items = favsViewModel.favorites.collectAsState()
+    val favsViewModel = hiltViewModel<FavoritesScreenViewModel>()
 
-    //   items.value.forEach { item ->
+    val items = favsViewModel.favorites.collectAsState()
+
+
     Box(
         modifier = Modifier
             .width(380.dp)
@@ -56,66 +57,66 @@ fun FavoriteItem(
                 ),
             horizontalArrangement = Arrangement.Center
         ) {
-//            Box(
-//                modifier = Modifier
-//                    .size(64.dp)
-//                    .background(
-//                        color = favorite.bgColor,
-//                        shape = CircleShape
-//                    ),
-//                contentAlignment = Alignment.Center
-//            ) {
-//                Image(
-//                    painter = painterResource(id = favorite.image),
-//                    contentDescription = null,
-//                    modifier = Modifier
-//                        .width(50.dp)
-//                        .height(41.dp)
-//                )
-//            }
-//            Spacer(modifier = Modifier.width(22.dp))
-//            Column(
-//                horizontalAlignment = Alignment.Start,
-//                verticalArrangement = Arrangement.Center
-//            ) {
-//                val coast = if (favorite.count < 1) {
-//                    favorite.coast
-//                } else {
-//                    favorite.count * favorite.coast
-//                }
-//                Text(
-//                    text = coast.toString(),
-//                    style = TextStyle(
-//                        fontFamily = AppFontFamily,
-//                        color = DarkPrimary,
-//                        fontSize = 12.sp,
-//                        fontWeight = FontWeight(500)
-//                    )
-//                )
-//                Text(
-//                    text = favorite.name,
-//                    style = TextStyle(
-//                        fontFamily = AppFontFamily,
-//                        color = Color.Black,
-//                        fontSize = 15.sp,
-//                        fontWeight = FontWeight(600)
-//                    )
-//                )
-//                val weight = if (favorite.weightValue < 0.0) {
-//                    favorite.weightParameter
-//                } else {
-//                    favorite.weightValue * favorite.count
-//                }
-//                Text(
-//                    text = "$weight ${favorite.weightParameter}",
-//                    style = TextStyle(
-//                        fontFamily = AppFontFamily,
-//                        color = CustomGray,
-//                        fontSize = 12.sp,
-//                        fontWeight = FontWeight(500)
-//                    )
-//                )
-//            }
+            Box(
+                modifier = Modifier
+                    .size(64.dp)
+                    .background(
+                        color = vegetable.bgColor,
+                        shape = CircleShape
+                    ),
+                contentAlignment = Alignment.Center
+            ) {
+                Image(
+                    painter = painterResource(id = vegetable.image),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .width(50.dp)
+                        .height(41.dp)
+                )
+            }
+            Spacer(modifier = Modifier.width(22.dp))
+            Column(
+                horizontalAlignment = Alignment.Start,
+                verticalArrangement = Arrangement.Center
+            ) {
+                val coast = if (vegetable.count < 1) {
+                    vegetable.coast
+                } else {
+                    vegetable.count * vegetable.coast
+                }
+                Text(
+                    text = coast.toString(),
+                    style = TextStyle(
+                        fontFamily = AppFontFamily,
+                        color = DarkPrimary,
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight(500)
+                    )
+                )
+                Text(
+                    text = vegetable.name,
+                    style = TextStyle(
+                        fontFamily = AppFontFamily,
+                        color = Color.Black,
+                        fontSize = 15.sp,
+                        fontWeight = FontWeight(600)
+                    )
+                )
+                val weight = if (vegetable.weightValue < 0.0) {
+                    vegetable.weightParameter
+                } else {
+                    vegetable.weightValue * vegetable.count
+                }
+                Text(
+                    text = "$weight ${vegetable.weightParameter}",
+                    style = TextStyle(
+                        fontFamily = AppFontFamily,
+                        color = CustomGray,
+                        fontSize = 12.sp,
+                        fontWeight = FontWeight(500)
+                    )
+                )
+            }
             Spacer(modifier = Modifier.width(125.dp))
             Column(
                 modifier = Modifier.background(Color.White),
@@ -129,9 +130,9 @@ fun FavoriteItem(
                         fontSize = 18.sp
                     )
                 )
-//                Text(
-//                    text = favorite.count.toString()
-//                )
+                Text(
+                    text = vegetable.count.toString()
+                )
                 Text(
                     text = "-",
                     style = TextStyle(
@@ -144,3 +145,5 @@ fun FavoriteItem(
         }
     }
 }
+
+
