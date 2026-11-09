@@ -14,7 +14,7 @@ import com.example.productfireapp.utils.ConvertColors
 @TypeConverters(ConvertColors::class)
 @Database(
     entities = [Vegetable::class, Favorite::class, BasketItem::class],
-    version = 2,
+    version = 3,
     exportSchema = true
 )
 abstract class MainDb: RoomDatabase() {

@@ -18,3 +18,4 @@ class ConvertColors {
         return createdColor
     }
 }
+
