@@ -1,4 +1,4 @@
-package com.example.productfireapp.presentation.favorites
+package com.example.productfireapp.presentation.screens.basket_screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -17,14 +17,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.productfireapp.R
-import com.example.productfireapp.domain.models.Favorite
 import com.example.productfireapp.domain.models.Vegetable
 import com.example.productfireapp.ui.theme.SwipeBoxColor
 
 @Composable
-fun SwipeFavorite(
+fun SwipeItem(
     vegetable: Vegetable,
-    onDeleteClick: () -> Unit
+    onDeleteClick: () -> Unit,
 ) {
     val dismissState = rememberSwipeToDismissBoxState(
         confirmValueChange = { value ->
@@ -58,10 +57,9 @@ fun SwipeFavorite(
             }
         },
         content = {
-            FavoriteItem(vegetable = vegetable)
+            CartItem(vegetable)
         },
         enableDismissFromStartToEnd = false
     )
 }
-
 

@@ -1,4 +1,4 @@
-package com.example.productfireapp.presentation.favorites
+package com.example.productfireapp.presentation.screens.basket_screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -23,15 +23,17 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.productfireapp.domain.models.BasketItem
 import com.example.productfireapp.domain.models.Vegetable
 import com.example.productfireapp.ui.theme.AppFontFamily
 import com.example.productfireapp.ui.theme.CustomGray
 import com.example.productfireapp.ui.theme.DarkPrimary
 
 @Composable
-fun FavoriteItem(
+fun CartItem(
     vegetable: Vegetable
 ) {
+    val coast = vegetable.coast * vegetable.count
     Box(
         modifier = Modifier
             .width(380.dp)
@@ -41,20 +43,13 @@ fun FavoriteItem(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(
-                    start = 15.dp,
-                    end = 20.dp,
-                    top = 18.dp
-                ),
+                .padding(start = 15.dp, end = 20.dp, top = 18.dp),
             horizontalArrangement = Arrangement.Center
         ) {
             Box(
                 modifier = Modifier
                     .size(64.dp)
-                    .background(
-                        color = vegetable.bgColor,
-                        shape = CircleShape
-                    ),
+                    .background(color = vegetable.bgColor, shape = CircleShape),
                 contentAlignment = Alignment.Center
             ) {
                 Image(
@@ -68,15 +63,14 @@ fun FavoriteItem(
             Spacer(modifier = Modifier.width(22.dp))
             Column(
                 horizontalAlignment = Alignment.Start,
-                verticalArrangement = Arrangement.Center
+                verticalArrangement = Arrangement.SpaceAround
             ) {
-                val coast = if (vegetable.count < 1) {
-                    vegetable.coast
-                } else {
-                    vegetable.count * vegetable.coast
-                }
                 Text(
-                    text = coast.toString(),
+                    text = if (vegetable.count < 1) {
+                        "$ ${vegetable.coast}"
+                    } else {
+                        "$ $coast"
+                    },
                     style = TextStyle(
                         fontFamily = AppFontFamily,
                         color = DarkPrimary,
@@ -108,7 +102,7 @@ fun FavoriteItem(
                     )
                 )
             }
-            Spacer(modifier = Modifier.width(125.dp))
+            Spacer(modifier = Modifier.width(240.dp))
             Column(
                 modifier = Modifier.background(Color.White),
                 verticalArrangement = Arrangement.Center
@@ -136,5 +130,4 @@ fun FavoriteItem(
         }
     }
 }
-
 

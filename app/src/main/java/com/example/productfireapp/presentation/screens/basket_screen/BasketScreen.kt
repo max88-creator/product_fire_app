@@ -1,4 +1,4 @@
-package com.example.productfireapp.presentation.favorites
+package com.example.productfireapp.presentation.screens.basket_screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -15,22 +15,31 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.example.productfireapp.presentation.viewmodels.FavoritesScreenViewModel
+import com.example.productfireapp.presentation.viewmodels.BasketScreenViewModel
 import com.example.productfireapp.ui.theme.CustomGray
 
 @Composable
-fun FavoritesList(
-    viewModel: FavoritesScreenViewModel = hiltViewModel(),
-    backToHome: () -> Unit
+fun BasketScreen(
+    backClick: () -> Unit
 ) {
-    val favoritesList = viewModel.favorites.collectAsState()
+    val basketItemViewModel: BasketScreenViewModel = hiltViewModel()
+
+    val items = basketItemViewModel.basketItemState.collectAsState()
 
     Scaffold(
         topBar = {
-            TopFavoriteBar(
+            CartTopBar(
                 backToHomeScreenClick = {
-                    backToHome()
-                })
+                    backClick()
+                }
+            )
+        },
+        bottomBar = {
+            CartBottomBar(
+                onShippingMethodNavigate = {
+
+                }
+            )
         }
     ) { paddingValues ->
         Column(
@@ -44,20 +53,17 @@ fun FavoritesList(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 17.dp)
-                    .background(color = CustomGray.copy(alpha = 0.2f))
             ) {
-                items(
-                    favoritesList.value,
-                    key = { favorite -> favorite.id }
-                ) { favorite ->
-                SwipeFavorite(
-                    vegetable = favorite,
-                    onDeleteClick = { viewModel.deleteFavorite(favorite.id) }
-                )
+                items(items.value) { item ->
+                    SwipeItem(
+                        vegetable = item,
+                        onDeleteClick = { basketItemViewModel.delete(item.id) }
+                    )
                     Spacer(modifier = Modifier.height(14.dp))
                 }
             }
         }
     }
 }
+
 

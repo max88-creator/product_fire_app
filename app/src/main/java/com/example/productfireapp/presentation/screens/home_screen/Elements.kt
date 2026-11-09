@@ -1,4 +1,4 @@
-package com.example.productfireapp.presentation.home_screen
+package com.example.productfireapp.presentation.screens.home_screen
 
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.graphics.Color

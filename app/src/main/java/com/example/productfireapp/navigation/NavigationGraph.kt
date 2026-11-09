@@ -1,5 +1,8 @@
 package com.example.productfireapp.navigation
 
+import androidx.compose.animation.AnimatedContentTransitionScope
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
@@ -13,12 +16,12 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.productfireapp.basket_screen.BasketScreen
+import com.example.productfireapp.presentation.screens.basket_screen.BasketScreen
 import com.example.productfireapp.bottom_nav_bar.data.BottomMenuItem
 import com.example.productfireapp.bottom_nav_bar.ui.BottomMenu
-import com.example.productfireapp.presentation.favorites.FavoritesList
-import com.example.productfireapp.presentation.home_screen.HomeScreen
-import com.example.productfireapp.presentation.home_screen.ProductsList
+import com.example.productfireapp.presentation.screens.favorites.FavoritesList
+import com.example.productfireapp.presentation.screens.home_screen.HomeScreen
+import com.example.productfireapp.presentation.screens.home_screen.ProductsList
 import com.example.productfireapp.user_screen.UserScreen
 
 @Composable
@@ -75,34 +78,119 @@ fun NavigationGraph() {
             //    popExitTransition = TODO(),
             //     sizeTransform = TODO()
         ) {
-            composable<NavigationRoutes.Home> {
+            composable<NavigationRoutes.Home>(
+                enterTransition = {
+                    slideIntoContainer(
+                        towards = AnimatedContentTransitionScope.SlideDirection.Right,
+                        animationSpec = tween(
+                            durationMillis = 500,
+                            easing = FastOutSlowInEasing
+                        )
+                    )
+                }
+            ) {
                 HomeScreen(
                     toProductListNavigate = {
                         navController.navigate(NavigationRoutes.ProductList)
                     }
                 )
             }
-            composable<NavigationRoutes.User> { UserScreen() }
-            composable<NavigationRoutes.Favorites> {
+            composable<NavigationRoutes.User>(
+                enterTransition = {
+                    slideIntoContainer(
+                        towards = AnimatedContentTransitionScope.SlideDirection.Left,
+                        animationSpec = tween(
+                            durationMillis = 500,
+                            easing = FastOutSlowInEasing
+                        )
+                    )
+                }
+            ) { UserScreen() }
+
+            composable<NavigationRoutes.Basket>(
+                enterTransition = {
+                    slideIntoContainer(
+                        towards = AnimatedContentTransitionScope.SlideDirection.Left,
+                        animationSpec = tween(
+                            durationMillis = 500,
+                            easing = FastOutSlowInEasing
+                        )
+                    )
+                }
+            ) {
+                BasketScreen(
+                    backClick = {
+                        navController.navigate(NavigationRoutes.Home)
+                    }
+                )
+            }
+
+            composable<NavigationRoutes.Favorites>(
+                enterTransition = {
+                    slideIntoContainer(
+                        towards = AnimatedContentTransitionScope.SlideDirection.Right,
+                        animationSpec = tween(
+                            durationMillis = 500,
+                            easing = FastOutSlowInEasing
+                        )
+                    )
+                }
+            ) {
                 FavoritesList(
                     backToHome = {
                         navController.navigate(NavigationRoutes.Home)
                     }
                 )
             }
-            composable<NavigationRoutes.Basket> {
+            composable<NavigationRoutes.Favorites> (
+                enterTransition = {
+                    slideIntoContainer(
+                        towards = AnimatedContentTransitionScope.SlideDirection.Left,
+                        animationSpec = tween(
+                            durationMillis = 500,
+                            easing = FastOutSlowInEasing
+                        )
+                    )
+                }
+            ) {
+                FavoritesList(
+                    backToHome = {
+                        navController.navigate(NavigationRoutes.Home)
+                    }
+                )
+            }
+            composable<NavigationRoutes.Basket>(
+                enterTransition = {
+                    slideIntoContainer(
+                        towards = AnimatedContentTransitionScope.SlideDirection.Left,
+                        animationSpec = tween(
+                            durationMillis = 500,
+                            easing = FastOutSlowInEasing
+                        )
+                    )
+                }
+            ) {
                 BasketScreen(
                     backClick = { navController.navigate(NavigationRoutes.Home) },
                 )
             }
-            composable<NavigationRoutes.ProductList> {
+            composable<NavigationRoutes.ProductList> (
+                enterTransition = {
+                    slideIntoContainer(
+                        towards = AnimatedContentTransitionScope.SlideDirection.Left,
+                        animationSpec = tween(
+                            durationMillis = 500,
+                            easing = FastOutSlowInEasing
+                        )
+                    )
+                }
+            ) {
                 ProductsList(
                     backToHomeScreenClick = {
                         navController.navigate(NavigationRoutes.Home)
                     }
                 )
             }
-
         }
     }
 }

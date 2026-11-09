@@ -1,4 +1,4 @@
-package com.example.productfireapp.basket_screen
+package com.example.productfireapp.presentation.screens.basket_screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

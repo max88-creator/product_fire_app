@@ -1,4 +1,4 @@
-package com.example.productfireapp.presentation.favorites
+package com.example.productfireapp.presentation.screens.home_screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -7,14 +7,13 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -25,26 +24,25 @@ import androidx.compose.ui.unit.sp
 import com.example.productfireapp.R
 import com.example.productfireapp.ui.theme.AppFontFamily
 
+
 @Composable
-fun TopFavoriteBar(
-    backToHomeScreenClick: () -> Unit
+fun TopProductBar(
+    label: String,
+    onNavigateClick: () -> Unit
 ) {
+    val letterSpace = 18.sp * 0.03f
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .height(118.dp)
             .background(color = Color.White)
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(start = 17.dp)
-        ) {
-            Spacer(modifier = Modifier.height(63.dp))
+        Column() {
+            Spacer(modifier = Modifier.height(62.dp))
             Row(
                 modifier = Modifier
-                    .fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
+                    .fillMaxWidth()
+                    .padding(horizontal = 17.dp)
             ) {
                 Image(
                     painter = painterResource(R.drawable.back_arrow),
@@ -52,19 +50,30 @@ fun TopFavoriteBar(
                     modifier = Modifier
                         .width(23.dp)
                         .height(16.dp)
-                        .clickable {
-                            backToHomeScreenClick()
-                        }
+                        .clickable(
+                            onClick = {
+                                onNavigateClick()
+                            }
+                        )
                 )
-                Spacer(modifier = Modifier.width(123.dp))
+                Spacer(modifier = Modifier.width(113.dp))
                 Text(
-                    text = "Favorites",
+                    text = label,
                     style = TextStyle(
                         fontFamily = AppFontFamily,
                         color = Color.Black,
                         fontSize = 18.sp,
-                        fontWeight = FontWeight(500)
+                        fontWeight = FontWeight(500),
+                        letterSpacing = letterSpace
                     )
+                )
+                Spacer(modifier = Modifier.width(116.dp))
+                Image(
+                    painter = painterResource(R.drawable.ic_sort),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .width(23.dp)
+                        .height(21.dp)
                 )
             }
         }
