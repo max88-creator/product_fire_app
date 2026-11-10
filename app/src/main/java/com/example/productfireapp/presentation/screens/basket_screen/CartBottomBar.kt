@@ -132,7 +132,6 @@ fun CartBottomBar(
                 )
             }
             Spacer(modifier = Modifier.height(16.dp))
-                //      Spacer(modifier = Modifier.weight(1f))
             Box(
                 modifier = Modifier
                     .width(380.dp)

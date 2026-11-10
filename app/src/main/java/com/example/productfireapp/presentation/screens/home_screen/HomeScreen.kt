@@ -19,7 +19,8 @@ import com.example.productfireapp.R
 
 @Composable
 fun HomeScreen(
-    toProductListNavigate: () ->Unit
+    toProductListNavigate: () ->Unit,
+    toFilterScreenClick: () ->Unit
 ) {
     Column(
         modifier = Modifier
@@ -32,7 +33,11 @@ fun HomeScreen(
                 .padding(horizontal = 17.dp)
         ) {
             Spacer(modifier = Modifier.height(15.dp))
-            SearchKeyWordsBox()
+            SearchKeyWordsBox(
+                applyFiltersClick = {
+                    toFilterScreenClick()
+                }
+            )
             Spacer(modifier = Modifier.height(10.dp))
             Image(
                 painter = painterResource(

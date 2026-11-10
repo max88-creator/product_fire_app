@@ -19,6 +19,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.productfireapp.presentation.screens.basket_screen.BasketScreen
 import com.example.productfireapp.bottom_nav_bar.data.BottomMenuItem
 import com.example.productfireapp.bottom_nav_bar.ui.BottomMenu
+import com.example.productfireapp.filter.FilterScreen
 import com.example.productfireapp.presentation.screens.favorites.FavoritesList
 import com.example.productfireapp.presentation.screens.home_screen.HomeScreen
 import com.example.productfireapp.presentation.screens.home_screen.ProductsList
@@ -34,7 +35,8 @@ fun NavigationGraph() {
     val showBottomMenu =
         destination?.hasRoute<NavigationRoutes.Basket>() != true &&
                 destination?.hasRoute<NavigationRoutes.Favorites>() != true &&
-                destination?.hasRoute<NavigationRoutes.ProductList>() != true
+                destination?.hasRoute<NavigationRoutes.ProductList>() != true &&
+                destination?.hasRoute<NavigationRoutes.Filter>() != true
 
     var selectedItemTitle by rememberSaveable {
         mutableStateOf(BottomMenuItem.Home.title)
@@ -92,7 +94,10 @@ fun NavigationGraph() {
                 HomeScreen(
                     toProductListNavigate = {
                         navController.navigate(NavigationRoutes.ProductList)
-                    }
+                    },
+                    toFilterScreenClick = {
+                        navController.navigate(NavigationRoutes.Filter)
+                    },
                 )
             }
             composable<NavigationRoutes.User>(
@@ -156,6 +161,14 @@ fun NavigationGraph() {
             ) {
                 ProductsList(
                     backToHomeScreenClick = {
+                        navController.popBackStack()
+                    }
+                )
+            }
+
+            composable<NavigationRoutes.Filter>() {
+                FilterScreen(
+                    backToHomeClick = {
                         navController.popBackStack()
                     }
                 )

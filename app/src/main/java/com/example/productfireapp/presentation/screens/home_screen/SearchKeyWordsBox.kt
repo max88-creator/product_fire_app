@@ -2,6 +2,7 @@ package com.example.productfireapp.presentation.screens.home_screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -28,8 +29,9 @@ import com.example.productfireapp.ui.theme.CustomGray
 import com.example.productfireapp.ui.theme.TextBoxGray
 
 @Composable
-@Preview(showBackground = true)
-fun SearchKeyWordsBox() {
+fun SearchKeyWordsBox(
+    applyFiltersClick: () -> Unit
+) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -68,6 +70,9 @@ fun SearchKeyWordsBox() {
                 modifier = Modifier
                     .width(19.dp)
                     .height(17.dp)
+                    .clickable {
+                        applyFiltersClick()
+                    }
             )
         }
     }
