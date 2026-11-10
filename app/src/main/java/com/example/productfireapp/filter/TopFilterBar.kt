@@ -27,7 +27,9 @@ import com.example.productfireapp.ui.theme.AppFontFamily
 @Composable
 fun TopFilterBar(
     backToHomeScreenClick: () -> Unit,
-    refreshClick: () -> Unit = {}
+    filterOrRefresh: Boolean,
+    refreshClick: () -> Unit,
+    returnToSort: () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -66,16 +68,30 @@ fun TopFilterBar(
                     )
                 )
                 Spacer(modifier = Modifier.width(113.dp))
-                Image(
-                    painter = painterResource(R.drawable.ic_reload_button),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .width(20.dp)
-                        .height(20.dp)
-                        .clickable {
-                            refreshClick()
-                        }
-                )
+                if (filterOrRefresh) {
+                    Image(
+                        painter = painterResource(R.drawable.ic_sort),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .width(19.dp)
+                            .height(17.dp)
+                            .clickable {
+                                returnToSort()
+                            }
+                    )
+                } else {
+                    Image(
+                        painter = painterResource(R.drawable.ic_reload_button),
+                        contentDescription = null,
+                        modifier = Modifier
+                            .width(20.dp)
+                            .height(20.dp)
+                            .clickable {
+                                refreshClick()
+                            }
+                    )
+
+                }
             }
             Spacer(modifier = Modifier.height(23.dp))
         }

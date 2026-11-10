@@ -15,6 +15,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -24,60 +25,92 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.productfireapp.domain.models.Vegetable
 import com.example.productfireapp.ui.theme.AppFontFamily
 import com.example.productfireapp.ui.theme.BorderColor
 import com.example.productfireapp.ui.theme.DarkPrimary
 
 @Composable
 fun FilterScreen(
-    backToHomeClick: () -> Unit
+    backToHomeClick: () -> Unit,
+    filterViewModel: FilterViewModel = hiltViewModel()
 ) {
-    var minValue by remember { mutableIntStateOf(0) }
-    var maxValue by remember { mutableIntStateOf(0) }
+    var showFilterResult by remember { mutableStateOf(false) }
     Scaffold(
         topBar = {
             TopFilterBar(
                 backToHomeScreenClick = {
                     backToHomeClick()
                 },
+                filterOrRefresh = showFilterResult,
+                refreshClick = {
+
+                },
+                returnToSort = {
+                  showFilterResult = false
+                },
             )
         }
     ) { paddingValues ->
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .background(color = BorderColor)
-        ) {
+        if (showFilterResult) {
+            Spacer(modifier = Modifier.height(105.dp))
+            FilterResultScreen()
+        } else {
             Column(
                 modifier = Modifier
-                    .padding(horizontal = 17.dp)
+                    .fillMaxSize()
+                    .padding(paddingValues)
+                    .background(color = BorderColor)
             ) {
-                Spacer(modifier = Modifier.height(21.dp))
-                FilterItemsCard()
-                Spacer(modifier = Modifier.height(105.dp))
-                Box(
+                Column(
                     modifier = Modifier
-                        .width(380.dp)
-                        .height(60.dp)
-                        .background(
-                            color = DarkPrimary,
-                            shape = RoundedCornerShape(5.dp)
-                        )
-                        .clickable {
-
-                        },
-                    contentAlignment = Alignment.Center
+                        .padding(horizontal = 17.dp)
                 ) {
-                    Text(
-                        text = "Checkout",
-                        style = TextStyle(
-                            fontFamily = AppFontFamily,
-                            color = Color.White,
-                            fontSize = 15.sp,
-                            fontWeight = FontWeight(600)
-                        )
+                    Spacer(modifier = Modifier.height(21.dp))
+                    FilterItemsCard(
+                        minValue = filterViewModel.minValueText.value,
+                        maxValue = filterViewModel.maxValueText.value,
+                        onMinValueChange = {
+                            filterViewModel.onEvent(
+                                FilterScreenEvent.OnMinValueTextChange(
+                                    value = it
+                                )
+                            )
+                        },
+                        onMaxValueChange = {
+                            filterViewModel.onEvent(
+                                FilterScreenEvent.OnMaxValueTextChange(
+                                    value = it
+                                )
+                            )
+                        }
                     )
+                    Spacer(modifier = Modifier.height(105.dp))
+                    Box(
+                        modifier = Modifier
+                            .width(380.dp)
+                            .height(60.dp)
+                            .background(
+                                color = DarkPrimary,
+                                shape = RoundedCornerShape(5.dp)
+                            )
+                            .clickable {
+                                showFilterResult = !showFilterResult
+                            },
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Text(
+                            text = "Apply filter",
+                            style = TextStyle(
+                                fontFamily = AppFontFamily,
+                                color = Color.White,
+                                fontSize = 15.sp,
+                                fontWeight = FontWeight(600)
+                            )
+                        )
+                    }
                 }
             }
         }

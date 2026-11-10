@@ -27,7 +27,10 @@ import com.example.productfireapp.ui.theme.BorderColor
 
 @Composable
 fun FilterItemsCard(
-
+    minValue: String,
+    maxValue: String,
+    onMinValueChange: (String) -> Unit,
+    onMaxValueChange: (String) -> Unit
 ) {
     var minValue by remember { mutableStateOf("") }
     var maxValue by remember { mutableStateOf("") }
@@ -62,7 +65,7 @@ fun FilterItemsCard(
                     value = minValue,
                     labelText = "Min.",
                     onValueChange = {
-                        minValue = it
+                        onMinValueChange(it)
                     }
                 )
                 Spacer(modifier = Modifier.width(7.dp))
@@ -70,7 +73,7 @@ fun FilterItemsCard(
                     value = maxValue,
                     labelText = "Max.",
                     onValueChange = {
-                        maxValue = it
+                        onMaxValueChange(it)
                     }
                 )
             }
