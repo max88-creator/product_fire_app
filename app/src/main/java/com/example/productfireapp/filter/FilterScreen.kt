@@ -46,10 +46,12 @@ fun FilterScreen(
                 },
                 filterOrRefresh = showFilterResult,
                 refreshClick = {
-
+                    filterViewModel.onEvent(
+                        FilterScreenEvent.OnClearFilters
+                    )
                 },
                 returnToSort = {
-                  showFilterResult = false
+                    showFilterResult = false
                 },
             )
         }
@@ -72,6 +74,10 @@ fun FilterScreen(
                     FilterItemsCard(
                         minValue = filterViewModel.minValueText.value,
                         maxValue = filterViewModel.maxValueText.value,
+                        discountState = filterViewModel.isExistDiscount.value,
+                        freeDeliveryState = filterViewModel.isExistFreeDelivery.value,
+                        sameDayDeliveryState = filterViewModel.isExistSameDayDelivery.value,
+                        selectedStars = filterViewModel.selectedStars.intValue,
                         onMinValueChange = {
                             filterViewModel.onEvent(
                                 FilterScreenEvent.OnMinValueTextChange(
@@ -83,6 +89,28 @@ fun FilterScreen(
                             filterViewModel.onEvent(
                                 FilterScreenEvent.OnMaxValueTextChange(
                                     value = it
+                                )
+                            )
+                        },
+                        onDiscountClick = {
+                            filterViewModel.onEvent(
+                                FilterScreenEvent.OnExistDiscountClick
+                            )
+                        },
+                        onFreeDeliveryClick = {
+                            filterViewModel.onEvent(
+                                FilterScreenEvent.OnFreeDeliveryClick
+                            )
+                        },
+                        onSameDayDeliveryClick = {
+                            filterViewModel.onEvent(
+                                FilterScreenEvent.OnSameDayDeliveryClick
+                            )
+                        },
+                        onStarClick = {
+                            filterViewModel.onEvent(
+                                FilterScreenEvent.OnStarsClick(
+                                    selectedStars = 0
                                 )
                             )
                         }

@@ -32,10 +32,14 @@ import com.example.productfireapp.ui.theme.CustomGray
 import com.example.productfireapp.ui.theme.DarkPrimary
 
 @Composable
-fun OtherFilters() {
-    var clickDiscountCheck by remember { mutableStateOf(false) }
-    var clickDeliveryCheck by remember { mutableStateOf(false) }
-    var clickDayDeliveryCheck by remember { mutableStateOf(false) }
+fun OtherFilters(
+    discountState: Boolean,
+    freeDeliveryState: Boolean,
+    sameDayDeliveryState: Boolean,
+    onDiscountClick: () -> Unit,
+    onFreeDeliveryClick: () -> Unit,
+    onSameDayDeliveryClick: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -54,7 +58,7 @@ fun OtherFilters() {
         Row(
             modifier = Modifier
                 .clickable {
-                    clickDiscountCheck = !clickDiscountCheck
+                    onDiscountClick()
                 }
         ) {
             Row(
@@ -84,7 +88,7 @@ fun OtherFilters() {
                 contentDescription = null,
                 modifier = Modifier
                     .size(16.dp),
-                tint = if (clickDiscountCheck) {
+                tint = if (discountState) {
                     DarkPrimary
                 } else {
                     CustomGray
@@ -102,7 +106,7 @@ fun OtherFilters() {
         Row(
             modifier = Modifier
                 .clickable {
-                    clickDeliveryCheck = !clickDeliveryCheck
+                    onFreeDeliveryClick()
                 }
         ) {
             Row(
@@ -132,7 +136,7 @@ fun OtherFilters() {
                 contentDescription = null,
                 modifier = Modifier
                     .size(16.dp),
-                tint = if (clickDeliveryCheck) {
+                tint = if (freeDeliveryState) {
                     DarkPrimary
                 } else {
                     CustomGray
@@ -150,7 +154,7 @@ fun OtherFilters() {
         Row(
             modifier = Modifier
                 .clickable {
-                    clickDayDeliveryCheck = !clickDayDeliveryCheck
+                    onSameDayDeliveryClick()
                 }
         ) {
             Row(
@@ -180,7 +184,7 @@ fun OtherFilters() {
                 contentDescription = null,
                 modifier = Modifier
                     .size(16.dp),
-                tint = if (clickDayDeliveryCheck) {
+                tint = if (sameDayDeliveryState) {
                     DarkPrimary
                 } else {
                     CustomGray

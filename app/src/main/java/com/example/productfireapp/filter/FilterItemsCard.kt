@@ -13,7 +13,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
@@ -29,13 +28,17 @@ import com.example.productfireapp.ui.theme.BorderColor
 fun FilterItemsCard(
     minValue: String,
     maxValue: String,
+    discountState: Boolean,
+    freeDeliveryState: Boolean,
+    sameDayDeliveryState: Boolean,
+    selectedStars: Int,
     onMinValueChange: (String) -> Unit,
-    onMaxValueChange: (String) -> Unit
+    onMaxValueChange: (String) -> Unit,
+    onDiscountClick: () -> Unit,
+    onFreeDeliveryClick: () -> Unit,
+    onSameDayDeliveryClick: () -> Unit,
+    onStarClick: () -> Unit
 ) {
-    var minValue by remember { mutableStateOf("") }
-    var maxValue by remember { mutableStateOf("") }
-    var selectedStars by remember { mutableIntStateOf(0) }
-
     Column(
         modifier = Modifier
             .background(color = Color.White)
@@ -87,7 +90,10 @@ fun FilterItemsCard(
         )
         StarRating(
             selectedStars = selectedStars,
-            onStarClick = { selectedStars = it }
+            onStarClick = {
+                onStarClick()
+            //    selectedStars = it
+            }
         )
 
         Spacer(modifier = Modifier.height(28.dp))
@@ -98,7 +104,14 @@ fun FilterItemsCard(
                 .background(BorderColor)
         )
         Spacer(modifier = Modifier.height(18.dp))
-        OtherFilters()
+        OtherFilters(
+            discountState = discountState,
+            freeDeliveryState = freeDeliveryState,
+            sameDayDeliveryState = sameDayDeliveryState,
+            onDiscountClick = { onDiscountClick() },
+            onFreeDeliveryClick = { onFreeDeliveryClick() },
+            onSameDayDeliveryClick = { onSameDayDeliveryClick() }
+        )
     }
 }
 
