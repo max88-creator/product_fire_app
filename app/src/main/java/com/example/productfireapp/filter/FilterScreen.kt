@@ -14,7 +14,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -26,8 +25,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.productfireapp.domain.models.Vegetable
+import com.example.productfireapp.filter.filter_components.TopFilterBar
+import com.example.productfireapp.filter.filter_view_model.FilterScreenEvent
+import com.example.productfireapp.filter.filter_view_model.FilterViewModel
 import com.example.productfireapp.ui.theme.AppFontFamily
 import com.example.productfireapp.ui.theme.BorderColor
 import com.example.productfireapp.ui.theme.DarkPrimary
@@ -110,7 +110,7 @@ fun FilterScreen(
                         onStarClick = {
                             filterViewModel.onEvent(
                                 FilterScreenEvent.OnStarsClick(
-                                    selectedStars = 0
+                                    selectedStars = it
                                 )
                             )
                         }
@@ -144,3 +144,5 @@ fun FilterScreen(
         }
     }
 }
+
+

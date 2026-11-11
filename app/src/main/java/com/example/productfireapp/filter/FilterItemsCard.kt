@@ -11,10 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -37,7 +33,7 @@ fun FilterItemsCard(
     onDiscountClick: () -> Unit,
     onFreeDeliveryClick: () -> Unit,
     onSameDayDeliveryClick: () -> Unit,
-    onStarClick: () -> Unit
+    onStarClick: (Int) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -90,10 +86,7 @@ fun FilterItemsCard(
         )
         StarRating(
             selectedStars = selectedStars,
-            onStarClick = {
-                onStarClick()
-            //    selectedStars = it
-            }
+            onStarClick = onStarClick
         )
 
         Spacer(modifier = Modifier.height(28.dp))

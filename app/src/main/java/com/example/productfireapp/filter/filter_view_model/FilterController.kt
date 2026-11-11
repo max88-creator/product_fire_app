@@ -1,4 +1,4 @@
-package com.example.productfireapp.filter
+package com.example.productfireapp.filter.filter_view_model
 
 import androidx.compose.runtime.MutableState
 

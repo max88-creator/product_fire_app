@@ -1,6 +1,5 @@
-package com.example.productfireapp.filter
+package com.example.productfireapp.filter.filter_view_model
 
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
@@ -55,6 +54,7 @@ class FilterViewModel @Inject constructor():
                 isExistDiscount.value = false
                 isExistFreeDelivery.value = false
                 isExistSameDayDelivery.value = false
+                selectedStars.intValue = 0
             }
         }
     }
