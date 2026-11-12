@@ -26,7 +26,7 @@ import com.example.productfireapp.presentation.screens.filter.SearchResultScreen
 import com.example.productfireapp.presentation.screens.favorites.FavoritesList
 import com.example.productfireapp.presentation.screens.home_screen.HomeScreen
 import com.example.productfireapp.presentation.screens.home_screen.ProductsList
-import com.example.productfireapp.shipping_method.ShippingMethodScreen
+import com.example.productfireapp.presentation.screens.shipping_method.ShippingMethodScreen
 import com.example.productfireapp.user_screen.UserScreen
 
 @Composable

@@ -1,4 +1,4 @@
-package com.example.productfireapp.shipping_method
+package com.example.productfireapp.presentation.screens.shipping_method
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
