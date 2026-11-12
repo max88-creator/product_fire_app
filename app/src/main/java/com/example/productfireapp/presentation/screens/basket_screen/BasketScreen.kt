@@ -20,7 +20,8 @@ import com.example.productfireapp.ui.theme.CustomGray
 
 @Composable
 fun BasketScreen(
-    backClick: () -> Unit
+    backClick: () -> Unit,
+    onShippingMethodNavigate: () -> Unit
 ) {
     val basketItemViewModel: BasketScreenViewModel = hiltViewModel()
 
@@ -50,7 +51,7 @@ fun BasketScreen(
                 shippingCharge = shippingCharge,
                 total = totalPrice,
                 onShippingMethodNavigate = {
-
+                    onShippingMethodNavigate()
                 }
             )
         }

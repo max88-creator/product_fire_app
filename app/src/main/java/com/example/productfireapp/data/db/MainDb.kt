@@ -8,13 +8,18 @@ import com.example.productfireapp.domain.dao.FavoritesDao
 import com.example.productfireapp.domain.dao.VegetableDao
 import com.example.productfireapp.domain.models.BasketItem
 import com.example.productfireapp.domain.models.Favorite
+import com.example.productfireapp.domain.models.ShippingAddress
 import com.example.productfireapp.domain.models.Vegetable
 import com.example.productfireapp.utils.ConvertColors
+import com.example.productfireapp.utils.ConvertCountry
 
-@TypeConverters(ConvertColors::class)
+@TypeConverters(ConvertColors::class, ConvertCountry::class)
 @Database(
-    entities = [Vegetable::class, Favorite::class, BasketItem::class],
-    version = 3,
+    entities = [
+        Vegetable::class, Favorite::class,
+        BasketItem::class, ShippingAddress::class
+               ],
+    version = 4,
     exportSchema = true
 )
 abstract class MainDb: RoomDatabase() {
