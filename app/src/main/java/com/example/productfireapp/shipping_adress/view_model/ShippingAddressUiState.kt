@@ -11,3 +11,4 @@ data class ShippingAddressUiState(
     val city: String = "",
     val country: Country = Country.RUSSIA
 )
+

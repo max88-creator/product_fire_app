@@ -28,3 +28,16 @@ enum class Country {
     UZBEKISTAN
 }
 
+fun Country.displayName(): String {
+    return when(this) {
+        Country.MONTENEGRO -> "Montenegro"
+        Country.ARMENIA -> "Armenia"
+        Country.GEORGIA -> "Georgia"
+        Country.GERMANY -> "Germany"
+        Country.SERBIA -> "Serbia"
+        Country.TURKEY -> "Turkey"
+        Country.RUSSIA -> "Russia"
+        Country.UZBEKISTAN -> "Uzbekistan"
+    }
+}
+

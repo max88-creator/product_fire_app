@@ -5,6 +5,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.example.productfireapp.domain.dao.BasketItemDao
 import com.example.productfireapp.domain.dao.FavoritesDao
+import com.example.productfireapp.domain.dao.ShippingAddressDao
 import com.example.productfireapp.domain.dao.VegetableDao
 import com.example.productfireapp.domain.models.BasketItem
 import com.example.productfireapp.domain.models.Favorite
@@ -26,6 +27,7 @@ abstract class MainDb: RoomDatabase() {
     abstract fun vegetableDao(): VegetableDao
     abstract fun favoritesDao(): FavoritesDao
     abstract fun basketItemDao(): BasketItemDao
+    abstract fun shippingAddressDao(): ShippingAddressDao
 }
 
 

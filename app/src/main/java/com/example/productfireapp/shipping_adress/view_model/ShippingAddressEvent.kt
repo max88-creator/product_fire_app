@@ -12,12 +12,3 @@ sealed class ShippingAddressEvent {
     data class ChoseCountry(val country: Country): ShippingAddressEvent()
 }
 
-
-/*
-val email: String = "",
-    val phoneNumber: String = "",
-    val address: String = "",
-    val zipCode: String = "",
-    val city: String = "",
-    val country: Country = Country.RUSSIA
- */

@@ -1,15 +1,17 @@
 package com.example.productfireapp.shipping_adress.screen
 
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.example.productfireapp.R
 import com.example.productfireapp.ui.theme.AppFontFamily
 import com.example.productfireapp.ui.theme.CustomGray
 
@@ -29,7 +31,8 @@ fun ShippingAddressTextField(
             onValueChange(it)
         },
         leadingIcon = {
-            Icon(painter = painterResource(leadingIcon),
+            Icon(
+                painter = painterResource(leadingIcon),
                 contentDescription = null,
                 modifier = modifier,
                 tint = CustomGray
@@ -46,6 +49,15 @@ fun ShippingAddressTextField(
                     letterSpacing = letterSpacing.sp
                 )
             )
-        }
+        },
+        modifier = Modifier
+            .fillMaxWidth(),
+        colors = TextFieldDefaults.colors(
+            focusedIndicatorColor = Color.White,
+            unfocusedIndicatorColor = Color.Transparent,
+            focusedContainerColor = Color.White,
+            unfocusedContainerColor = Color.White
+        )
     )
 }
+

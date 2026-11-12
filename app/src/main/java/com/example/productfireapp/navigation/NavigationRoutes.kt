@@ -16,6 +16,8 @@ sealed interface NavigationRoutes {
     data object Filter : NavigationRoutes
 
     @Serializable
+    data object ShippingAddressScreen: NavigationRoutes
+    @Serializable
     data object ShippingMethodScreen: NavigationRoutes
     @Serializable
     data object User : NavigationRoutes

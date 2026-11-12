@@ -2,14 +2,16 @@ package com.example.productfireapp.shipping_adress.view_model
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.productfireapp.domain.models.Country
 import com.example.productfireapp.domain.models.ShippingAddress
 import com.example.productfireapp.domain.repositories.ShippingAddressRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
+@HiltViewModel
 class ShippingAddressViewModel @Inject constructor(
     private val repository: ShippingAddressRepository
 ) : ViewModel() {
@@ -89,3 +91,8 @@ class ShippingAddressViewModel @Inject constructor(
         }
     }
 }
+
+
+
+
+

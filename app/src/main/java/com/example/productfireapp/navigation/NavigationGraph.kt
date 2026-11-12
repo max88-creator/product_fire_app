@@ -27,6 +27,7 @@ import com.example.productfireapp.presentation.screens.favorites.FavoritesList
 import com.example.productfireapp.presentation.screens.home_screen.HomeScreen
 import com.example.productfireapp.presentation.screens.home_screen.ProductsList
 import com.example.productfireapp.presentation.screens.shipping_method.ShippingMethodScreen
+import com.example.productfireapp.shipping_adress.screen.ShippingAddressScreen
 import com.example.productfireapp.user_screen.UserScreen
 
 @Composable
@@ -182,7 +183,26 @@ fun NavigationGraph() {
                 )
             }
 
-            composable<NavigationRoutes.ProductList> (
+            composable<NavigationRoutes.ProductList>(
+                enterTransition = {
+                    slideIntoContainer(
+                        towards = AnimatedContentTransitionScope.SlideDirection.Left,
+                        animationSpec = tween(
+                            durationMillis = 500,
+                            easing = FastOutSlowInEasing
+                        )
+                    )
+                }
+            )
+            {
+                ProductsList(
+                    backToHomeScreenClick = {
+                        navController.popBackStack()
+                    }
+                )
+            }
+
+            composable<NavigationRoutes.ShippingAddressScreen> (
                 enterTransition = {
                     slideIntoContainer(
                         towards = AnimatedContentTransitionScope.SlideDirection.Left,
@@ -193,14 +213,28 @@ fun NavigationGraph() {
                     )
                 }
             ) {
-                ProductsList(
-                    backToHomeScreenClick = {
+                ShippingAddressScreen(
+                    onPaymentMethodClick = {
+
+                    },
+                    backToShippingMethodScreenClick = {
                         navController.popBackStack()
                     }
                 )
             }
 
-            composable<NavigationRoutes.Filter>() {
+            composable<NavigationRoutes.Filter> (
+                enterTransition = {
+                    slideIntoContainer(
+                        towards = AnimatedContentTransitionScope.SlideDirection.Left,
+                        animationSpec = tween(
+                            durationMillis = 500,
+                            easing = FastOutSlowInEasing
+                        )
+                    )
+                }
+            )
+            {
                 FilterScreen(
                     backToHomeClick = {
                         navController.popBackStack()

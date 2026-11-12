@@ -54,29 +54,6 @@ class FilterViewModel @Inject constructor(
         }
     }
 
-    //    fun applyFilters(): List<Vegetable> {
-//        val minVal = minValueText.value.toDoubleOrNull()
-//        val maxVal = maxValueText.value.toDoubleOrNull()
-//
-//        if (minVal != 0.0) {
-//         return    vegetables.value.filter { vegetable ->
-//                 vegetable.coast >= minVal
-//             }
-//        }
-//       return if (maxVal != 0.0) {
-//            vegetables.value.filter { vegetable ->
-//                vegetable.coast <= maxVal
-//            }
-//        }
-//        if (minVal != 0.0 && maxVal != 0.0) {
-//       return     vegetables.value.filter { vegetable ->
-//                vegetable.coast in minVal..maxVal
-//            }
-//        }
-//        else {
-//         return   vegetables.value
-//        }
-//    }
     fun onEvent(event: FilterScreenEvent) {
         when (event) {
             is FilterScreenEvent.OnMinValueTextChange -> {

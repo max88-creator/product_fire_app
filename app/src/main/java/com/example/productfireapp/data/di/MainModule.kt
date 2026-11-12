@@ -8,6 +8,7 @@ import com.example.productfireapp.data.database_migrations.Migration3_4
 import com.example.productfireapp.data.db.MainDb
 import com.example.productfireapp.domain.dao.BasketItemDao
 import com.example.productfireapp.domain.dao.FavoritesDao
+import com.example.productfireapp.domain.dao.ShippingAddressDao
 import com.example.productfireapp.domain.dao.VegetableDao
 import dagger.Module
 import dagger.Provides
@@ -42,6 +43,11 @@ object MainModule {
     @Provides
     fun provideBasketItemDao(mainDb: MainDb): BasketItemDao {
         return mainDb.basketItemDao()
+    }
+
+    @Provides
+    fun provideShippingAddressDao(mainDb: MainDb): ShippingAddressDao {
+        return mainDb.shippingAddressDao()
     }
 }
 
