@@ -35,7 +35,6 @@ fun CartTopBar(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-   //         .height(118.dp)
             .background(color = Color.White)
     ) {
         Column(

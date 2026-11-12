@@ -26,6 +26,7 @@ import com.example.productfireapp.presentation.screens.filter.SearchResultScreen
 import com.example.productfireapp.presentation.screens.favorites.FavoritesList
 import com.example.productfireapp.presentation.screens.home_screen.HomeScreen
 import com.example.productfireapp.presentation.screens.home_screen.ProductsList
+import com.example.productfireapp.shipping_method.ShippingMethodScreen
 import com.example.productfireapp.user_screen.UserScreen
 
 @Composable
@@ -33,7 +34,7 @@ fun NavigationGraph() {
     val navController = rememberNavController()
     val viewModelStoreOwner = requireNotNull(
         LocalViewModelStoreOwner.current
-    ) { "ViewModelStoreOwner должен быть доступен внутри NavHost" }
+    ) {  }
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val destination = navBackStackEntry?.destination
 
@@ -42,7 +43,8 @@ fun NavigationGraph() {
                 destination?.hasRoute<NavigationRoutes.Favorites>() != true &&
                 destination?.hasRoute<NavigationRoutes.ProductList>() != true &&
                 destination?.hasRoute<NavigationRoutes.Filter>() != true &&
-                destination?.hasRoute<NavigationRoutes.SearchResult>() != true
+                destination?.hasRoute<NavigationRoutes.SearchResult>() != true &&
+                destination?.hasRoute<NavigationRoutes.ShippingMethodScreen>() != true
 
     var selectedItemTitle by rememberSaveable {
         mutableStateOf(BottomMenuItem.Home.title)
@@ -116,6 +118,14 @@ fun NavigationGraph() {
                         navController.navigate(NavigationRoutes.Filter)
                     },
                     viewModelStoreOwner = viewModelStoreOwner
+                )
+            }
+            composable<NavigationRoutes.ShippingMethodScreen>{
+                ShippingMethodScreen(
+                    backToBasketScreenClick = { navController.popBackStack() },
+                    onShippingInformationClick = {
+
+                    }
                 )
             }
             composable<NavigationRoutes.FilterResult> {

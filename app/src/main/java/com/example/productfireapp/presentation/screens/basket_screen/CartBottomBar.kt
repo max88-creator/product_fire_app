@@ -33,7 +33,7 @@ import com.example.productfireapp.ui.theme.DarkPrimary
 @Composable
 fun CartBottomBar(
     subtotal: Double,
-    shippingCharge: Double,
+    shippingCharge: Int,
     total: Double,
     onShippingMethodNavigate: () -> Unit
 ) {
@@ -41,7 +41,6 @@ fun CartBottomBar(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-  //          .height(234.dp)
             .background(Color.White)
     ) {
         Column(

@@ -32,7 +32,7 @@ fun BasketScreen(
         item.coast * item.count
     }
 
-    val shippingCharge = 0.0
+    val shippingCharge = 3
 
     val totalPrice = sum + shippingCharge
 
@@ -47,7 +47,7 @@ fun BasketScreen(
         bottomBar = {
             CartBottomBar(
                 subtotal = sum,
-                shippingCharge = 0.0,
+                shippingCharge = shippingCharge,
                 total = totalPrice,
                 onShippingMethodNavigate = {
 
