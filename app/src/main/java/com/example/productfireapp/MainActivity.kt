@@ -5,8 +5,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.example.productfireapp.filter.FilterItemsCard
-import com.example.productfireapp.filter.FilterScreen
 import com.example.productfireapp.navigation.NavigationGraph
 import com.example.productfireapp.ui.theme.ProductFireAppTheme
 import dagger.hilt.android.AndroidEntryPoint

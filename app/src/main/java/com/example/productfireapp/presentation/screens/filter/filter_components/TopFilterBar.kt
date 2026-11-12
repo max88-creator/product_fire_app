@@ -1,4 +1,4 @@
-package com.example.productfireapp.filter.filter_components
+package com.example.productfireapp.presentation.screens.filter.filter_components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

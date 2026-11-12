@@ -1,4 +1,4 @@
-package com.example.productfireapp.filter.filter_view_model
+package com.example.productfireapp.presentation.screens.filter.filter_view_model
 
 import com.example.productfireapp.domain.models.Vegetable
 
@@ -12,3 +12,4 @@ data class FilterUiState(
     val isFreeShipping: Boolean = false,
     val isSameDayDelivery: Boolean = false
 )
+

@@ -1,4 +1,4 @@
-package com.example.productfireapp.filter
+package com.example.productfireapp.presentation.screens.filter
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -6,9 +6,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -25,9 +25,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.example.productfireapp.filter.filter_components.TopFilterBar
-import com.example.productfireapp.filter.filter_view_model.FilterScreenEvent
-import com.example.productfireapp.filter.filter_view_model.FilterViewModel
+import com.example.productfireapp.presentation.screens.filter.filter_components.TopFilterBar
+import com.example.productfireapp.presentation.screens.filter.filter_view_model.FilterScreenEvent
+import com.example.productfireapp.presentation.screens.filter.filter_view_model.FilterViewModel
 import com.example.productfireapp.ui.theme.AppFontFamily
 import com.example.productfireapp.ui.theme.BorderColor
 import com.example.productfireapp.ui.theme.DarkPrimary
@@ -118,7 +118,7 @@ fun FilterScreen(
                     Spacer(modifier = Modifier.height(105.dp))
                     Box(
                         modifier = Modifier
-                            .width(380.dp)
+                            .fillMaxWidth()
                             .height(60.dp)
                             .background(
                                 color = DarkPrimary,
@@ -126,6 +126,9 @@ fun FilterScreen(
                             )
                             .clickable {
                                 showFilterResult = !showFilterResult
+                                filterViewModel.onEvent(
+                                    FilterScreenEvent.OnApplyFilters
+                                )
                             },
                         contentAlignment = Alignment.Center
                     ) {

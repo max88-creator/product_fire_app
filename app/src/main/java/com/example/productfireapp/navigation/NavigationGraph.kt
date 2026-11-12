@@ -11,6 +11,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -19,7 +20,9 @@ import androidx.navigation.compose.rememberNavController
 import com.example.productfireapp.presentation.screens.basket_screen.BasketScreen
 import com.example.productfireapp.bottom_nav_bar.data.BottomMenuItem
 import com.example.productfireapp.bottom_nav_bar.ui.BottomMenu
-import com.example.productfireapp.filter.FilterScreen
+import com.example.productfireapp.presentation.screens.filter.FilterResultScreen
+import com.example.productfireapp.presentation.screens.filter.FilterScreen
+import com.example.productfireapp.presentation.screens.filter.SearchResultScreen
 import com.example.productfireapp.presentation.screens.favorites.FavoritesList
 import com.example.productfireapp.presentation.screens.home_screen.HomeScreen
 import com.example.productfireapp.presentation.screens.home_screen.ProductsList
@@ -28,7 +31,9 @@ import com.example.productfireapp.user_screen.UserScreen
 @Composable
 fun NavigationGraph() {
     val navController = rememberNavController()
-
+    val viewModelStoreOwner = requireNotNull(
+        LocalViewModelStoreOwner.current
+    ) { "ViewModelStoreOwner должен быть доступен внутри NavHost" }
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val destination = navBackStackEntry?.destination
 
@@ -36,7 +41,8 @@ fun NavigationGraph() {
         destination?.hasRoute<NavigationRoutes.Basket>() != true &&
                 destination?.hasRoute<NavigationRoutes.Favorites>() != true &&
                 destination?.hasRoute<NavigationRoutes.ProductList>() != true &&
-                destination?.hasRoute<NavigationRoutes.Filter>() != true
+                destination?.hasRoute<NavigationRoutes.Filter>() != true &&
+                destination?.hasRoute<NavigationRoutes.SearchResult>() != true
 
     var selectedItemTitle by rememberSaveable {
         mutableStateOf(BottomMenuItem.Home.title)
@@ -98,7 +104,22 @@ fun NavigationGraph() {
                     toFilterScreenClick = {
                         navController.navigate(NavigationRoutes.Filter)
                     },
+                    onSearchResultClick = {
+                        navController.navigate(NavigationRoutes.SearchResult)
+                    }
                 )
+            }
+
+            composable<NavigationRoutes.SearchResult> {
+                SearchResultScreen(
+                    onFilterScreen = {
+                        navController.navigate(NavigationRoutes.Filter)
+                    },
+                    viewModelStoreOwner = viewModelStoreOwner
+                )
+            }
+            composable<NavigationRoutes.FilterResult> {
+                FilterResultScreen()
             }
             composable<NavigationRoutes.User>(
                 enterTransition = {

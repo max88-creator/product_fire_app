@@ -1,5 +1,6 @@
 package com.example.productfireapp.presentation.screens.home_screen
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
@@ -14,13 +15,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.productfireapp.R
-
+import com.example.productfireapp.navigation.NavigationRoutes
 
 
 @Composable
 fun HomeScreen(
-    toProductListNavigate: () ->Unit,
-    toFilterScreenClick: () ->Unit
+    toProductListNavigate: () -> Unit,
+    toFilterScreenClick: () -> Unit,
+    onSearchResultClick: () -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -34,6 +36,9 @@ fun HomeScreen(
         ) {
             Spacer(modifier = Modifier.height(15.dp))
             SearchKeyWordsBox(
+                onSearchResultClick = {
+                    onSearchResultClick()
+                },
                 applyFiltersClick = {
                     toFilterScreenClick()
                 }

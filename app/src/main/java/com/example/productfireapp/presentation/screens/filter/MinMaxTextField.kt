@@ -1,4 +1,4 @@
-package com.example.productfireapp.filter
+package com.example.productfireapp.presentation.screens.filter
 
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -53,4 +53,6 @@ fun MinMaxTextField(
         )
     )
 }
+
+
 

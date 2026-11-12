@@ -8,6 +8,11 @@ sealed interface NavigationRoutes {
     data object Home : NavigationRoutes
 
     @Serializable
+    data object SearchResult: NavigationRoutes
+    @Serializable
+    data object FilterResult : NavigationRoutes
+
+    @Serializable
     data object Filter : NavigationRoutes
 
     @Serializable

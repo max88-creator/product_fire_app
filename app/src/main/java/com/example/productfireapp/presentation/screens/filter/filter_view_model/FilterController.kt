@@ -1,4 +1,4 @@
-package com.example.productfireapp.filter.filter_view_model
+package com.example.productfireapp.presentation.screens.filter.filter_view_model
 
 import androidx.compose.runtime.MutableState
 
@@ -10,3 +10,4 @@ interface FilterController {
     val isExistFreeDelivery: MutableState<Boolean>
     val isExistSameDayDelivery: MutableState<Boolean>
 }
+
