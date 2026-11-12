@@ -56,7 +56,7 @@ fun TopShippingBar(
                 )
                 Spacer(modifier = Modifier.width(98.dp))
                 Text(
-                    text = "Shopping Cart",
+                    text = "Shipping Method",
                     style = TextStyle(
                         fontFamily = AppFontFamily,
                         color = Color.Black,

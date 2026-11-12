@@ -2,9 +2,11 @@ package com.example.productfireapp.data.di
 
 import com.example.productfireapp.data.repositories.BasketItemRepositoryImpl
 import com.example.productfireapp.data.repositories.FavoritesRepositoryImpl
+import com.example.productfireapp.data.repositories.ShippingAddressRepositoryImpl
 import com.example.productfireapp.data.repositories.VegetableRepositoryImpl
 import com.example.productfireapp.domain.repositories.BasketItemRepository
 import com.example.productfireapp.domain.repositories.FavoritesRepository
+import com.example.productfireapp.domain.repositories.ShippingAddressRepository
 import com.example.productfireapp.domain.repositories.VegetableRepository
 import dagger.Binds
 import dagger.Module
@@ -27,4 +29,8 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindBasketItemRepository(basketItemRepositoryImpl: BasketItemRepositoryImpl): BasketItemRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindShippingAddressRepository(shippingAddressRepositoryImpl: ShippingAddressRepositoryImpl): ShippingAddressRepository
 }
