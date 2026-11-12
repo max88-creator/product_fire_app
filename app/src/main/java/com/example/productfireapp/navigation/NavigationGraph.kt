@@ -157,6 +157,9 @@ fun NavigationGraph() {
                 BasketScreen(
                     backClick = {
                         navController.popBackStack()
+                    },
+                    onShippingMethodNavigate = {
+                        navController.navigate(NavigationRoutes.ShippingMethodScreen)
                     }
                 )
             }

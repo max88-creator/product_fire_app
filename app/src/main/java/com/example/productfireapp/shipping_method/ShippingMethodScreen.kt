@@ -41,6 +41,11 @@ fun ShippingMethodScreen(
                     backToBasketScreenClick()
                 }
             )
+        },
+        bottomBar = {
+            BottomShippingBar(
+                onShippingInformationClick
+            )
         }
     ) { paddingValues ->
         Column(
@@ -89,36 +94,7 @@ fun ShippingMethodScreen(
                     coast = 3
                 )
             }
-            Spacer(modifier = Modifier.height(131.dp))
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 17.dp)
-            ) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(60.dp)
-                        .background(
-                            color = DarkPrimary,
-                            shape = RoundedCornerShape(5.dp)
-                        )
-                        .clickable {
-                            onShippingInformationClick()
-                        },
-                    contentAlignment = Alignment.Center
-                ) {
-                    Text(
-                        text = "Next",
-                        style = TextStyle(
-                            fontFamily = AppFontFamily,
-                            color = Color.White,
-                            fontSize = 15.sp,
-                            fontWeight = FontWeight(600)
-                        )
-                    )
-                }
-            }
+        //    Spacer(modifier = Modifier.height(121.dp))
         }
     }
 }
