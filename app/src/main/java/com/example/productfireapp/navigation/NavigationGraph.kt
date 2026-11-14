@@ -20,6 +20,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.productfireapp.presentation.screens.basket_screen.BasketScreen
 import com.example.productfireapp.bottom_nav_bar.data.BottomMenuItem
 import com.example.productfireapp.bottom_nav_bar.ui.BottomMenu
+import com.example.productfireapp.payment_method.PaymentScreen
 import com.example.productfireapp.presentation.screens.filter.FilterResultScreen
 import com.example.productfireapp.presentation.screens.filter.FilterScreen
 import com.example.productfireapp.presentation.screens.filter.SearchResultScreen
@@ -27,7 +28,7 @@ import com.example.productfireapp.presentation.screens.favorites.FavoritesList
 import com.example.productfireapp.presentation.screens.home_screen.HomeScreen
 import com.example.productfireapp.presentation.screens.home_screen.ProductsList
 import com.example.productfireapp.presentation.screens.shipping_method.ShippingMethodScreen
-import com.example.productfireapp.shipping_adress.screen.ShippingAddressScreen
+import com.example.productfireapp.presentation.screens.shipping_adress.screen.ShippingAddressScreen
 import com.example.productfireapp.user_screen.UserScreen
 
 @Composable
@@ -35,7 +36,7 @@ fun NavigationGraph() {
     val navController = rememberNavController()
     val viewModelStoreOwner = requireNotNull(
         LocalViewModelStoreOwner.current
-    ) {  }
+    ) { }
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val destination = navBackStackEntry?.destination
 
@@ -45,7 +46,9 @@ fun NavigationGraph() {
                 destination?.hasRoute<NavigationRoutes.ProductList>() != true &&
                 destination?.hasRoute<NavigationRoutes.Filter>() != true &&
                 destination?.hasRoute<NavigationRoutes.SearchResult>() != true &&
-                destination?.hasRoute<NavigationRoutes.ShippingMethodScreen>() != true
+                destination?.hasRoute<NavigationRoutes.ShippingMethodScreen>() != true &&
+                destination?.hasRoute<NavigationRoutes.ShippingAddressScreen>() != true &&
+                destination?.hasRoute<NavigationRoutes.PaymentMethodScreen>() != true
 
     var selectedItemTitle by rememberSaveable {
         mutableStateOf(BottomMenuItem.Home.title)
@@ -121,11 +124,11 @@ fun NavigationGraph() {
                     viewModelStoreOwner = viewModelStoreOwner
                 )
             }
-            composable<NavigationRoutes.ShippingMethodScreen>{
+            composable<NavigationRoutes.ShippingMethodScreen> {
                 ShippingMethodScreen(
                     backToBasketScreenClick = { navController.popBackStack() },
                     onShippingInformationClick = {
-
+                        navController.navigate(NavigationRoutes.ShippingAddressScreen)
                     }
                 )
             }
@@ -202,7 +205,20 @@ fun NavigationGraph() {
                 )
             }
 
-            composable<NavigationRoutes.ShippingAddressScreen> (
+            composable<NavigationRoutes.PaymentMethodScreen>(
+                enterTransition = {
+                    slideIntoContainer(
+                        towards = AnimatedContentTransitionScope.SlideDirection.Left,
+                        animationSpec = tween(
+                            durationMillis = 500,
+                            easing = FastOutSlowInEasing
+                        )
+                    )
+                }
+            ) {
+                PaymentScreen()
+            }
+            composable<NavigationRoutes.ShippingAddressScreen>(
                 enterTransition = {
                     slideIntoContainer(
                         towards = AnimatedContentTransitionScope.SlideDirection.Left,
@@ -215,7 +231,7 @@ fun NavigationGraph() {
             ) {
                 ShippingAddressScreen(
                     onPaymentMethodClick = {
-
+                        navController.navigate(NavigationRoutes.PaymentMethodScreen)
                     },
                     backToShippingMethodScreenClick = {
                         navController.popBackStack()
@@ -223,7 +239,7 @@ fun NavigationGraph() {
                 )
             }
 
-            composable<NavigationRoutes.Filter> (
+            composable<NavigationRoutes.Filter>(
                 enterTransition = {
                     slideIntoContainer(
                         towards = AnimatedContentTransitionScope.SlideDirection.Left,

@@ -1,4 +1,4 @@
-package com.example.productfireapp.shipping_adress.screen
+package com.example.productfireapp.presentation.screens.shipping_adress.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -26,9 +26,8 @@ import com.example.productfireapp.R
 import com.example.productfireapp.ui.theme.AppFontFamily
 
 @Composable
-@Preview(showBackground = true)
 fun ShippingAddressTopBar(
-    backToShippingMethodScreenClick: () -> Unit ={}
+    backToShippingMethodScreenClick: () -> Unit
 ) {
     Box(
         modifier = Modifier

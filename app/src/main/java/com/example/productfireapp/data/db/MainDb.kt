@@ -8,6 +8,7 @@ import com.example.productfireapp.domain.dao.FavoritesDao
 import com.example.productfireapp.domain.dao.ShippingAddressDao
 import com.example.productfireapp.domain.dao.VegetableDao
 import com.example.productfireapp.domain.models.BasketItem
+import com.example.productfireapp.domain.models.CreditCart
 import com.example.productfireapp.domain.models.Favorite
 import com.example.productfireapp.domain.models.ShippingAddress
 import com.example.productfireapp.domain.models.Vegetable
@@ -18,9 +19,10 @@ import com.example.productfireapp.utils.ConvertCountry
 @Database(
     entities = [
         Vegetable::class, Favorite::class,
-        BasketItem::class, ShippingAddress::class
+        BasketItem::class, ShippingAddress::class,
+        CreditCart::class
                ],
-    version = 4,
+    version = 6,
     exportSchema = true
 )
 abstract class MainDb: RoomDatabase() {

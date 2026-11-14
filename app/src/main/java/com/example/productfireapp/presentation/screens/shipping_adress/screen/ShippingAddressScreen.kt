@@ -1,4 +1,4 @@
-package com.example.productfireapp.shipping_adress.screen
+package com.example.productfireapp.presentation.screens.shipping_adress.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -35,8 +35,8 @@ import com.example.productfireapp.R
 import com.example.productfireapp.domain.models.Country
 import com.example.productfireapp.domain.models.ShippingAddress
 import com.example.productfireapp.domain.models.displayName
-import com.example.productfireapp.shipping_adress.view_model.ShippingAddressEvent
-import com.example.productfireapp.shipping_adress.view_model.ShippingAddressViewModel
+import com.example.productfireapp.presentation.screens.shipping_adress.view_model.ShippingAddressEvent
+import com.example.productfireapp.presentation.screens.shipping_adress.view_model.ShippingAddressViewModel
 import com.example.productfireapp.ui.theme.AppFontFamily
 import com.example.productfireapp.ui.theme.CustomGray
 
@@ -91,7 +91,7 @@ fun ShippingAddressScreen(
                         .height(61.dp)
                 )
             }
-            Spacer(modifier = Modifier.height(42.dp))
+            Spacer(modifier = Modifier.height(35.dp))
             Column(
                 modifier = Modifier
                     .fillMaxWidth()

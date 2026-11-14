@@ -31,6 +31,13 @@ fun PaymentScreen() {
     Scaffold(
         topBar = {
             PayTopBar()
+        },
+        bottomBar = {
+            PaymentBottomBar(
+                onOrderSuccessClick = {
+
+                }
+            )
         }
     ) { paddingValues ->
         Surface(

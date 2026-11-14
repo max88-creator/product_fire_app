@@ -1,4 +1,4 @@
-package com.example.productfireapp.shipping_adress.screen
+package com.example.productfireapp.presentation.screens.shipping_adress.screen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -53,6 +53,6 @@ fun ShippingAddressBottomBar(
                 )
             )
         }
-        Spacer(modifier = Modifier.height(27.dp))
+        Spacer(modifier = Modifier.height(22.dp))
     }
 }

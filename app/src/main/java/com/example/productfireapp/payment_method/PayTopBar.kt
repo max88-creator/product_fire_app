@@ -4,12 +4,16 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
@@ -23,39 +27,47 @@ import com.example.productfireapp.ui.theme.AppFontFamily
 
 @Composable
 @Preview(showBackground = true)
-fun PayTopBar() {
+fun PayTopBar(
+    backToShippingAddressClick: () -> Unit = {}
+) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(110.dp)
             .background(color = Color.White)
     ) {
-        Box(
+        Column(
             modifier = Modifier
-                .padding(top = 60.dp, start = 17.dp)
+                .fillMaxWidth()
+                .padding(start = 17.dp)
         ) {
-            Image(
-                painter = painterResource(R.drawable.back_arrow),
-                contentDescription = null,
+            Spacer(modifier = Modifier.height(35.dp))
+            Row(
                 modifier = Modifier
-                    .width(23.dp)
-                    .height(16.dp)
-                    .clickable{}
-            )
-        }
-        Box(
-            modifier = Modifier
-                .padding(top = 63.dp, start = 126.dp)
-        ) {
-            Text(
-                text = "Payment Method",
-                style = TextStyle(
-                    fontFamily = AppFontFamily,
-                    fontSize = 18.sp,
-                    fontWeight = FontWeight(500),
-                    letterSpacing = 0.9.sp
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Image(
+                    painter = painterResource(R.drawable.back_arrow),
+                    contentDescription = null,
+                    modifier = Modifier
+                        .width(23.dp)
+                        .height(16.dp)
+                        .clickable {
+                            backToShippingAddressClick()
+                        }
                 )
-            )
+                Spacer(modifier = Modifier.width(98.dp))
+                Text(
+                    text = "Payment Method",
+                    style = TextStyle(
+                        fontFamily = AppFontFamily,
+                        color = Color.Black,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight(500)
+                    )
+                )
+            }
+            Spacer(modifier = Modifier.height(25.dp))
         }
     }
 }

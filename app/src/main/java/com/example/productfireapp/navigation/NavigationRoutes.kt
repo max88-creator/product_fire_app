@@ -13,8 +13,10 @@ sealed interface NavigationRoutes {
     data object FilterResult : NavigationRoutes
 
     @Serializable
-    data object Filter : NavigationRoutes
+    data object Filter: NavigationRoutes
 
+    @Serializable
+    data object PaymentMethodScreen: NavigationRoutes
     @Serializable
     data object ShippingAddressScreen: NavigationRoutes
     @Serializable

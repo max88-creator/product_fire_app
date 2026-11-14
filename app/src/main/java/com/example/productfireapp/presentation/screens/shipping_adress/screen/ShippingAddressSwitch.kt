@@ -1,4 +1,4 @@
-package com.example.productfireapp.shipping_adress.screen
+package com.example.productfireapp.presentation.screens.shipping_adress.screen
 
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.background

@@ -1,4 +1,4 @@
-package com.example.productfireapp.shipping_adress.view_model
+package com.example.productfireapp.presentation.screens.shipping_adress.view_model
 
 import com.example.productfireapp.domain.models.Country
 

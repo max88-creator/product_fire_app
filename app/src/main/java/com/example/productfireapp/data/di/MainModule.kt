@@ -2,9 +2,11 @@ package com.example.productfireapp.data.di
 
 import android.app.Application
 import androidx.room.Room
+import com.example.productfireapp.data.database_migrations.MIGRATION5_6
 import com.example.productfireapp.data.database_migrations.Migration1_2
 import com.example.productfireapp.data.database_migrations.Migration2_3
 import com.example.productfireapp.data.database_migrations.Migration3_4
+import com.example.productfireapp.data.database_migrations.Migration4_5
 import com.example.productfireapp.data.db.MainDb
 import com.example.productfireapp.domain.dao.BasketItemDao
 import com.example.productfireapp.domain.dao.FavoritesDao
@@ -27,7 +29,11 @@ object MainModule {
             klass = MainDb::class.java,
             name = "main_db"
         )
-            .addMigrations(Migration1_2, Migration2_3, Migration3_4).build()
+            .addMigrations(
+                Migration1_2, Migration2_3,
+                Migration3_4, Migration4_5,
+                MIGRATION5_6
+            ).build()
     }
 
     @Provides

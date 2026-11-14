@@ -22,7 +22,7 @@ import com.example.productfireapp.ui.theme.BorderColor
 @Composable
 fun ShippingMethodScreen(
     backToBasketScreenClick: () -> Unit,
-    onShippingInformationClick: () -> Unit
+    onShippingInformationClick:() -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -34,7 +34,9 @@ fun ShippingMethodScreen(
         },
         bottomBar = {
             BottomShippingBar(
-                onShippingInformationClick
+                {
+                    onShippingInformationClick()
+                }
             )
         }
     ) { paddingValues ->
@@ -84,7 +86,6 @@ fun ShippingMethodScreen(
                     coast = 3
                 )
             }
-        //    Spacer(modifier = Modifier.height(121.dp))
         }
     }
 }
